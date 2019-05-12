@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1041936281037",
+    "firebase_url": "https://climbing-logbook-dev.firebaseio.com",
+    "project_id": "climbing-logbook-dev",
+    "storage_bucket": "climbing-logbook-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041936281037:android:e87a9bee7c850c58",
+        "android_client_info": {
+          "package_name": "io.do4climbing.climbinglogbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041936281037-ocemplgf5c54nraq2h16kms8tvs8bmgj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.do4climbing.climbinglogbook",
+            "certificate_hash": "9e25ca2b4fbe11948db1f48567b3ac402fbc9ddc"
+          }
+        },
+        {
+          "client_id": "1041936281037-4d0hti7fhqf5ivd79t9no9r9b5jd0q2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABEmnJiGZ9YqhN2nxUtcpbTvkPh-0fO-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041936281037-4d0hti7fhqf5ivd79t9no9r9b5jd0q2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
