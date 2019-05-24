@@ -1,7 +1,9 @@
-import 'package:climbing_logbook/routeWizard.dart';
 import 'package:climbing_logbook/src/customDrawer.dart';
+import 'package:climbing_logbook/src/routeWizard.dart';
+import 'package:climbing_logbook/src/states/RouteState.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum RouteWizardMode { CREATE, EDIT, NONE }
 
@@ -12,7 +14,6 @@ final Color chartBackgroundTo = Color(0xff0e1823);
 
 class Dashboard extends StatefulWidget {
   final FirebaseUser user;
-
   Dashboard({this.user});
 
   @override
@@ -21,72 +22,64 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   RouteWizardMode _mode = RouteWizardMode.NONE;
-  List<Widget> top = [];
 
   @override
   Widget build(BuildContext context) {
-    switch (_mode) {
-      case RouteWizardMode.CREATE:
-        top.add(RouteWizard.creator());
-        break;
-      case RouteWizardMode.EDIT:
-
-      case RouteWizardMode.NONE:
-    }
-
     return SafeArea(
-      child: Stack(
-        children: <Widget>[
-          Scaffold(
-            backgroundColor: listBackground,
-            body: CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                  title: Text("CLIMBING LOGBOOK"),
-                  centerTitle: true,
-                  leading: Builder(
-                    builder: (context) => IconButton(
-                          icon: Icon(Icons.menu),
-                          onPressed: () => Scaffold.of(context).openDrawer(),
+      child: ChangeNotifierProvider<RouteState>(
+        builder: (context) => RouteState(),
+        child: Stack(
+          children: <Widget>[
+            Scaffold(
+              backgroundColor: listBackground,
+              body: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    title: Text("CLIMBING LOGBOOK"),
+                    centerTitle: true,
+                    leading: Builder(
+                      builder: (context) => IconButton(
+                            icon: Icon(Icons.menu),
+                            onPressed: () => Scaffold.of(context).openDrawer(),
+                          ),
+                    ),
+                    backgroundColor: appBarBackground,
+                    floating: true,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Container(
+                        padding: EdgeInsets.only(top: 50.0),
+                        child: Column(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                child: Center(
+                                  child: Placeholder(),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Container(
+                                child: Center(
+                                  child: Placeholder(),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                  ),
-                  backgroundColor: appBarBackground,
-                  floating: true,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Container(
-                      padding: EdgeInsets.only(top: 50.0),
-                      child: Column(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              child: Center(
-                                child: Placeholder(),
-                              ),
-                            ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [chartBackgroundFrom, chartBackgroundTo],
                           ),
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              child: Center(
-                                child: Placeholder(),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [chartBackgroundFrom, chartBackgroundTo],
                         ),
                       ),
                     ),
+                    expandedHeight: 300,
                   ),
-                  expandedHeight: 300,
-                ),
 //            RouteLogs(
 //              routes: List<RouteLog>.generate(
 //                100,
@@ -97,28 +90,39 @@ class _DashboardState extends State<Dashboard> {
 //                    : ClimbingRoute("6a+"),
 //              ),
 //            )
-              ],
-            ),
-            floatingActionButton: FloatingActionButton(
-              elevation: 3.0,
-              onPressed: () {
-                setState(() => _mode = RouteWizardMode.CREATE);
-              },
-              child: Icon(
-                Icons.add,
-                size: 45.0,
+                ],
               ),
-              backgroundColor: Color(0xffffdd00),
+              floatingActionButton: FloatingActionButton(
+                elevation: 3.0,
+                onPressed: () {
+                  setState(() => _mode = RouteWizardMode.CREATE);
+                },
+                child: Icon(
+                  Icons.add,
+                  size: 45.0,
+                ),
+                backgroundColor: Color(0xffffdd00),
+              ),
+              drawer: CustomDrawer(accountType: 'Google', user: widget.user),
             ),
-            drawer: CustomDrawer(accountType: 'Google', user: widget.user),
-          ),
-          if (_mode == RouteWizardMode.CREATE)
-            RouteWizard.creator(onClose: () {
-              setState(
-                () => _mode = RouteWizardMode.NONE,
-              );
-            }),
-        ],
+            if (_mode == RouteWizardMode.CREATE)
+              RouteWizard.creator(
+                onClose: () {
+                  setState(
+                    () => _mode = RouteWizardMode.NONE,
+                  );
+                },
+              ),
+            if (_mode == RouteWizardMode.EDIT)
+              RouteWizard.editor(
+                onClose: () {
+                  setState(
+                    () => _mode = RouteWizardMode.NONE,
+                  );
+                },
+              )
+          ],
+        ),
       ),
     );
   }

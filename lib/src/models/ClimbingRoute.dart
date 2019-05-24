@@ -1,10 +1,9 @@
-
 enum OutCome { SUCCESS, FAILURE }
 enum GradingStyle { FRENCH, POLISH }
 enum BelayingStyle { LEAD, AUTO, TOPROPE }
 enum Closure { ONSIGHT, FLASH }
 
-class Route {
+class ClimbingRoute {
   String outCome;
   String gradingStyle;
   String grade;
@@ -12,7 +11,7 @@ class Route {
   String closure;
   List<String> tags;
 
-  Route(
+  ClimbingRoute(
       {this.outCome,
       this.gradingStyle,
       this.grade,
@@ -20,8 +19,8 @@ class Route {
       this.closure,
       this.tags});
 
-  factory Route.fromJson(Map<String, dynamic> jsonData) {
-    return Route(
+  factory ClimbingRoute.fromJson(Map<String, dynamic> jsonData) {
+    return ClimbingRoute(
         outCome: 'SUCCESS',
         gradingStyle: 'FRENCH',
         grade: '6a',
