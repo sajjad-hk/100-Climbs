@@ -1,14 +1,13 @@
 import 'package:climbing_logbook/src/customIcon.dart';
-import 'package:climbing_logbook/src/states/RouteState.dart';
+import 'package:climbing_logbook/src/customRadio.dart';
+import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'customRadio.dart';
 
 class OutCome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final route = Provider.of<RouteState>(context);
+    final route = Provider.of<ClimbingRouteState>(context);
     return Column(
       children: <Widget>[
         Expanded(
@@ -45,30 +44,26 @@ class OutCome extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 2,
-                        child: Consumer<RouteState>(
-                          builder: (context, routeState, _) {
-                            return ToggleRadio.columnStyle(
-                              label: 'Yes',
-                              value: 'Yes',
-                              groupValue: routeState.route.outCome,
-                              notCheckedIcon: Container(
-                                width: 50,
-                                height: 50,
-                                child: CustomIcon(
-                                  path: 'assets/icons/smile-icon.png',
-                                ),
-                              ),
-                              checkedIcon: Container(
-                                width: 50,
-                                height: 50,
-                                child: CustomIcon(
-                                  path: 'assets/icons/smile-white-icon.png',
-                                ),
-                              ),
-                              onChanged: (String val) {
-                                route.outCome = val;
-                              },
-                            );
+                        child: ToggleRadio.columnStyle(
+                          label: 'Yes',
+                          value: 'Yes',
+                          groupValue: route.route.outCome,
+                          notCheckedIcon: Container(
+                            width: 50,
+                            height: 50,
+                            child: CustomIcon(
+                              path: 'assets/icons/smile-icon.png',
+                            ),
+                          ),
+                          checkedIcon: Container(
+                            width: 50,
+                            height: 50,
+                            child: CustomIcon(
+                              path: 'assets/icons/smile-white-icon.png',
+                            ),
+                          ),
+                          onChanged: (String val) {
+                            route.outCome = val;
                           },
                         ),
                       ),
@@ -90,32 +85,28 @@ class OutCome extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 2,
-                        child: Consumer<RouteState>(
-                            builder: (context, routeState, _) {
-                          return ToggleRadio.columnStyle(
-                            label: 'No',
-                            value: 'No',
-                            groupValue: routeState.route.outCome,
-                            notCheckedIcon: Container(
-                              width: 50,
-                              height: 50,
-                              child: CustomIcon(
-                                path: 'assets/icons/sad-icon.png',
-                              ),
+                        child: ToggleRadio.columnStyle(
+                          label: 'No',
+                          value: 'No',
+                          groupValue: route.route.outCome,
+                          notCheckedIcon: Container(
+                            width: 50,
+                            height: 50,
+                            child: CustomIcon(
+                              path: 'assets/icons/sad-icon.png',
                             ),
-                            checkedIcon: Container(
-                              width: 50,
-                              height: 50,
-                              child: CustomIcon(
-                                path: 'assets/icons/sad-white-icon.png',
-                              ),
+                          ),
+                          checkedIcon: Container(
+                            width: 50,
+                            height: 50,
+                            child: CustomIcon(
+                              path: 'assets/icons/sad-white-icon.png',
                             ),
-                            onChanged: (String val) {
-                              route.outCome = val;
-                              print(route.route.outCome);
-                            },
-                          );
-                        }),
+                          ),
+                          onChanged: (String val) {
+                            route.outCome = val;
+                          },
+                        ),
                       ),
                       Expanded(
                         child: Container(),

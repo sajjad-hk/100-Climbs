@@ -115,9 +115,9 @@ class ToggleRadio extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        checked ? checkedIcon : notCheckedIcon,
+        if (checked != null && notCheckedIcon != null)
+          checked ? checkedIcon : notCheckedIcon,
         Container(
-//          color: Colors.red,
           padding: const EdgeInsets.all(5.0),
           child: Text(
             label,

@@ -1,6 +1,6 @@
 import 'package:climbing_logbook/src/customDrawer.dart';
 import 'package:climbing_logbook/src/routeWizard.dart';
-import 'package:climbing_logbook/src/states/RouteState.dart';
+import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +26,12 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ChangeNotifierProvider<RouteState>(
-        builder: (context) => RouteState(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ClimbingRouteState>(
+            builder: (context) => ClimbingRouteState(),
+          ),
+        ],
         child: Stack(
           children: <Widget>[
             Scaffold(

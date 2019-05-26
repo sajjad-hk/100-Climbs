@@ -62,6 +62,8 @@ flutter:
     - assets/icons/smile-icon.png
     - assets/icons/smile-white-icon.png
     - assets/icons/sad-white-icon.png
+    - assets/icons/minus-icon.png
+    - assets/icons/plus-icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
