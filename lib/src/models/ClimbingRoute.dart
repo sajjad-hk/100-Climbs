@@ -8,7 +8,7 @@ class ClimbingRoute {
   String gradingStyle;
   String grade;
   String belayingStyle;
-  String closure;
+  List<String> closures;
   List<String> tags;
 
   ClimbingRoute(
@@ -16,7 +16,7 @@ class ClimbingRoute {
       this.gradingStyle,
       this.grade,
       this.belayingStyle,
-      this.closure,
+      this.closures,
       this.tags});
 
   factory ClimbingRoute.fromJson(Map<String, dynamic> jsonData) {
@@ -25,7 +25,7 @@ class ClimbingRoute {
         gradingStyle: 'FRENCH',
         grade: '6a',
         belayingStyle: 'LEAD',
-        closure: 'FLASH',
+        closures: ['FLASH'],
         tags: []);
   }
 }

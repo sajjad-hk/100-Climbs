@@ -19,7 +19,6 @@ class _GradePickerState extends State<GradePicker> {
   @override
   void initState() {
     super.initState();
-//    _controller.text = '4a';
   }
 
   plus(climbingRouteState) {
@@ -51,10 +50,16 @@ class _GradePickerState extends State<GradePicker> {
   }
 
   @override
+  void didUpdateWidget(GradePicker oldWidget) {
+    final climbingRouteState = Provider.of<ClimbingRouteState>(context);
+    _controller.text = climbingRouteState.route.grade;
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final climbingRouteState = Provider.of<ClimbingRouteState>(context);
     _controller.addListener(() => setKnobAngle(climbingRouteState));
-//    _controller.text = climbingRouteState.route.grade;
     return Container(
       padding: const EdgeInsets.all(5),
       key: _key,
@@ -88,8 +93,6 @@ class _GradePickerState extends State<GradePicker> {
                           knobAngle = Calculator.calculateAngle(
                               details.globalPosition, center, width);
                         });
-                        print(Calculator.calculateGradeIndex(knobAngle,
-                            climbingRouteState.climbingGradeValues.length));
                         climbingRouteState.grade = climbingRouteState
                                 .climbingGradeValues[
                             Calculator.calculateGradeIndex(knobAngle,

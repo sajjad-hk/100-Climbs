@@ -1,7 +1,8 @@
+import 'package:climbing_logbook/src/belay.dart';
 import 'package:climbing_logbook/src/grade.dart';
+import 'package:climbing_logbook/src/outCome.dart';
+import 'package:climbing_logbook/src/tags.dart';
 import 'package:flutter/material.dart';
-
-import 'outCome.dart';
 
 class RouteWizard extends StatefulWidget {
   final GestureTapCallback onClose;
@@ -65,12 +66,8 @@ class _RouteWizardState extends State<RouteWizard> {
                   children: <Widget>[
                     OutCome(),
                     Grade(),
-                    Container(
-                      child: Center(child: Text('OOO')),
-                    ),
-                    Container(
-                      child: Center(child: Text('PPP')),
-                    ),
+                    Belay(),
+                    Tags(),
                   ],
                 ),
               ),

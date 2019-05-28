@@ -54,6 +54,12 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
+  fonts:
+    - family: Arial-MT-Bold
+      fonts:
+        - asset: assets/fonts/arial-mt-bold.ttf
+          weight: 200
+
   assets:
     - assets/icons/google-icon.png
     - assets/icons/facebook-icon.png
@@ -64,6 +70,12 @@ flutter:
     - assets/icons/sad-white-icon.png
     - assets/icons/minus-icon.png
     - assets/icons/plus-icon.png
+    - assets/icons/flash_dark-icon.png
+    - assets/icons/flash_white-icon.png
+    - assets/icons/eye_dark-icon.png
+    - assets/icons/eye_white-icon.png
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

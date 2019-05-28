@@ -45,7 +45,6 @@ class CustomRadioState extends State<CustomRadio> {
           duration: const Duration(milliseconds: 400),
           child: InkWell(
             onTap: () {
-              print(widget.value);
               widget.onChanged(widget.value);
             },
             child: widget.checked,
@@ -56,7 +55,6 @@ class CustomRadioState extends State<CustomRadio> {
           duration: const Duration(milliseconds: 400),
           child: InkWell(
             onTap: () {
-              print(widget.value);
               widget.onChanged(widget.value);
             },
             child: widget.notChecked,
@@ -123,6 +121,7 @@ class ToggleRadio extends StatelessWidget {
             label,
             style: TextStyle(
               color: checked ? Colors.white : Color(0x4d000000),
+              fontFamily: 'Arial-MT-Bold',
               fontSize: 20,
             ),
           ),
@@ -133,19 +132,15 @@ class ToggleRadio extends StatelessWidget {
 
   _buildViewRowStyle(bool checked) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 16.0),
-          child: Icon(
-            Icons.arrow_upward,
-            color: checked ? Colors.white : Color(0x4d000000),
-          ),
-        ),
+        if (checked != null && notCheckedIcon != null)
+          checked ? checkedIcon : notCheckedIcon,
         Text(
           label,
           style: TextStyle(
             color: checked ? Colors.white : Color(0x4d000000),
+            fontFamily: 'Arial-MT-Bold',
             fontSize: 18,
           ),
         ),

@@ -56,14 +56,33 @@ class ClimbingRouteState with ChangeNotifier {
       gradingStyle: 'FRENCH',
       grade: '4a',
       belayingStyle: 'LEAD',
-      closure: 'FLASH',
-      tags: []);
+      closures: ['FLASH'],
+      tags: ['Makak']);
 
   List<String> _climbingGradeValues = GRADE_SET['FRENCH'];
 
   ClimbingRoute get route => _route;
   List<String> get climbingGradeValues => _climbingGradeValues;
   String get gradingStyle => _route.gradingStyle;
+
+  set tag(String value) {
+    _route.tags.add(value);
+    notifyListeners();
+  }
+
+  set closure(String value) {
+    if (_route.closures.contains(value)) {
+      _route.closures.remove(value);
+    } else {
+      _route.closures.add(value);
+    }
+    notifyListeners();
+  }
+
+  set belayingStyle(String value) {
+    _route.belayingStyle = value;
+    notifyListeners();
+  }
 
   set outCome(String value) {
     _route.outCome = value;
