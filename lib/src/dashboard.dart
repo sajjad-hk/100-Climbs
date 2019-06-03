@@ -1,7 +1,7 @@
 import 'package:climbing_logbook/src/customDrawer.dart';
+import 'package:climbing_logbook/src/customRadio.dart';
 import 'package:climbing_logbook/src/routeWizard.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +13,6 @@ final Color chartBackgroundFrom = Color(0xff165571);
 final Color chartBackgroundTo = Color(0xff0e1823);
 
 class Dashboard extends StatefulWidget {
-  final FirebaseUser user;
-  Dashboard({this.user});
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -22,6 +20,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   RouteWizardMode _mode = RouteWizardMode.NONE;
+  String chartFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +57,53 @@ class _DashboardState extends State<Dashboard> {
                             Expanded(
                               flex: 1,
                               child: Container(
-                                child: Center(
-                                  child: Placeholder(),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 40,
+                                      width: 100,
+                                      child: ToggleRadio.rowStyle(
+                                        label: 'Lead',
+                                        value: 'Lead',
+                                        groupValue: chartFilter,
+                                        onChanged: (String value) {
+                                          setState(() {
+                                            chartFilter = value;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 40,
+                                      width: 100,
+                                      child: ToggleRadio.rowStyle(
+                                        label: 'Top Rope',
+                                        value: 'Top Rope',
+                                        groupValue: chartFilter,
+                                        onChanged: (String value) {
+                                          setState(() {
+                                            chartFilter = value;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 40,
+                                      width: 100,
+                                      child: ToggleRadio.rowStyle(
+                                        label: 'Auto',
+                                        value: 'Auto',
+                                        groupValue: chartFilter,
+                                        onChanged: (String value) {
+                                          setState(() {
+                                            chartFilter = value;
+                                          });
+                                        },
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
@@ -107,7 +151,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 backgroundColor: Color(0xffffdd00),
               ),
-              drawer: CustomDrawer(accountType: 'Google', user: widget.user),
+              drawer: CustomDrawer(accountType: 'Google'),
             ),
             if (_mode == RouteWizardMode.CREATE)
               RouteWizard.creator(

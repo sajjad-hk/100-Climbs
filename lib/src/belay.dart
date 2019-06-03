@@ -31,7 +31,7 @@ class Belay extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 4,
+          flex: 6,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

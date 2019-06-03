@@ -1,3 +1,4 @@
+import 'package:climbing_logbook/src/Repositories/RouteRepository.dart';
 import 'package:climbing_logbook/src/customIcon.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
@@ -345,6 +346,8 @@ class Tags extends StatelessWidget {
                 flex: 2,
                 child: InkWell(
                   onTap: () {
+                    print(climbingRoteState.route.grade);
+                    RouteRepository().addRoute(climbingRoteState.route);
                     // Save the route
                     // Go back to first tab
                   },
