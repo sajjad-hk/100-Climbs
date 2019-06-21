@@ -1,31 +1,22 @@
-enum OutCome { SUCCESS, FAILURE }
-enum GradingStyle { FRENCH, POLISH }
-enum BelayingStyle { LEAD, AUTO, TOPROPE }
-enum Closure { ONSIGHT, FLASH }
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
 
-class ClimbingRoute {
-  String outCome;
-  String gradingStyle;
-  String grade;
-  String belayingStyle;
-  List<String> closures;
-  List<String> tags;
+part 'ClimbingRoute.g.dart';
 
-  ClimbingRoute(
-      {this.outCome,
-      this.gradingStyle,
-      this.grade,
-      this.belayingStyle,
-      this.closures,
-      this.tags});
+abstract class ClimbingRoute
+    implements Built<ClimbingRoute, ClimbingRouteBuilder> {
+  OutComeEnum get outCome;
+  GradingStyleEnum get gradingStyle;
+  String get grade;
+  BelayingStyleEnum get belayingStyle;
+  @nullable
+  ClosureEnum get closure;
+  BuiltSet<String> get tags;
 
-  factory ClimbingRoute.fromJson(Map<String, dynamic> jsonData) {
-    return ClimbingRoute(
-        outCome: 'SUCCESS',
-        gradingStyle: 'FRENCH',
-        grade: '6a',
-        belayingStyle: 'LEAD',
-        closures: ['FLASH'],
-        tags: []);
-  }
+  ClimbingRoute._();
+  factory ClimbingRoute([void Function(ClimbingRouteBuilder) updates]) =
+      _$ClimbingRoute;
+  static Serializer<ClimbingRoute> get serializer => _$climbingRouteSerializer;
 }

@@ -1,9 +1,14 @@
-import 'package:climbing_logbook/src/Repositories/RouteRepository.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:climbing_logbook/src/customIcon.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
+import 'package:climbing_logbook/src/models/ClimbingRoute.dart';
+import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'Repositories/RouteRepository.dart';
 
 class Tags extends StatelessWidget {
   static TextEditingController tagTextController = TextEditingController();
@@ -12,6 +17,7 @@ class Tags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final climbingRoteState = Provider.of<ClimbingRouteState>(context);
+    final user = Provider.of<FirebaseUser>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -81,10 +87,10 @@ class Tags extends StatelessWidget {
                             margin: const EdgeInsets.only(right: 2.0),
                             child: CustomRadio(
                               value: 'FLASH',
-                              groupValue: climbingRoteState.route.closures
-                                      .contains('FLASH')
-                                  ? 'FLASH'
-                                  : null,
+                              groupValue:
+                                  climbingRoteState.route.closure == 'FLASH'
+                                      ? 'FLASH'
+                                      : null,
                               onChanged: (String val) {
                                 climbingRoteState.closure = val;
                               },
@@ -166,10 +172,10 @@ class Tags extends StatelessWidget {
                             margin: const EdgeInsets.only(left: 2.0),
                             child: CustomRadio(
                               value: 'On Sight',
-                              groupValue: climbingRoteState.route.closures
-                                      .contains('On Sight')
-                                  ? 'On Sight'
-                                  : null,
+                              groupValue:
+                                  climbingRoteState.route.closure == 'On Sight'
+                                      ? 'On Sight'
+                                      : null,
                               onChanged: (String val) {
                                 climbingRoteState.closure = val;
                               },
@@ -346,8 +352,15 @@ class Tags extends StatelessWidget {
                 flex: 2,
                 child: InkWell(
                   onTap: () {
-                    print(climbingRoteState.route.grade);
-                    RouteRepository().addRoute(climbingRoteState.route);
+                    final standardSerializers = (serializers.toBuilder()
+                          ..addPlugin(StandardJsonPlugin()))
+                        .build();
+                    final value2 = standardSerializers.serializeWith(
+                        ClimbingRoute.serializer, climbingRoteState.route);
+                    print(value2);
+
+////                    routeToSave['uid'] = user.uid;
+                    routeRepository.addRoute(value2);
                     // Save the route
                     // Go back to first tab
                   },

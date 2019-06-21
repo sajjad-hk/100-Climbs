@@ -1,3 +1,4 @@
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,12 +47,12 @@ class Belay extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 4,
-                        child: ToggleRadio.rowStyle(
+                        child: ToggleRadio<BelayingStyleEnum>.rowStyle(
                           label: 'Lead',
-                          value: 'LEAD',
+                          value: BelayingStyleEnum.valueOf('lead'),
                           groupValue: climbingRouteState.route.belayingStyle,
-                          onChanged: (String val) {
-                            climbingRouteState.belayingStyle = val;
+                          onChanged: (dynamic val) {
+                            climbingRouteState.belayingStyle = val.toString();
                           },
                         ),
                       ),
@@ -74,12 +75,12 @@ class Belay extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 4,
-                        child: ToggleRadio.rowStyle(
+                        child: ToggleRadio<BelayingStyleEnum>.rowStyle(
                           label: 'Auto',
-                          value: 'AUTO',
+                          value: BelayingStyleEnum.valueOf('auto'),
                           groupValue: climbingRouteState.route.belayingStyle,
-                          onChanged: (String val) {
-                            climbingRouteState.belayingStyle = val;
+                          onChanged: (dynamic val) {
+                            climbingRouteState.belayingStyle = val.toString();
                           },
                         ),
                       ),
@@ -102,12 +103,12 @@ class Belay extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 4,
-                        child: ToggleRadio.rowStyle(
+                        child: ToggleRadio<BelayingStyleEnum>.rowStyle(
                           label: 'Toprope',
-                          value: 'TOPEROPE',
+                          value: BelayingStyleEnum.valueOf('toprope'),
                           groupValue: climbingRouteState.route.belayingStyle,
-                          onChanged: (String val) {
-                            climbingRouteState.belayingStyle = val;
+                          onChanged: (dynamic val) {
+                            climbingRouteState.belayingStyle = val.toString();
                           },
                         ),
                       ),

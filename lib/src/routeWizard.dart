@@ -1,8 +1,15 @@
+import 'package:built_value/standard_json_plugin.dart';
+import 'package:climbing_logbook/src/Repositories/RouteRepository.dart';
 import 'package:climbing_logbook/src/belay.dart';
 import 'package:climbing_logbook/src/grade.dart';
 import 'package:climbing_logbook/src/outCome.dart';
+import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:climbing_logbook/src/tags.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'models/ClimbingRoute.dart';
+import 'models/serializers.dart';
 
 class RouteWizard extends StatefulWidget {
   final GestureTapCallback onClose;
@@ -103,12 +110,28 @@ class _RouteWizardState extends State<RouteWizard> {
                             : Icons.arrow_forward,
                         color: Colors.white,
                       ),
-                      onPressed: () => _controller.nextPage(
+                      onPressed: () {
+                        if (currentPageIndex == 3) {
+                          final climbingRoteState =
+                              Provider.of<ClimbingRouteState>(context);
+                          final standardSerializers = (serializers.toBuilder()
+                                ..addPlugin(StandardJsonPlugin()))
+                              .build();
+                          final value2 = standardSerializers.serializeWith(
+                              ClimbingRoute.serializer,
+                              climbingRoteState.route);
+                          print(value2);
+                          routeRepository.addRoute(value2);
+                          widget.onClose();
+                        } else {
+                          _controller.nextPage(
                             duration: Duration(
                               milliseconds: 200,
                             ),
                             curve: Curves.easeIn,
-                          ),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

@@ -1,4 +1,7 @@
+import 'package:built_collection/built_collection.dart';
+import 'package:built_collection/src/set.dart';
 import 'package:climbing_logbook/src/models/ClimbingRoute.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:flutter/foundation.dart';
 
 const GRADE_SET = {
@@ -51,52 +54,57 @@ const GRADE_SET = {
 };
 
 class ClimbingRouteState with ChangeNotifier {
-  ClimbingRoute _route = ClimbingRoute(
-      outCome: 'Yes',
-      gradingStyle: 'FRENCH',
-      grade: '4a',
-      belayingStyle: 'LEAD',
-      closures: ['FLASH'],
-      tags: ['Makak']);
+  ClimbingRoute _route = ClimbingRoute((route) => route
+    ..outCome = OutComeEnum.success
+    ..gradingStyle = GradingStyleEnum.french
+    ..grade = '4a'
+    ..belayingStyle = BelayingStyleEnum.lead
+    ..closure = ClosureEnum.flash
+    ..tags = SetBuilder<String>());
 
   List<String> _climbingGradeValues = GRADE_SET['FRENCH'];
 
   ClimbingRoute get route => _route;
+
   List<String> get climbingGradeValues => _climbingGradeValues;
-  String get gradingStyle => _route.gradingStyle;
+//  GradingStyle get gradingStyle => _route.gradingStyle;
 
   set tag(String value) {
-    _route.tags.add(value);
+    _route = _route.rebuild(
+        (route) => route..tags = SetBuilder<String>([..._route.tags, value]));
     notifyListeners();
   }
 
   set closure(String value) {
-    if (_route.closures.contains(value)) {
-      _route.closures.remove(value);
-    } else {
-      _route.closures.add(value);
-    }
+    _route = _route.rebuild((route) => route
+      ..closure = _route.closure == ClosureEnum.valueOf(value)
+          ? null
+          : ClosureEnum.valueOf(value));
     notifyListeners();
   }
 
   set belayingStyle(String value) {
-    _route.belayingStyle = value;
+    _route = _route.rebuild(
+        (route) => route..belayingStyle = BelayingStyleEnum.valueOf(value));
+
     notifyListeners();
   }
 
   set outCome(String value) {
-    _route.outCome = value;
+    _route =
+        _route.rebuild((route) => route..outCome = OutComeEnum.valueOf(value));
     notifyListeners();
   }
 
   set gradingStyle(String value) {
-    _route.gradingStyle = value;
+    _route = _route.rebuild(
+        (route) => route..gradingStyle = GradingStyleEnum.valueOf(value));
     _climbingGradeValues = GRADE_SET[value];
     notifyListeners();
   }
 
   set grade(String value) {
-    _route.grade = value;
+    _route = _route.rebuild((route) => route..grade = value);
     notifyListeners();
   }
 

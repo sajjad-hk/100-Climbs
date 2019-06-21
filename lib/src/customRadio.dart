@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
-class CustomRadio extends StatefulWidget {
+class CustomRadio<T> extends StatefulWidget {
   CustomRadio(
       {Key key,
       @required this.value,
@@ -12,9 +12,9 @@ class CustomRadio extends StatefulWidget {
       this.notChecked})
       : super(key: key);
 
-  final ValueChanged<String> onChanged;
-  final String value;
-  final String groupValue;
+  final ValueChanged<T> onChanged;
+  final T value;
+  final T groupValue;
   final Widget checked;
   final Widget notChecked;
 
@@ -65,10 +65,10 @@ class CustomRadioState extends State<CustomRadio> {
   }
 }
 
-class ToggleRadio extends StatelessWidget {
-  final String value;
-  final String groupValue;
-  final ValueChanged<String> onChanged;
+class ToggleRadio<T> extends StatelessWidget {
+  final T value;
+  final T groupValue;
+  final ValueChanged<T> onChanged;
   final Widget checkedIcon;
   final Widget notCheckedIcon;
   final String label;

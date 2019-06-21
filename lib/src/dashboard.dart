@@ -1,9 +1,13 @@
 import 'package:climbing_logbook/src/customDrawer.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
+import 'package:climbing_logbook/src/models/ClimbingRoute.dart';
 import 'package:climbing_logbook/src/routeWizard.dart';
+import 'package:climbing_logbook/src/states/ClimbingRouteList.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'climbingRoutes.dart';
 
 enum RouteWizardMode { CREATE, EDIT, NONE }
 
@@ -13,7 +17,6 @@ final Color chartBackgroundFrom = Color(0xff165571);
 final Color chartBackgroundTo = Color(0xff0e1823);
 
 class Dashboard extends StatefulWidget {
-
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -22,6 +25,7 @@ class _DashboardState extends State<Dashboard> {
   RouteWizardMode _mode = RouteWizardMode.NONE;
   String chartFilter;
 
+  final c = ClimbingRouteList();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -128,6 +132,27 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     expandedHeight: 300,
                   ),
+                  StreamBuilder<List<ClimbingRoute>>(
+                    stream: c.getRouteList(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ClimbingRoutes(
+                          routes: snapshot.data,
+                        );
+                      } else {
+                        return SliverList(
+                          delegate: SliverChildListDelegate(
+                            [
+                              Center(
+                                child: Text('Loading...'),
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  )
+
 //            RouteLogs(
 //              routes: List<RouteLog>.generate(
 //                100,
@@ -151,7 +176,8 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 backgroundColor: Color(0xffffdd00),
               ),
-              drawer: CustomDrawer(accountType: 'Google'),
+              drawer: CustomDrawer(
+                  accountType: 'Google'), // todo change static account type
             ),
             if (_mode == RouteWizardMode.CREATE)
               RouteWizard.creator(

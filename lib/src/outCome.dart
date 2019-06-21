@@ -1,5 +1,6 @@
 import 'package:climbing_logbook/src/customIcon.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,9 +45,9 @@ class OutCome extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 2,
-                        child: ToggleRadio.columnStyle(
+                        child: ToggleRadio<OutComeEnum>.columnStyle(
                           label: 'Yes',
-                          value: 'Yes',
+                          value: OutComeEnum.valueOf('success'),
                           groupValue: route.route.outCome,
                           notCheckedIcon: Container(
                             width: 50,
@@ -62,8 +63,8 @@ class OutCome extends StatelessWidget {
                               path: 'assets/icons/smile-white-icon.png',
                             ),
                           ),
-                          onChanged: (String val) {
-                            route.outCome = val;
+                          onChanged: (dynamic val) {
+                            route.outCome = val.toString();
                           },
                         ),
                       ),
@@ -85,9 +86,9 @@ class OutCome extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 2,
-                        child: ToggleRadio.columnStyle(
+                        child: ToggleRadio<OutComeEnum>.columnStyle(
                           label: 'No',
-                          value: 'No',
+                          value: OutComeEnum.valueOf('failure'),
                           groupValue: route.route.outCome,
                           notCheckedIcon: Container(
                             width: 50,
@@ -103,8 +104,8 @@ class OutCome extends StatelessWidget {
                               path: 'assets/icons/sad-white-icon.png',
                             ),
                           ),
-                          onChanged: (String val) {
-                            route.outCome = val;
+                          onChanged: (dynamic val) {
+                            route.outCome = val.toString();
                           },
                         ),
                       ),

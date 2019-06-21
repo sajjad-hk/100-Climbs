@@ -6,6 +6,8 @@ import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/enums.dart';
+
 class Grade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,12 +49,12 @@ class Grade extends StatelessWidget {
                     flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ToggleRadio.columnStyle(
+                      child: ToggleRadio<GradingStyleEnum>.columnStyle(
                         label: 'French',
-                        value: 'FRENCH',
+                        value: GradingStyleEnum.valueOf('french'),
                         groupValue: climbingRouteState.route.gradingStyle,
-                        onChanged: (String val) {
-                          climbingRouteState.gradingStyle = val;
+                        onChanged: (dynamic val) {
+                          climbingRouteState.gradingStyle = val.toString();
                           climbingRouteState.grade =
                               climbingRouteState.climbingGradeValues[0];
                         },
@@ -63,12 +65,12 @@ class Grade extends StatelessWidget {
                     flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ToggleRadio.columnStyle(
+                      child: ToggleRadio<GradingStyleEnum>.columnStyle(
                         label: 'Polish',
-                        value: 'POLISH',
+                        value: GradingStyleEnum.valueOf('polish'),
                         groupValue: climbingRouteState.route.gradingStyle,
-                        onChanged: (String val) {
-                          climbingRouteState.gradingStyle = val;
+                        onChanged: (dynamic val) {
+                          climbingRouteState.gradingStyle = val.toString();
                           climbingRouteState.grade =
                               climbingRouteState.climbingGradeValues[0];
                         },
