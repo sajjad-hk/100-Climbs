@@ -1,7 +1,6 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:built_collection/src/set.dart';
-import 'package:climbing_logbook/src/models/ClimbingRoute.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
+import 'package:climbing_logbook/src/models/values.dart';
 import 'package:flutter/foundation.dart';
 
 const GRADE_SET = {
@@ -55,6 +54,7 @@ const GRADE_SET = {
 
 class ClimbingRouteState with ChangeNotifier {
   ClimbingRoute _route = ClimbingRoute((route) => route
+    ..uid = ''
     ..outCome = OutComeEnum.success
     ..gradingStyle = GradingStyleEnum.french
     ..grade = '4a'
@@ -68,6 +68,10 @@ class ClimbingRouteState with ChangeNotifier {
 
   List<String> get climbingGradeValues => _climbingGradeValues;
 //  GradingStyle get gradingStyle => _route.gradingStyle;
+
+  set uid(String value) {
+    _route = _route.rebuild((route) => route..uid = value);
+  }
 
   set tag(String value) {
     _route = _route.rebuild(

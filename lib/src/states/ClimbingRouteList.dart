@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:climbing_logbook/src/models/ClimbingRoute.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
+import 'package:climbing_logbook/src/models/values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ClimbingRouteList {
@@ -21,11 +21,9 @@ class ClimbingRouteList {
     },
   );
 
-  Stream<List<ClimbingRoute>> getRouteList() {
-    var ref = _db.collection('routes');
+  Stream<List<ClimbingRoute>> getRouteList(String uid) {
+    var ref = _db.collection('routes').where('uid', isEqualTo: uid);
 
     return ref.snapshots().transform(streamTransformer);
   }
-
-  addRoute(ClimbingRoute item) {}
 }

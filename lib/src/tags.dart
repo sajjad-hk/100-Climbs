@@ -1,8 +1,8 @@
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:climbing_logbook/src/customIcon.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
-import 'package:climbing_logbook/src/models/ClimbingRoute.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
+import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

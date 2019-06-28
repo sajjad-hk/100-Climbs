@@ -26,6 +26,9 @@ dependencies:
   rxdart: ^0.21.0
   provider: ^2.0.1
 
+  flutter_charts: ^0.1.10
+  charts_flutter: ^0.6.0
+
   built_collection: '>=2.0.0 <5.0.0'
   built_value: '>=5.5.5 <7.0.0'
 
@@ -84,6 +87,7 @@ flutter:
     - assets/icons/flash_white-icon.png
     - assets/icons/eye_dark-icon.png
     - assets/icons/eye_white-icon.png
+    - assets/icons/icon_lead_active.png
 
 
 

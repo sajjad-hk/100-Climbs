@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ClimbingRoute.dart';
+part of 'values.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -22,6 +22,8 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
       'outCome',
       serializers.serialize(object.outCome,
           specifiedType: const FullType(OutComeEnum)),
+      'uid',
+      serializers.serialize(object.uid, specifiedType: const FullType(String)),
       'gradingStyle',
       serializers.serialize(object.gradingStyle,
           specifiedType: const FullType(GradingStyleEnum)),
@@ -60,6 +62,10 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
           result.outCome = serializers.deserialize(value,
               specifiedType: const FullType(OutComeEnum)) as OutComeEnum;
           break;
+        case 'uid':
+          result.uid = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'gradingStyle':
           result.gradingStyle = serializers.deserialize(value,
                   specifiedType: const FullType(GradingStyleEnum))
@@ -95,6 +101,8 @@ class _$ClimbingRoute extends ClimbingRoute {
   @override
   final OutComeEnum outCome;
   @override
+  final String uid;
+  @override
   final GradingStyleEnum gradingStyle;
   @override
   final String grade;
@@ -110,6 +118,7 @@ class _$ClimbingRoute extends ClimbingRoute {
 
   _$ClimbingRoute._(
       {this.outCome,
+      this.uid,
       this.gradingStyle,
       this.grade,
       this.belayingStyle,
@@ -118,6 +127,9 @@ class _$ClimbingRoute extends ClimbingRoute {
       : super._() {
     if (outCome == null) {
       throw new BuiltValueNullFieldError('ClimbingRoute', 'outCome');
+    }
+    if (uid == null) {
+      throw new BuiltValueNullFieldError('ClimbingRoute', 'uid');
     }
     if (gradingStyle == null) {
       throw new BuiltValueNullFieldError('ClimbingRoute', 'gradingStyle');
@@ -145,6 +157,7 @@ class _$ClimbingRoute extends ClimbingRoute {
     if (identical(other, this)) return true;
     return other is ClimbingRoute &&
         outCome == other.outCome &&
+        uid == other.uid &&
         gradingStyle == other.gradingStyle &&
         grade == other.grade &&
         belayingStyle == other.belayingStyle &&
@@ -157,7 +170,9 @@ class _$ClimbingRoute extends ClimbingRoute {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, outCome.hashCode), gradingStyle.hashCode),
+                $jc(
+                    $jc($jc($jc(0, outCome.hashCode), uid.hashCode),
+                        gradingStyle.hashCode),
                     grade.hashCode),
                 belayingStyle.hashCode),
             closure.hashCode),
@@ -168,6 +183,7 @@ class _$ClimbingRoute extends ClimbingRoute {
   String toString() {
     return (newBuiltValueToStringHelper('ClimbingRoute')
           ..add('outCome', outCome)
+          ..add('uid', uid)
           ..add('gradingStyle', gradingStyle)
           ..add('grade', grade)
           ..add('belayingStyle', belayingStyle)
@@ -184,6 +200,10 @@ class ClimbingRouteBuilder
   OutComeEnum _outCome;
   OutComeEnum get outCome => _$this._outCome;
   set outCome(OutComeEnum outCome) => _$this._outCome = outCome;
+
+  String _uid;
+  String get uid => _$this._uid;
+  set uid(String uid) => _$this._uid = uid;
 
   GradingStyleEnum _gradingStyle;
   GradingStyleEnum get gradingStyle => _$this._gradingStyle;
@@ -212,6 +232,7 @@ class ClimbingRouteBuilder
   ClimbingRouteBuilder get _$this {
     if (_$v != null) {
       _outCome = _$v.outCome;
+      _uid = _$v.uid;
       _gradingStyle = _$v.gradingStyle;
       _grade = _$v.grade;
       _belayingStyle = _$v.belayingStyle;
@@ -242,6 +263,7 @@ class ClimbingRouteBuilder
       _$result = _$v ??
           new _$ClimbingRoute._(
               outCome: outCome,
+              uid: uid,
               gradingStyle: gradingStyle,
               grade: grade,
               belayingStyle: belayingStyle,

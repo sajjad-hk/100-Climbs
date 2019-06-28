@@ -1,3 +1,4 @@
+import 'package:climbing_logbook/src/customRadio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -128,6 +129,14 @@ class CustomDrawer extends StatelessWidget {
                         ],
                       ),
                       onPressed: () => null,
+                    ),
+                    NewCustomRadio.col(
+                      value: null,
+                      groupValue: null,
+                      label: 'Yes',
+                      checkedContentColor: Colors.white,
+                      checkedBgColor: Color(0xff4d000000),
+                      unCheckedBgColor: Colors.transparent,
                     ),
                     FlatButton(
                       color: chartBackgroundTo,

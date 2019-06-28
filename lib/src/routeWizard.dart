@@ -5,11 +5,12 @@ import 'package:climbing_logbook/src/grade.dart';
 import 'package:climbing_logbook/src/outCome.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:climbing_logbook/src/tags.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'models/ClimbingRoute.dart';
 import 'models/serializers.dart';
+import 'models/values.dart';
 
 class RouteWizard extends StatefulWidget {
   final GestureTapCallback onClose;
@@ -36,9 +37,10 @@ class _RouteWizardState extends State<RouteWizard> {
     currentPageIndex = 0;
   }
 
-  _routeWizardWapper() {
+  _routeWizardWapper(BuildContext context) {
     PageController _controller = PageController(initialPage: 0);
-
+    final climbingRoteState = Provider.of<ClimbingRouteState>(context);
+    final user = Provider.of<FirebaseUser>(context);
     return Container(
       color: Color(0xffb3000000),
       padding: const EdgeInsets.all(12.0),
@@ -112,15 +114,14 @@ class _RouteWizardState extends State<RouteWizard> {
                       ),
                       onPressed: () {
                         if (currentPageIndex == 3) {
-                          final climbingRoteState =
-                              Provider.of<ClimbingRouteState>(context);
                           final standardSerializers = (serializers.toBuilder()
                                 ..addPlugin(StandardJsonPlugin()))
                               .build();
+                          climbingRoteState.uid = user.uid;
                           final value2 = standardSerializers.serializeWith(
                               ClimbingRoute.serializer,
                               climbingRoteState.route);
-                          print(value2);
+//                          print(value2);
                           routeRepository.addRoute(value2);
                           widget.onClose();
                         } else {
@@ -145,6 +146,6 @@ class _RouteWizardState extends State<RouteWizard> {
 
   @override
   Widget build(BuildContext context) {
-    return _routeWizardWapper();
+    return _routeWizardWapper(context);
   }
 }
