@@ -1,3 +1,4 @@
+import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class Belay extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Expanded(
                         flex: 1,
@@ -47,10 +49,14 @@ class Belay extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 4,
-                        child: ToggleRadio<BelayingStyleEnum>.rowStyle(
+                        child: NewCustomRadio.row(
                           label: 'Lead',
                           value: BelayingStyleEnum.valueOf('lead'),
                           groupValue: climbingRouteState.route.belayingStyle,
+                          iconProvider: LogBookIcons.lead,
+                          checkedContentColor: Colors.white,
+                          checkedBgColor: Color(0xff4d000000),
+                          unCheckedBgColor: Colors.transparent,
                           onChanged: (dynamic val) {
                             climbingRouteState.belayingStyle = val.toString();
                           },
@@ -68,6 +74,7 @@ class Belay extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Expanded(
                         flex: 1,
@@ -75,10 +82,14 @@ class Belay extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 4,
-                        child: ToggleRadio<BelayingStyleEnum>.rowStyle(
+                        child: NewCustomRadio.row(
                           label: 'Auto',
                           value: BelayingStyleEnum.valueOf('auto'),
                           groupValue: climbingRouteState.route.belayingStyle,
+                          iconProvider: LogBookIcons.auto,
+                          checkedContentColor: Colors.white,
+                          checkedBgColor: Color(0xff4d000000),
+                          unCheckedBgColor: Colors.transparent,
                           onChanged: (dynamic val) {
                             climbingRouteState.belayingStyle = val.toString();
                           },
@@ -96,6 +107,7 @@ class Belay extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Expanded(
                         flex: 1,
@@ -103,10 +115,14 @@ class Belay extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 4,
-                        child: ToggleRadio<BelayingStyleEnum>.rowStyle(
+                        child: NewCustomRadio.row(
                           label: 'Toprope',
                           value: BelayingStyleEnum.valueOf('toprope'),
                           groupValue: climbingRouteState.route.belayingStyle,
+                          iconProvider: LogBookIcons.toprope,
+                          checkedContentColor: Colors.white,
+                          checkedBgColor: Color(0xff4d000000),
+                          unCheckedBgColor: Colors.transparent,
                           onChanged: (dynamic val) {
                             climbingRouteState.belayingStyle = val.toString();
                           },

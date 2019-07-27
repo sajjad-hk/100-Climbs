@@ -1,6 +1,7 @@
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:climbing_logbook/src/customIcon.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
+import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
@@ -81,170 +82,39 @@ class Tags extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(15.0),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(right: 2.0),
-                            child: CustomRadio(
-                              value: 'FLASH',
-                              groupValue:
-                                  climbingRoteState.route.closure == 'FLASH'
-                                      ? 'FLASH'
-                                      : null,
-                              onChanged: (String val) {
-                                climbingRoteState.closure = val;
+                            child: NewCustomRadio.row(
+                              value: ClosureEnum.valueOf('flash'),
+                              groupValue: climbingRoteState.route.closure,
+                              label: 'FLASH',
+                              iconProvider: LogBookIcons.flash,
+                              checkedContentColor: Colors.white,
+                              checkedBgColor: Color(0xff4d000000),
+                              unCheckedBgColor: Colors.white,
+                              onChanged: (val) {
+                                climbingRoteState.closure = val.toString();
                               },
-                              checked: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0x4d000000),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(4),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      child: CustomIcon(
-                                        path:
-                                            'assets/icons/flash_white-icon.png',
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Text(
-                                          'Flash',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'Arial-MT-Bold',
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              notChecked: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(4),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      child: CustomIcon(
-                                        path:
-                                            'assets/icons/flash_dark-icon.png',
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Text(
-                                          'Flash',
-                                          style: TextStyle(
-                                            fontFamily: 'Arial-MT-Bold',
-                                            color: Color(0x4d000000),
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ),
                         ),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(left: 2.0),
-                            child: CustomRadio(
-                              value: 'On Sight',
-                              groupValue:
-                                  climbingRoteState.route.closure == 'On Sight'
-                                      ? 'On Sight'
-                                      : null,
-                              onChanged: (String val) {
-                                climbingRoteState.closure = val;
+                            child: NewCustomRadio.row(
+                              value: ClosureEnum.valueOf('onsight'),
+                              groupValue: climbingRoteState.route.closure,
+                              label: 'On Sight',
+                              iconProvider: LogBookIcons.eye,
+                              checkedContentColor: Colors.white,
+                              checkedBgColor: Color(0xff4d000000),
+                              unCheckedBgColor: Colors.white,
+                              onChanged: (val) {
+                                climbingRoteState.closure = val.toString();
                               },
-                              checked: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0x4d000000),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(4),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      child: CustomIcon(
-                                        path: 'assets/icons/eye_white-icon.png',
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Text(
-                                          'On Sight',
-                                          style: TextStyle(
-                                            fontFamily: 'Arial-MT-Bold',
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              notChecked: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(4),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      child: CustomIcon(
-                                        path: 'assets/icons/eye_dark-icon.png',
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Text(
-                                          'On Sight',
-                                          style: TextStyle(
-                                            fontFamily: 'Arial-MT-Bold',
-                                            color: Color(0x4d000000),
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ),
                         ),

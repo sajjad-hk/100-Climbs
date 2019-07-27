@@ -43,17 +43,21 @@ class Grade extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Expanded(
                     flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ToggleRadio<GradingStyleEnum>.columnStyle(
-                        label: 'French',
+                      child: NewCustomRadio.row(
                         value: GradingStyleEnum.valueOf('french'),
                         groupValue: climbingRouteState.route.gradingStyle,
-                        onChanged: (dynamic val) {
+                        label: 'French',
+                        checkedContentColor: Colors.white,
+                        checkedBgColor: Color(0xff4d000000),
+                        unCheckedBgColor: Colors.transparent,
+                        onChanged: (val) {
                           climbingRouteState.gradingStyle = val.toString();
                           climbingRouteState.grade =
                               climbingRouteState.climbingGradeValues[0];
@@ -65,11 +69,14 @@ class Grade extends StatelessWidget {
                     flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ToggleRadio<GradingStyleEnum>.columnStyle(
-                        label: 'Polish',
+                      child: NewCustomRadio.row(
                         value: GradingStyleEnum.valueOf('polish'),
                         groupValue: climbingRouteState.route.gradingStyle,
-                        onChanged: (dynamic val) {
+                        label: 'Polish',
+                        checkedContentColor: Colors.white,
+                        checkedBgColor: Color(0xff4d000000),
+                        unCheckedBgColor: Colors.transparent,
+                        onChanged: (val) {
                           climbingRouteState.gradingStyle = val.toString();
                           climbingRouteState.grade =
                               climbingRouteState.climbingGradeValues[0];

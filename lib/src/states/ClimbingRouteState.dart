@@ -4,7 +4,7 @@ import 'package:climbing_logbook/src/models/values.dart';
 import 'package:flutter/foundation.dart';
 
 const GRADE_SET = {
-  "FRENCH": [
+  'french': [
     '4a',
     '4a+',
     '4b',
@@ -31,7 +31,7 @@ const GRADE_SET = {
     '7c+',
     '8a'
   ],
-  'POLISH': [
+  'polish': [
     'IV+',
     'V-',
     'V',
@@ -62,12 +62,11 @@ class ClimbingRouteState with ChangeNotifier {
     ..closure = ClosureEnum.flash
     ..tags = SetBuilder<String>());
 
-  List<String> _climbingGradeValues = GRADE_SET['FRENCH'];
+  List<String> _climbingGradeValues = GRADE_SET['french'];
 
   ClimbingRoute get route => _route;
 
   List<String> get climbingGradeValues => _climbingGradeValues;
-//  GradingStyle get gradingStyle => _route.gradingStyle;
 
   set uid(String value) {
     _route = _route.rebuild((route) => route..uid = value);

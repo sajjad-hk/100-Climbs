@@ -5,8 +5,9 @@ import 'models/values.dart';
 
 class ClimbingRoutes extends StatelessWidget {
   final List<ClimbingRoute> routes;
+  final GestureTapCallback onEdit;
 
-  ClimbingRoutes({this.routes});
+  ClimbingRoutes({this.routes, this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,10 @@ class ClimbingRoutes extends StatelessWidget {
                           size: 20,
                           color: Color(0xff8b8b8b),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          print('soom');
+                          onEdit();
+                        },
                       ),
                     ),
                     Container(

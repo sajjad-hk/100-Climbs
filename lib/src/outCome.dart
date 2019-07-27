@@ -1,5 +1,5 @@
-import 'package:climbing_logbook/src/customIcon.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
+import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
@@ -45,25 +45,15 @@ class OutCome extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 2,
-                        child: ToggleRadio<OutComeEnum>.columnStyle(
-                          label: 'Yes',
+                        child: NewCustomRadio.col(
                           value: OutComeEnum.valueOf('success'),
                           groupValue: route.route.outCome,
-                          notCheckedIcon: Container(
-                            width: 50,
-                            height: 50,
-                            child: CustomIcon(
-                              path: 'assets/icons/smile-icon.png',
-                            ),
-                          ),
-                          checkedIcon: Container(
-                            width: 50,
-                            height: 50,
-                            child: CustomIcon(
-                              path: 'assets/icons/smile-white-icon.png',
-                            ),
-                          ),
-                          onChanged: (dynamic val) {
+                          label: 'Yes',
+                          iconProvider: LogBookIcons.smile,
+                          checkedContentColor: Colors.white,
+                          checkedBgColor: Color(0xff4d000000),
+                          unCheckedBgColor: Colors.transparent,
+                          onChanged: (val) {
                             route.outCome = val.toString();
                           },
                         ),
@@ -86,25 +76,15 @@ class OutCome extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 2,
-                        child: ToggleRadio<OutComeEnum>.columnStyle(
-                          label: 'No',
+                        child: NewCustomRadio.col(
                           value: OutComeEnum.valueOf('failure'),
                           groupValue: route.route.outCome,
-                          notCheckedIcon: Container(
-                            width: 50,
-                            height: 50,
-                            child: CustomIcon(
-                              path: 'assets/icons/sad-icon.png',
-                            ),
-                          ),
-                          checkedIcon: Container(
-                            width: 50,
-                            height: 50,
-                            child: CustomIcon(
-                              path: 'assets/icons/sad-white-icon.png',
-                            ),
-                          ),
-                          onChanged: (dynamic val) {
+                          label: 'No',
+                          iconProvider: LogBookIcons.sad,
+                          checkedContentColor: Colors.white,
+                          checkedBgColor: Color(0xff4d000000),
+                          unCheckedBgColor: Colors.transparent,
+                          onChanged: (val) {
                             route.outCome = val.toString();
                           },
                         ),

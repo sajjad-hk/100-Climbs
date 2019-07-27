@@ -136,8 +136,12 @@ class _DashboardState extends State<Dashboard> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return ClimbingRoutes(
-                          routes: snapshot.data,
-                        );
+                            routes: snapshot.data,
+                            onEdit: () {
+                              setState(() {
+                                _mode = RouteWizardMode.EDIT;
+                              });
+                            });
                       } else {
                         return SliverList(
                           delegate: SliverChildListDelegate(
