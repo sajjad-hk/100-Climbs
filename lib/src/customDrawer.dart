@@ -1,3 +1,5 @@
+import 'package:climbing_logbook/src/auth.dart';
+import 'package:climbing_logbook/src/models/values.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -99,7 +101,7 @@ class CustomDrawer extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: () =>
-                                      FirebaseAuth.instance.signOut(),
+                                      authService.signOut(context),
                                 ),
                               ),
                             ),

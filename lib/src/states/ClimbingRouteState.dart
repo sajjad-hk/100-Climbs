@@ -68,8 +68,26 @@ class ClimbingRouteState with ChangeNotifier {
 
   List<String> get climbingGradeValues => _climbingGradeValues;
 
+  List<String> _l = ['Murall', 'Makak', 'Obozowa'];
+
+
+  List<String> get usersTags {
+    return _l;
+  }
+
+  set userTags(List<String> tags) {
+    _l = tags;
+    notifyListeners();
+  }
+
   set uid(String value) {
     _route = _route.rebuild((route) => route..uid = value);
+  }
+
+  set tags(List tags) {
+    _route = _route.rebuild(
+            (route) => route..tags = SetBuilder<String>(tags));
+    notifyListeners();
   }
 
   set tag(String value) {

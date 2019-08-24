@@ -2,7 +2,9 @@ import 'dart:core';
 
 import 'package:climbing_logbook/src/customRadio.dart';
 import 'package:climbing_logbook/src/gradePicker.dart';
+import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +14,7 @@ class Grade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final climbingRouteState = Provider.of<ClimbingRouteState>(context);
+    final user = Provider.of<ClimbingLogBookUser>(context);
     return Column(
       children: <Widget>[
         Visibility(
@@ -41,10 +44,10 @@ class Grade extends StatelessWidget {
           child: Expanded(
             flex: 1,
             child: Container(
-              padding: const EdgeInsets.only(left: 15, right: 15),
+              padding: const EdgeInsets.only(left: 40, right: 40),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Expanded(
                     flex: 1,
@@ -54,6 +57,7 @@ class Grade extends StatelessWidget {
                         value: GradingStyleEnum.valueOf('french'),
                         groupValue: climbingRouteState.route.gradingStyle,
                         label: 'French',
+                        fontSize: 18,
                         checkedContentColor: Colors.white,
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,
@@ -73,6 +77,7 @@ class Grade extends StatelessWidget {
                         value: GradingStyleEnum.valueOf('polish'),
                         groupValue: climbingRouteState.route.gradingStyle,
                         label: 'Polish',
+                        fontSize: 18,
                         checkedContentColor: Colors.white,
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,

@@ -1,5 +1,9 @@
+import 'package:climbing_logbook/src/colors/LogBookColors.dart';
+import 'package:climbing_logbook/src/customIcon.dart';
+import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'models/values.dart';
 
@@ -26,23 +30,53 @@ class ClimbingRoutes extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  color: Colors.redAccent,
-                  height: 65,
+                  color: LogBookColors.getGradeColor(it.grade),
+                  height: 90,
                   width: 6,
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 10),
+                  height: 90,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        it.grade,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 34,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.only(top: 10, left: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  it.grade,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 34,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            height: 35,
+                            width: 35,
+                            child: Center(child: CustomIcon(
+                              path: LogBookIcons.toprope,
+                              color: LogBookColors.black_30,
+                              size: 25,
+                            )),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: LogBookColors.silver,
+                            ),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -77,7 +111,6 @@ class ClimbingRoutes extends StatelessWidget {
                           color: Color(0xff8b8b8b),
                         ),
                         onPressed: () {
-                          print('soom');
                           onEdit();
                         },
                       ),

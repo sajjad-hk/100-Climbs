@@ -8,6 +8,8 @@ part of 'values.dart';
 
 Serializer<ClimbingRoute> _$climbingRouteSerializer =
     new _$ClimbingRouteSerializer();
+Serializer<ClimbingLogBookUser> _$climbingLogBookUserSerializer =
+    new _$ClimbingLogBookUserSerializer();
 
 class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
   @override
@@ -16,7 +18,7 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
   final String wireName = 'ClimbingRoute';
 
   @override
-  Iterable serialize(Serializers serializers, ClimbingRoute object,
+  Iterable<Object> serialize(Serializers serializers, ClimbingRoute object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'outCome',
@@ -33,10 +35,6 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
       'belayingStyle',
       serializers.serialize(object.belayingStyle,
           specifiedType: const FullType(BelayingStyleEnum)),
-      'tags',
-      serializers.serialize(object.tags,
-          specifiedType:
-              const FullType(BuiltSet, const [const FullType(String)])),
     ];
     if (object.closure != null) {
       result
@@ -44,11 +42,19 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
         ..add(serializers.serialize(object.closure,
             specifiedType: const FullType(ClosureEnum)));
     }
+    if (object.tags != null) {
+      result
+        ..add('tags')
+        ..add(serializers.serialize(object.tags,
+            specifiedType:
+                const FullType(BuiltSet, const [const FullType(String)])));
+    }
     return result;
   }
 
   @override
-  ClimbingRoute deserialize(Serializers serializers, Iterable serialized,
+  ClimbingRoute deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ClimbingRouteBuilder();
 
@@ -88,7 +94,95 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
           result.tags.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(String)]))
-              as BuiltSet);
+              as BuiltSet<dynamic>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ClimbingLogBookUserSerializer
+    implements StructuredSerializer<ClimbingLogBookUser> {
+  @override
+  final Iterable<Type> types = const [
+    ClimbingLogBookUser,
+    _$ClimbingLogBookUser
+  ];
+  @override
+  final String wireName = 'ClimbingLogBookUser';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, ClimbingLogBookUser object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'uid',
+      serializers.serialize(object.uid, specifiedType: const FullType(String)),
+      'displayName',
+      serializers.serialize(object.displayName,
+          specifiedType: const FullType(String)),
+      'email',
+      serializers.serialize(object.email,
+          specifiedType: const FullType(String)),
+      'lastLogin',
+      serializers.serialize(object.lastLogin,
+          specifiedType: const FullType(DateTime)),
+    ];
+    if (object.photoUrl != null) {
+      result
+        ..add('photoUrl')
+        ..add(serializers.serialize(object.photoUrl,
+            specifiedType: const FullType(String)));
+    }
+    if (object.tags != null) {
+      result
+        ..add('tags')
+        ..add(serializers.serialize(object.tags,
+            specifiedType:
+                const FullType(BuiltSet, const [const FullType(String)])));
+    }
+    return result;
+  }
+
+  @override
+  ClimbingLogBookUser deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ClimbingLogBookUserBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'uid':
+          result.uid = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'displayName':
+          result.displayName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'photoUrl':
+          result.photoUrl = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'email':
+          result.email = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'tags':
+          result.tags.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltSet, const [const FullType(String)]))
+              as BuiltSet<dynamic>);
+          break;
+        case 'lastLogin':
+          result.lastLogin = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
           break;
       }
     }
@@ -139,9 +233,6 @@ class _$ClimbingRoute extends ClimbingRoute {
     }
     if (belayingStyle == null) {
       throw new BuiltValueNullFieldError('ClimbingRoute', 'belayingStyle');
-    }
-    if (tags == null) {
-      throw new BuiltValueNullFieldError('ClimbingRoute', 'tags');
     }
   }
 
@@ -268,15 +359,185 @@ class ClimbingRouteBuilder
               grade: grade,
               belayingStyle: belayingStyle,
               closure: closure,
-              tags: tags.build());
+              tags: _tags?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'tags';
-        tags.build();
+        _tags?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ClimbingRoute', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ClimbingLogBookUser extends ClimbingLogBookUser {
+  @override
+  final String uid;
+  @override
+  final String displayName;
+  @override
+  final String photoUrl;
+  @override
+  final String email;
+  @override
+  final BuiltSet<String> tags;
+  @override
+  final DateTime lastLogin;
+
+  factory _$ClimbingLogBookUser(
+          [void Function(ClimbingLogBookUserBuilder) updates]) =>
+      (new ClimbingLogBookUserBuilder()..update(updates)).build();
+
+  _$ClimbingLogBookUser._(
+      {this.uid,
+      this.displayName,
+      this.photoUrl,
+      this.email,
+      this.tags,
+      this.lastLogin})
+      : super._() {
+    if (uid == null) {
+      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'uid');
+    }
+    if (displayName == null) {
+      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'displayName');
+    }
+    if (email == null) {
+      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'email');
+    }
+    if (lastLogin == null) {
+      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'lastLogin');
+    }
+  }
+
+  @override
+  ClimbingLogBookUser rebuild(
+          void Function(ClimbingLogBookUserBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ClimbingLogBookUserBuilder toBuilder() =>
+      new ClimbingLogBookUserBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ClimbingLogBookUser &&
+        uid == other.uid &&
+        displayName == other.displayName &&
+        photoUrl == other.photoUrl &&
+        email == other.email &&
+        tags == other.tags &&
+        lastLogin == other.lastLogin;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc($jc($jc(0, uid.hashCode), displayName.hashCode),
+                    photoUrl.hashCode),
+                email.hashCode),
+            tags.hashCode),
+        lastLogin.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ClimbingLogBookUser')
+          ..add('uid', uid)
+          ..add('displayName', displayName)
+          ..add('photoUrl', photoUrl)
+          ..add('email', email)
+          ..add('tags', tags)
+          ..add('lastLogin', lastLogin))
+        .toString();
+  }
+}
+
+class ClimbingLogBookUserBuilder
+    implements Builder<ClimbingLogBookUser, ClimbingLogBookUserBuilder> {
+  _$ClimbingLogBookUser _$v;
+
+  String _uid;
+  String get uid => _$this._uid;
+  set uid(String uid) => _$this._uid = uid;
+
+  String _displayName;
+  String get displayName => _$this._displayName;
+  set displayName(String displayName) => _$this._displayName = displayName;
+
+  String _photoUrl;
+  String get photoUrl => _$this._photoUrl;
+  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
+
+  String _email;
+  String get email => _$this._email;
+  set email(String email) => _$this._email = email;
+
+  SetBuilder<String> _tags;
+  SetBuilder<String> get tags => _$this._tags ??= new SetBuilder<String>();
+  set tags(SetBuilder<String> tags) => _$this._tags = tags;
+
+  DateTime _lastLogin;
+  DateTime get lastLogin => _$this._lastLogin;
+  set lastLogin(DateTime lastLogin) => _$this._lastLogin = lastLogin;
+
+  ClimbingLogBookUserBuilder();
+
+  ClimbingLogBookUserBuilder get _$this {
+    if (_$v != null) {
+      _uid = _$v.uid;
+      _displayName = _$v.displayName;
+      _photoUrl = _$v.photoUrl;
+      _email = _$v.email;
+      _tags = _$v.tags?.toBuilder();
+      _lastLogin = _$v.lastLogin;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ClimbingLogBookUser other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ClimbingLogBookUser;
+  }
+
+  @override
+  void update(void Function(ClimbingLogBookUserBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ClimbingLogBookUser build() {
+    _$ClimbingLogBookUser _$result;
+    try {
+      _$result = _$v ??
+          new _$ClimbingLogBookUser._(
+              uid: uid,
+              displayName: displayName,
+              photoUrl: photoUrl,
+              email: email,
+              tags: _tags?.build(),
+              lastLogin: lastLogin);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'tags';
+        _tags?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ClimbingLogBookUser', _$failedField, e.toString());
       }
       rethrow;
     }

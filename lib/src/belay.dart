@@ -51,6 +51,7 @@ class Belay extends StatelessWidget {
                         flex: 4,
                         child: NewCustomRadio.row(
                           label: 'Lead',
+                          fontSize: 18,
                           value: BelayingStyleEnum.valueOf('lead'),
                           groupValue: climbingRouteState.route.belayingStyle,
                           iconProvider: LogBookIcons.lead,
@@ -84,6 +85,7 @@ class Belay extends StatelessWidget {
                         flex: 4,
                         child: NewCustomRadio.row(
                           label: 'Auto',
+                          fontSize: 18,
                           value: BelayingStyleEnum.valueOf('auto'),
                           groupValue: climbingRouteState.route.belayingStyle,
                           iconProvider: LogBookIcons.auto,
@@ -117,6 +119,7 @@ class Belay extends StatelessWidget {
                         flex: 4,
                         child: NewCustomRadio.row(
                           label: 'Toprope',
+                          fontSize: 18,
                           value: BelayingStyleEnum.valueOf('toprope'),
                           groupValue: climbingRouteState.route.belayingStyle,
                           iconProvider: LogBookIcons.toprope,

@@ -8,10 +8,14 @@ part of serializers;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BelayingStyleEnum.serializer)
+      ..add(ClimbingLogBookUser.serializer)
       ..add(ClimbingRoute.serializer)
       ..add(ClosureEnum.serializer)
       ..add(GradingStyleEnum.serializer)
       ..add(OutComeEnum.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltSet, const [const FullType(String)]),
+          () => new SetBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType(String)]),
           () => new SetBuilder<String>()))

@@ -5,52 +5,49 @@ import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'Repositories/RouteRepository.dart';
 
 class Tags extends StatelessWidget {
   static TextEditingController tagTextController = TextEditingController();
-  static List<Widget> tags;
 
   @override
   Widget build(BuildContext context) {
     final climbingRoteState = Provider.of<ClimbingRouteState>(context);
-    final user = Provider.of<FirebaseUser>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Visibility(
           visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-          child: Expanded(
-            flex: 1,
-            child: Center(
-              child: Text(
-                'Tags',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28.0,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(1.0, 2.0),
-                      blurRadius: 3.0,
-                      color: Color(0xff29000000),
+          child: Flexible(
+            flex:2,
+            fit: FlexFit.loose,
+            child: Column(
+              children: <Widget>[
+                Flexible(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      'Tags',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(1.0, 2.0),
+                            blurRadius: 3.0,
+                            color: Color(0xff29000000),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 6,
-          child: Column(
-            children: <Widget>[
-              Visibility(
-                visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-                child: Row(
+                Row(
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(
@@ -74,24 +71,23 @@ class Tags extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              Visibility(
-                visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-                child: Expanded(
-                  flex: 1,
+                Flexible(
+                  fit: FlexFit.tight,
                   child: Container(
                     padding: EdgeInsets.all(15.0),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Expanded(
+                        Flexible(
                           child: Container(
-                            margin: const EdgeInsets.only(right: 2.0),
+                            padding: const EdgeInsets.only(left: 2.0, right: 7.5),
                             child: NewCustomRadio.row(
-                              value: ClosureEnum.valueOf('flash'),
+                              value: ClosureEnum.valueOf('onsight'),
                               groupValue: climbingRoteState.route.closure,
-                              label: 'FLASH',
-                              iconProvider: LogBookIcons.flash,
+                              label: 'On Sight',
+                              fontSize: 18,
+                              iconProvider: LogBookIcons.eye,
                               checkedContentColor: Colors.white,
                               checkedBgColor: Color(0xff4d000000),
                               unCheckedBgColor: Colors.white,
@@ -101,14 +97,18 @@ class Tags extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Expanded(
+                        Flexible(
                           child: Container(
-                            margin: const EdgeInsets.only(left: 2.0),
+                            padding: const EdgeInsets.only(
+                              right: 2.0,
+                              left: 7.5,
+                            ),
                             child: NewCustomRadio.row(
-                              value: ClosureEnum.valueOf('onsight'),
+                              value: ClosureEnum.valueOf('flash'),
                               groupValue: climbingRoteState.route.closure,
-                              label: 'On Sight',
-                              iconProvider: LogBookIcons.eye,
+                              label: 'FLASH',
+                              fontSize: 18,
+                              iconProvider: LogBookIcons.flash,
                               checkedContentColor: Colors.white,
                               checkedBgColor: Color(0xff4d000000),
                               unCheckedBgColor: Colors.white,
@@ -122,52 +122,98 @@ class Tags extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.only(
-                      left: 20.0,
-                      bottom: 5.0,
-                    ),
-                    child: Text(
-                      'Other',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(1.0, 2.0),
-                            blurRadius: 3.0,
-                            color: Color(0xff29000000),
-                          ),
-                        ],
+              ],
+            ),
+          ),
+        ),
+//        Visibility(
+//          visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+//          child: Flexible(
+//            flex: 1,
+//            child:
+//          ),
+//        ),
+//        Visibility(
+//          visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+//          child: Flexible(
+//            flex: 1,
+//            fit: FlexFit.tight,
+//            child:
+//          ),
+//        ),
+        Flexible(
+          flex: 3,
+          fit: FlexFit.loose,
+          child: Column(
+            children: <Widget>[
+              Flexible(
+                flex: 2,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: 20.0,
+                        bottom: 5.0,
+                      ),
+                      child: Text(
+                        'Other',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(1.0, 2.0),
+                              blurRadius: 3.0,
+                              color: Color(0xff29000000),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Wrap(
                 alignment: WrapAlignment.spaceEvenly,
-                spacing: 10,
+                spacing: 5,
                 children: [
                   for (String tag in climbingRoteState.route.tags)
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Color(0xff4c000000),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
+                    FlatButton(
+                      onPressed: () {
+                        List tags = climbingRoteState.route.tags.toList();
+                        tags.remove(tag);
+                        climbingRoteState.tags = tags;
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(3.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xff4c000000),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                        ),
+                        width: tag.length * 9.0 + 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Text(
+                                tag,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ],
                         ),
                       ),
-                      child: Text(
-                        tag,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
+                    )
                 ],
               ),
               Container(
@@ -178,7 +224,6 @@ class Tags extends StatelessWidget {
                       child: Container(
                         margin: const EdgeInsets.only(left: 20),
                         decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.all(
                             Radius.circular(2),
                           ),
@@ -186,61 +231,92 @@ class Tags extends StatelessWidget {
                         child: Container(
                           child: TextField(
                             textCapitalization: TextCapitalization.words,
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.left,
                             controller: tagTextController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
+                              hintText: 'Click to add ...',
+                              hintStyle: TextStyle(
+                                fontSize: 18,
+                                color: Color(0xff4c000000),
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xff4c000000),
+                            ),
+                            onChanged: (String value) {
+                              print(value);
+                              climbingRoteState.userTags = climbingRoteState.usersTags.where((String f) => f.startsWith(value) && value != '').toList();
+                              print(climbingRoteState.usersTags.toString());
+                            },
                           ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(5.0),
-                      child: FloatingActionButton(
-                        mini: true,
-                        onPressed: () {
-                          if (tagTextController.text != null &&
-                              tagTextController.text != '') {
-                            climbingRoteState.tag = tagTextController.text;
-                          }
-                          tagTextController.text = '';
-                        },
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.add,
-                          color: Color(0xff8b8b8b),
-                          size: 40,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: InkWell(
-                  onTap: () {
-                    final standardSerializers = (serializers.toBuilder()
-                          ..addPlugin(StandardJsonPlugin()))
-                        .build();
-                    final value2 = standardSerializers.serializeWith(
-                        ClimbingRoute.serializer, climbingRoteState.route);
-                    print(value2);
-
-////                    routeToSave['uid'] = user.uid;
-                    routeRepository.addRoute(value2);
-                    // Save the route
-                    // Go back to first tab
+              Container(
+                height: 100,
+                width: 250,
+                child: ListView.builder(
+                  itemCount: climbingRoteState.usersTags.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        climbingRoteState.tag = climbingRoteState.usersTags.toList()[index];
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(0.5),
+                        padding: const EdgeInsets.all(2.5),
+                        color: Color(0xff4c000000),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Text(
+                                climbingRoteState.usersTags[index],
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
                   },
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        '+ LOG ANOTHER ROUTE',
-                        style: TextStyle(
-                          color: Color(0xff4c000000),
-                          fontSize: 18,
+                ),
+              ),
+              Visibility(
+                visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+                child: Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: InkWell(
+                    onTap: () {
+                      final standardSerializers = (serializers.toBuilder()
+                            ..addPlugin(StandardJsonPlugin()))
+                          .build();
+                      final value2 = standardSerializers.serializeWith(
+                          ClimbingRoute.serializer, climbingRoteState.route);
+                      routeRepository.addRoute(value2);
+                      // Save the route
+                      // Go back to first tab
+                    },
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          '+ LOG ANOTHER ROUTE',
+                          style: TextStyle(
+                            color: Color(0xff4c000000),
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),

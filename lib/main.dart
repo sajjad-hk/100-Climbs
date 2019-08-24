@@ -1,5 +1,8 @@
-import 'package:climbing_logbook/src/dashboard.dart';
+import 'package:climbing_logbook/src/auth.dart';
+import 'package:climbing_logbook/src/home.dart';
 import 'package:climbing_logbook/src/login.dart';
+import 'package:climbing_logbook/src/models/values.dart';
+import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,25 +17,33 @@ class ClimbingLogbook extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        StreamProvider<FirebaseUser>.value(
-            stream: FirebaseAuth.instance.onAuthStateChanged),
-      ],
+    return StreamProvider<FirebaseUser>.value(
+      stream: FirebaseAuth.instance.onAuthStateChanged,
+      catchError: (_, __) => null,
       child: MaterialApp(
         title: 'CLIMBING LOGBOOK',
-        home: Home(),
+        home: Consumer<FirebaseUser>(
+          builder: (context, firebaseUser, _) {
+            if (firebaseUser != null) {
+              return MultiProvider(
+                providers: [
+                  StreamProvider<ClimbingLogBookUser>.value(
+                    stream:
+                    authService.climbingLogBookUser(firebaseUser.uid),
+                    catchError: (_, __) => null,
+                  ),
+                  ChangeNotifierProvider<ClimbingRouteState>(
+                    builder: (context) => ClimbingRouteState(),
+                  ),
+                ],
+                child: Home(),
+              );
+            } else {
+              return Login();
+            }
+          },
+        ),
       ),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var user = Provider.of<FirebaseUser>(context);
-    return Container(
-      child: user != null ? Dashboard() : Login(),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class LogBookColors {
   LogBookColors._();
 
@@ -24,6 +26,10 @@ class LogBookColors {
   static const Color azure = Color(0xff00abff);
   static const Color lightBlue = Color(0xff62cee8);
   static const Color tealish = Color(0xff2fc4b5);
+  static const Color lightSeaGreen = Color(0xff10a28c);
+  static const Color elfGreen = Color(0xff179863);
+  static const Color fruitSalad = Color(0xff48a657);
+  static const Color emerald = Color(0xff4dbe86);
   static const Color grass = Color(0xff5cb133);
   static const Color grossGreen = Color(0xffa7ca12);
   static const Color mustardYellow = Color(0xffe0d00a);
@@ -42,4 +48,72 @@ class LogBookColors {
   static const Color barney = Color(0xffc522a9);
   static const Color barneyTwo = Color(0xff992bb5);
   static const Color warmPurple = Color(0xff692c8c);
+
+
+  static Color getGradeColor(String grade) {
+    switch(grade) {
+      case '4a':
+        return lightishPurple;
+      case '4a+':
+        return lighterPurple;
+      case '4b':
+        return warmBlue;
+      case '4b+':
+        return azul;
+      case '4c':
+        return clearBlue;
+      case '4c+':
+        return azure;
+      case '5a':
+        return lightBlue;
+      case '5a+':
+        return tealish;
+      case '5b':
+        return lightSeaGreen;
+      case '5b+':
+        return elfGreen;
+      case '5c':
+        return fruitSalad;
+      case '5c+':
+        return emerald;
+      case '6a':
+        return grass;
+      case '6a+':
+        return grossGreen;
+      case '6b':
+        return mustardYellow;
+      case '6b+':
+        return sunflowerYellow;
+      case '6c':
+        return mango;
+      case '6c+':
+        return tangerine;
+      case '7a':
+        return pinkishOrange;
+      case '7a+':
+        return grapefruit;
+      case '7b':
+        return coral;
+      case '7b+':
+        return lightRed;
+      case '7c':
+        return tomato;
+      case '7c+':
+        return pinkishRed;
+      case '8a':
+        return darkishPink;
+      case '8a+':
+        return strongPink;
+      case '8b':
+        return purplePink;
+      case '8b+':
+        return barney;
+      case '8c':
+        return barneyTwo;
+      case '8c+':
+        return warmPurple;
+      default:
+        return Colors.white;
+    }
+  }
 }

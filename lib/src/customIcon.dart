@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CustomIcon extends StatelessWidget {
   final String path;
   final Color color;
+  final double size;
 
-  CustomIcon({@required this.path, @required this.color});
+  CustomIcon({@required this.path, @required this.color, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class CustomIcon extends StatelessWidget {
       return ImageIcon(
         AssetImage(path),
         color: color,
-        size: constraint.biggest.height,
+        size: size ?? constraint.biggest.height,
       );
     });
   }

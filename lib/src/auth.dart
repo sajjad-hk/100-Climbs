@@ -1,43 +1,40 @@
+import 'package:built_value/standard_json_plugin.dart';
+import 'package:climbing_logbook/src/login.dart';
+import 'package:climbing_logbook/src/models/serializers.dart';
+import 'package:climbing_logbook/src/models/values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:rxdart/rxdart.dart';
+
+import 'plugin/TimestapmsSerializer.dart';
 
 class AuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
 
-  Observable<FirebaseUser> _user; //firebase user
-  Observable<Map<String, dynamic>> profile; // custom user data in firestore
-  PublishSubject loading = PublishSubject();
-
-  AuthService() {
-    _user = Observable(_auth.onAuthStateChanged);
-    profile = _user.switchMap((FirebaseUser u) {
-      if (u != null) {
-        return _db
-            .collection('users')
-            .document(u.uid)
-            .snapshots()
-            .map((snap) => snap.data);
-      } else {
-        return Observable.just({});
-      }
-    });
-  }
+  final standardSerializers = (serializers.toBuilder()
+    ..addPlugin(StandardJsonPlugin())
+    ..addPlugin(TimestampSerializerPlugin())
+  ).build();
 
   Future<FirebaseUser> googleSignIn() async {
-    loading.add(true);
+
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-    FirebaseUser user = await _auth.signInWithCredential(credential);
+    final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
     updateUserData(user);
-    loading.add(false);
     return user;
   }
+
+  Stream<ClimbingLogBookUser> climbingLogBookUser(String uid) {
+   return  _db.collection('users').document(uid).snapshots().map((data) => standardSerializers.deserializeWith(ClimbingLogBookUser.serializer, data.data));
+  }
+
+
 
   void updateUserData(FirebaseUser user) async {
     DocumentReference ref = _db.collection('users').document(user.uid);
@@ -47,8 +44,8 @@ class AuthService {
         merge: true);
   }
 
-  void signOut() {
-    _auth.signOut();
+  void signOut(BuildContext context) {
+    _auth.signOut().catchError((_,__) => print('SOS'));
   }
 }
 

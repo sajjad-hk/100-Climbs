@@ -6,8 +6,10 @@ import 'package:climbing_logbook/src/models/values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // todo : not good name this is a route provider for list
-class ClimbingRouteList {
+class ClimbingRouteService {
+
   final Firestore _db = Firestore.instance;
+
   StreamTransformer<QuerySnapshot, List<ClimbingRoute>> streamTransformer =
       StreamTransformer.fromHandlers(
     handleData: (data, sink) {
@@ -28,3 +30,5 @@ class ClimbingRouteList {
     return ref.snapshots().transform(streamTransformer);
   }
 }
+
+final ClimbingRouteService climbingRouteService = ClimbingRouteService();
