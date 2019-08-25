@@ -1,5 +1,4 @@
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:climbing_logbook/src/login.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

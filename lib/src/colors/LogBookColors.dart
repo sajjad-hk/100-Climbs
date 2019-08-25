@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:flutter/material.dart';
 
 class LogBookColors {
@@ -114,6 +115,28 @@ class LogBookColors {
         return warmPurple;
       default:
         return Colors.white;
+    }
+  }
+
+  static Color getClimbingRouteOutcomeColor(OutComeEnum outCome) {
+    switch(outCome) {
+      case OutComeEnum.failure:
+        return paleGrey;
+      case OutComeEnum.success:
+        return white;
+      default:
+        return null;
+    }
+  }
+
+  static Color getClimbingRouteOutcomeBorderColor(OutComeEnum outCome) {
+    switch(outCome) {
+      case OutComeEnum.failure:
+        return coolGrey;
+      case OutComeEnum.success:
+        return Colors.transparent;
+      default:
+        return null;
     }
   }
 }

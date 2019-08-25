@@ -60,7 +60,8 @@ class ClimbingRouteState with ChangeNotifier {
     ..grade = '4a'
     ..belayingStyle = BelayingStyleEnum.lead
     ..closure = ClosureEnum.flash
-    ..tags = SetBuilder<String>());
+    ..tags = SetBuilder<String>()
+    ..loggedDate = DateTime.now());
 
   List<String> _climbingGradeValues = GRADE_SET['french'];
 
@@ -69,7 +70,6 @@ class ClimbingRouteState with ChangeNotifier {
   List<String> get climbingGradeValues => _climbingGradeValues;
 
   List<String> _l = ['Murall', 'Makak', 'Obozowa'];
-
 
   List<String> get usersTags {
     return _l;
@@ -85,8 +85,7 @@ class ClimbingRouteState with ChangeNotifier {
   }
 
   set tags(List tags) {
-    _route = _route.rebuild(
-            (route) => route..tags = SetBuilder<String>(tags));
+    _route = _route.rebuild((route) => route..tags = SetBuilder<String>(tags));
     notifyListeners();
   }
 

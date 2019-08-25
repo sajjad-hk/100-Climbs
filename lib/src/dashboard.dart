@@ -3,7 +3,7 @@ import 'package:climbing_logbook/src/colors/LogBookColors.dart';
 import 'package:climbing_logbook/src/customDrawer.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/stackedBarChart.dart';
-import 'package:climbing_logbook/src/states/ClimbingRouteList.dart';
+import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +49,7 @@ class Dashboard extends StatelessWidget {
                     Expanded(
                       flex: 4,
                       child: Container(
+                        padding: const EdgeInsets.all(10),
                         child: StackedBarChart.withSampleData(),
                       ),
                     ),
@@ -77,8 +78,11 @@ class Dashboard extends StatelessWidget {
                 return SliverList(
                   delegate: SliverChildListDelegate(
                     [
-                      Center(
-                        child: Text('Loading...'),
+                      Container(
+                        height: 200,
+                        child: Center(
+                          child: Text('Loading...'),
+                        ),
                       )
                     ],
                   ),

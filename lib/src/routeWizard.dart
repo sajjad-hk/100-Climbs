@@ -1,19 +1,13 @@
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:climbing_logbook/src/Repositories/RouteRepository.dart';
 import 'package:climbing_logbook/src/belay.dart';
 import 'package:climbing_logbook/src/colors/LogBookColors.dart';
-import 'package:climbing_logbook/src/customIcon.dart';
-import 'package:climbing_logbook/src/customRadio.dart';
 import 'package:climbing_logbook/src/editRoute.dart';
 import 'package:climbing_logbook/src/grade.dart';
-import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
-import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/outCome.dart';
+import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:climbing_logbook/src/tags.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'models/serializers.dart';
@@ -138,15 +132,9 @@ class _RouteWizardState extends State<RouteWizard> {
                       ),
                       onPressed: () {
                         if (currentPageIndex == 3) {
-                          final standardSerializers = (serializers.toBuilder()
-                                ..addPlugin(StandardJsonPlugin()))
-                              .build();
-                          climbingRoteState.uid = user.uid;
-                          final value2 = standardSerializers.serializeWith(
-                              ClimbingRoute.serializer,
-                              climbingRoteState.route);
-//                          print(value2);
-                          routeRepository.addRoute(value2);
+
+                          climbingRoteState.uid = user.uid; // todo: set id done by default!!
+                          climbingRouteService.addRoute(climbingRoteState.route);
                           widget.onClose();
                         } else {
                           _controller.nextPage(

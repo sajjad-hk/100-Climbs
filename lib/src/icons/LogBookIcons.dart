@@ -1,3 +1,5 @@
+import 'package:climbing_logbook/src/models/enums.dart';
+
 class LogBookIcons {
   LogBookIcons._();
 
@@ -15,4 +17,28 @@ class LogBookIcons {
   static const String plus = 'assets/icons/plus-icon.png';
   static const String sad = 'assets/icons/sad-white-icon.png';
   static const String smile = 'assets/icons/smile-white-icon.png';
+
+  static String getBelayStyleIcon(BelayingStyleEnum style) {
+    switch(style) {
+      case BelayingStyleEnum.toprope:
+        return toprope;
+      case BelayingStyleEnum.auto:
+        return lead;
+      case BelayingStyleEnum.lead:
+        return lead;
+      default:
+        return null;
+    }
+  }
+
+  static String getRouteClimbClosureIcon(ClosureEnum closure) {
+    switch(closure) {
+      case ClosureEnum.flash:
+        return flash;
+      case ClosureEnum.onsight:
+        return eye;
+      default:
+        return null;
+    }
+  }
 }

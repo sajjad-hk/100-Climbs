@@ -35,6 +35,9 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
       'belayingStyle',
       serializers.serialize(object.belayingStyle,
           specifiedType: const FullType(BelayingStyleEnum)),
+      'loggedDate',
+      serializers.serialize(object.loggedDate,
+          specifiedType: const FullType(DateTime)),
     ];
     if (object.closure != null) {
       result
@@ -95,6 +98,10 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(String)]))
               as BuiltSet<dynamic>);
+          break;
+        case 'loggedDate':
+          result.loggedDate = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
           break;
       }
     }
@@ -206,6 +213,8 @@ class _$ClimbingRoute extends ClimbingRoute {
   final ClosureEnum closure;
   @override
   final BuiltSet<String> tags;
+  @override
+  final DateTime loggedDate;
 
   factory _$ClimbingRoute([void Function(ClimbingRouteBuilder) updates]) =>
       (new ClimbingRouteBuilder()..update(updates)).build();
@@ -217,7 +226,8 @@ class _$ClimbingRoute extends ClimbingRoute {
       this.grade,
       this.belayingStyle,
       this.closure,
-      this.tags})
+      this.tags,
+      this.loggedDate})
       : super._() {
     if (outCome == null) {
       throw new BuiltValueNullFieldError('ClimbingRoute', 'outCome');
@@ -233,6 +243,9 @@ class _$ClimbingRoute extends ClimbingRoute {
     }
     if (belayingStyle == null) {
       throw new BuiltValueNullFieldError('ClimbingRoute', 'belayingStyle');
+    }
+    if (loggedDate == null) {
+      throw new BuiltValueNullFieldError('ClimbingRoute', 'loggedDate');
     }
   }
 
@@ -253,7 +266,8 @@ class _$ClimbingRoute extends ClimbingRoute {
         grade == other.grade &&
         belayingStyle == other.belayingStyle &&
         closure == other.closure &&
-        tags == other.tags;
+        tags == other.tags &&
+        loggedDate == other.loggedDate;
   }
 
   @override
@@ -262,12 +276,14 @@ class _$ClimbingRoute extends ClimbingRoute {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, outCome.hashCode), uid.hashCode),
-                        gradingStyle.hashCode),
-                    grade.hashCode),
-                belayingStyle.hashCode),
-            closure.hashCode),
-        tags.hashCode));
+                    $jc(
+                        $jc($jc($jc(0, outCome.hashCode), uid.hashCode),
+                            gradingStyle.hashCode),
+                        grade.hashCode),
+                    belayingStyle.hashCode),
+                closure.hashCode),
+            tags.hashCode),
+        loggedDate.hashCode));
   }
 
   @override
@@ -279,7 +295,8 @@ class _$ClimbingRoute extends ClimbingRoute {
           ..add('grade', grade)
           ..add('belayingStyle', belayingStyle)
           ..add('closure', closure)
-          ..add('tags', tags))
+          ..add('tags', tags)
+          ..add('loggedDate', loggedDate))
         .toString();
   }
 }
@@ -318,6 +335,10 @@ class ClimbingRouteBuilder
   SetBuilder<String> get tags => _$this._tags ??= new SetBuilder<String>();
   set tags(SetBuilder<String> tags) => _$this._tags = tags;
 
+  DateTime _loggedDate;
+  DateTime get loggedDate => _$this._loggedDate;
+  set loggedDate(DateTime loggedDate) => _$this._loggedDate = loggedDate;
+
   ClimbingRouteBuilder();
 
   ClimbingRouteBuilder get _$this {
@@ -329,6 +350,7 @@ class ClimbingRouteBuilder
       _belayingStyle = _$v.belayingStyle;
       _closure = _$v.closure;
       _tags = _$v.tags?.toBuilder();
+      _loggedDate = _$v.loggedDate;
       _$v = null;
     }
     return this;
@@ -359,7 +381,8 @@ class ClimbingRouteBuilder
               grade: grade,
               belayingStyle: belayingStyle,
               closure: closure,
-              tags: _tags?.build());
+              tags: _tags?.build(),
+              loggedDate: loggedDate);
     } catch (_) {
       String _$failedField;
       try {

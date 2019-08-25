@@ -24,6 +24,8 @@ abstract class ClimbingRoute
   @nullable
   BuiltSet<String> get tags;
 
+  DateTime get loggedDate;
+
   ClimbingRoute._();
 
   factory ClimbingRoute([void Function(ClimbingRouteBuilder) updates]) =

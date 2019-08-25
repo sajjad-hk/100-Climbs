@@ -1,16 +1,13 @@
-import 'package:built_value/standard_json_plugin.dart';
 import 'package:climbing_logbook/src/customRadio.dart';
 import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
-import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
+import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-
-import 'Repositories/RouteRepository.dart';
 
 class Tags extends StatelessWidget {
   static TextEditingController tagTextController = TextEditingController();
@@ -18,6 +15,7 @@ class Tags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final climbingRoteState = Provider.of<ClimbingRouteState>(context);
+    final user = Provider.of<ClimbingLogBookUser>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -300,12 +298,8 @@ class Tags extends StatelessWidget {
                   fit: FlexFit.tight,
                   child: InkWell(
                     onTap: () {
-                      final standardSerializers = (serializers.toBuilder()
-                            ..addPlugin(StandardJsonPlugin()))
-                          .build();
-                      final value2 = standardSerializers.serializeWith(
-                          ClimbingRoute.serializer, climbingRoteState.route);
-                      routeRepository.addRoute(value2);
+                      climbingRoteState.uid = user.uid;
+                      climbingRouteService.addRoute(climbingRoteState.route);
                       // Save the route
                       // Go back to first tab
                     },
