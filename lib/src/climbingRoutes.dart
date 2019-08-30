@@ -18,11 +18,15 @@ class ClimbingRoutes extends StatelessWidget {
   Widget build(BuildContext context) {
     var routeMapDate =
         groupBy(routes, (it) => DateFormat.yMMMMEEEEd().format(it.loggedDate));
-    List list = [];
-    routeMapDate.forEach((key, value) => {list.add(key), list.addAll(value)});
+    List dateKeys = routeMapDate.keys.toList()..sort();
+    List dateRoutes = [];
+    for(String dateKey in dateKeys) {
+      dateRoutes.add(dateKey);
+      dateRoutes.addAll(routeMapDate[dateKey]..sort((a, b)=> b.loggedDate.compareTo(a.loggedDate)));
+    }
     return SliverList(
       delegate: SliverChildListDelegate(
-        list.map((it) {
+        dateRoutes.map((it) {
           if (it is String) {
             return Container(
               padding: const EdgeInsets.all(5),

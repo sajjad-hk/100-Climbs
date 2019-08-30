@@ -21,27 +21,29 @@ class _GradePickerState extends State<GradePicker> {
     super.initState();
   }
 
-  plus(climbingRouteState) {
+  onGradeChangeWithKnobMove() {}
+
+  plus(ClimbingRouteState climbingRouteState) {
     setState(() {
       knobAngle += (2 * pi) / climbingRouteState.climbingGradeValues.length;
     });
-    climbingRouteState.route.grade = climbingRouteState.climbingGradeValues[
+    climbingRouteState.grade = climbingRouteState.climbingGradeValues[
         Calculator.calculateGradeIndex(
             knobAngle, climbingRouteState.climbingGradeValues.length)];
     _controller.text = climbingRouteState.route.grade;
   }
 
-  minus(climbingRouteState) {
+  minus(ClimbingRouteState climbingRouteState) {
     setState(() {
       knobAngle -= (2 * pi) / climbingRouteState.climbingGradeValues.length;
     });
-    climbingRouteState.route.grade = climbingRouteState.climbingGradeValues[
+    climbingRouteState.grade = climbingRouteState.climbingGradeValues[
         Calculator.calculateGradeIndex(
             knobAngle, climbingRouteState.climbingGradeValues.length)];
     _controller.text = climbingRouteState.route.grade;
   }
 
-  setKnobAngle(climbingRouteState) {
+  setKnobAngle(ClimbingRouteState climbingRouteState) {
     setState(() {
       knobAngle =
           climbingRouteState.climbingGradeValues.indexOf(_controller.text) *
@@ -54,12 +56,17 @@ class _GradePickerState extends State<GradePicker> {
     final climbingRouteState = Provider.of<ClimbingRouteState>(context);
     _controller.text = climbingRouteState.route.grade;
     super.didUpdateWidget(oldWidget);
+    if (MediaQuery.of(context).viewInsets.bottom == 0.0) {
+      FocusScope.of(context).requestFocus(new FocusNode());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final climbingRouteState = Provider.of<ClimbingRouteState>(context);
     _controller.addListener(() => setKnobAngle(climbingRouteState));
+    _controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: _controller.text.length));
     return Container(
       padding: const EdgeInsets.all(5),
       key: _key,
@@ -78,7 +85,7 @@ class _GradePickerState extends State<GradePicker> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Color(0xff2e707070),
+                        color: Color(0xff4d000000),
                         width: 8.0,
                       ),
                     ),
@@ -156,7 +163,14 @@ class _GradePickerState extends State<GradePicker> {
                   margin: const EdgeInsets.all(5),
                   width: 90,
                   child: TextField(
-                    onSubmitted: (String value) {},
+                    enableInteractiveSelection: true,
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (String value) {
+                      climbingRouteState.grade = climbingRouteState
+                              .climbingGradeValues[
+                          Calculator.calculateGradeIndex(knobAngle,
+                              climbingRouteState.climbingGradeValues.length)];
+                    },
                     controller: _controller,
                     style: TextStyle(
                       color: Colors.white,

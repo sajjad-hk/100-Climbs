@@ -15,6 +15,7 @@ class NewCustomRadio<T> extends StatelessWidget {
   final String label;
   final String iconProvider;
   final double fontSize;
+  final double iconSize;
 
   NewCustomRadio.col({
     @required this.value,
@@ -24,6 +25,7 @@ class NewCustomRadio<T> extends StatelessWidget {
     @required this.checkedContentColor,
     @required this.label,
     this.fontSize,
+    this.iconSize,
     this.iconProvider,
     this.onChanged,
   }) : this.style = 'col';
@@ -36,21 +38,22 @@ class NewCustomRadio<T> extends StatelessWidget {
     @required this.checkedContentColor,
     @required this.label,
     this.fontSize,
+    this.iconSize,
     this.iconProvider,
     this.onChanged,
   }) : this.style = 'row';
 
   _buildInCol() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Flexible(
           flex: 2,
-          fit: FlexFit.tight,
+          fit: FlexFit.loose,
           child: Container(
             child: CustomIcon(
               path: iconProvider,
+              size: this.iconSize ?? 20,
               color:
                   !(value == groupValue) ? checkedBgColor : checkedContentColor,
             ),
@@ -58,14 +61,18 @@ class NewCustomRadio<T> extends StatelessWidget {
         ),
         Flexible(
           flex: 1,
-          fit: FlexFit.tight,
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: this.fontSize ?? 20,
-              color:
-                  !(value == groupValue) ? checkedBgColor : checkedContentColor,
+          fit: FlexFit.loose,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: this.fontSize ?? 20,
+                color: !(value == groupValue)
+                    ? checkedBgColor
+                    : checkedContentColor,
+              ),
             ),
           ),
         )
@@ -74,17 +81,20 @@ class NewCustomRadio<T> extends StatelessWidget {
   }
 
   _buildInRow() {
+    bool noIcon = iconProvider == null;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment:
+          noIcon ? MainAxisAlignment.center : MainAxisAlignment.start,
       children: <Widget>[
-        if (iconProvider != null)
+        if (!noIcon)
           Flexible(
-            flex: 1,
+            flex: 2,
             fit: FlexFit.loose,
             child: Container(
-              margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+              padding: const EdgeInsets.all(15.0),
               child: CustomIcon(
                 path: iconProvider,
+                size: iconSize ?? 20,
                 color: !(value == groupValue)
                     ? checkedBgColor
                     : checkedContentColor,
@@ -93,15 +103,16 @@ class NewCustomRadio<T> extends StatelessWidget {
           ),
         Flexible(
           flex: 3,
-          fit: FlexFit.tight,
+          fit: FlexFit.loose,
           child: Container(
             child: Text(
               label,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: this.fontSize ?? 25,
-                color:
-                    !(value == groupValue) ? checkedBgColor : checkedContentColor,
+                color: !(value == groupValue)
+                    ? checkedBgColor
+                    : checkedContentColor,
               ),
             ),
           ),

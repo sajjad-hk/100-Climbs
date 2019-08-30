@@ -39,7 +39,7 @@ class AuthService {
     DocumentReference ref = _db.collection('users').document(user.uid);
 
     return ref.setData(
-        {'uid': user.uid, 'email': user.email, 'lastLogin': DateTime.now()},
+        {'uid': user.uid, 'displayName': user.displayName,'photoUrl': user.photoUrl,'email': user.email, 'lastLogin': DateTime.now()},
         merge: true);
   }
 

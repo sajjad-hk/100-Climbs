@@ -81,11 +81,11 @@ flutter:
     - assets/icons/sad-white-icon.png
     - assets/icons/minus-icon.png
     - assets/icons/plus-icon.png
-    - assets/icons/flash_white-icon.png
-    - assets/icons/eye_white-icon.png
-    - assets/icons/icon_lead_active.png
-    - assets/icons/icon_auto.png
-    - assets/icons/icon_toprope.png
+    - assets/icons/flash_icon.png
+    - assets/icons/onsight_icon.png
+    - assets/icons/lead_icon.png
+    - assets/icons/auto_icon.png
+    - assets/icons/toprope_icon.png
     - assets/icons/calendar-icon.png
 
 

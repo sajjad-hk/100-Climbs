@@ -1,6 +1,6 @@
 import 'package:climbing_logbook/src/dashboard.dart';
 import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/routeWizard.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/climbingRouteWizard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

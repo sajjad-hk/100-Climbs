@@ -13,18 +13,16 @@ class ClimbingRouteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-      ),
       child: Material(
-        shadowColor: Color(0x29000000),
+        elevation: 2,
+        shadowColor: Color(0xff290000),
         color: LogBookColors.getClimbingRouteOutcomeColor(route.outCome),
         child: InkWell(
-          highlightColor: Colors.cyan,
+          highlightColor: Colors.grey,
           onTap: () => edit(),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.transparent,
-              border: Border.all(color: LogBookColors.getClimbingRouteOutcomeBorderColor(route.outCome)),
             ),
 
             child: Row(
@@ -129,42 +127,6 @@ class ClimbingRouteItem extends StatelessWidget {
                 Expanded(child: Container()),
                 Row(
                   children: <Widget>[
-//                      Container(
-//                        padding: EdgeInsets.all(1.0),
-//                        height: 40,
-//                        decoration: new BoxDecoration(
-//                          color: Color(0xffe7ecee),
-//                          shape: BoxShape.circle,
-//                        ),
-//                        child: IconButton(
-//                          splashColor: Color(0xff8b8b8b),
-//                          icon: Icon(
-//                            Icons.mode_edit,
-//                            size: 20,
-//                            color: Color(0xff8b8b8b),
-//                          ),
-//                          onPressed: () {
-//                            onEdit();
-//                          },
-//                        ),
-//                      ),
-//                      Container(
-//                        padding: EdgeInsets.all(1.0),
-//                        height: 40,
-//                        decoration: new BoxDecoration(
-//                          color: Color(0xffffebeb),
-//                          shape: BoxShape.circle,
-//                        ),
-//                        child: IconButton(
-//                          splashColor: Color(0xffd6acac),
-//                          icon: Icon(
-//                            Icons.delete,
-//                            size: 20,
-//                            color: Color(0xffd6acac),
-//                          ),
-//                          onPressed: () {},
-//                        ),
-//                      ),
                     Container(
                       child: IconButton(
                         icon: Icon(Icons.more_vert),
