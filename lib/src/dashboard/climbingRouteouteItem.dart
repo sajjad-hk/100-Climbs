@@ -1,6 +1,6 @@
-import 'package:climbing_logbook/src/colors/LogBookColors.dart';
-import 'package:climbing_logbook/src/customIcon.dart';
-import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/assets-content/colors/LogBookColors.dart';
+import 'package:climbing_logbook/src/commons/customIcon.dart';
+import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,6 @@ class ClimbingRouteItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.transparent,
             ),
-
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -102,23 +101,23 @@ class ClimbingRouteItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           if (route.tags.isNotEmpty)
-                          Container(
-                            padding: const EdgeInsets.all(3.5),
-                            margin: const EdgeInsets.only(left: 10),
-                            decoration: BoxDecoration(
-                                color: LogBookColors.white,
-                                border: Border.all(
-                                  color: LogBookColors.whiteTwo,
-                                )),
-                            child: Wrap(
-                              children: <Widget>[
-                                for(String tag in route.tags)
-                                  Center(
-                                    child: Text(tag),
-                                  ),
-                              ],
-                            ),
-                          )
+                            Container(
+                              padding: const EdgeInsets.all(3.5),
+                              margin: const EdgeInsets.only(left: 10),
+                              decoration: BoxDecoration(
+                                  color: LogBookColors.white,
+                                  border: Border.all(
+                                    color: LogBookColors.whiteTwo,
+                                  )),
+                              child: Wrap(
+                                children: <Widget>[
+                                  for (String tag in route.tags)
+                                    Center(
+                                      child: Text(tag),
+                                    ),
+                                ],
+                              ),
+                            )
                         ],
                       )
                     ],

@@ -1,15 +1,19 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
-import 'package:climbing_logbook/src/customRadio.dart';
-import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:climbing_logbook/src/commons/customRadio.dart';
+import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
-import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OutCome extends StatelessWidget {
+  final GestureTapCallback autoNext;
+
+  OutCome({this.autoNext});
+
   @override
   Widget build(BuildContext context) {
-    final route = Provider.of<ClimbingRouteState>(context);
+    final state = Provider.of<WizardState>(context);
     return Column(
       children: <Widget>[
         WizardPageTitle(
@@ -34,7 +38,7 @@ class OutCome extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: NewCustomRadio.col(
                       value: OutComeEnum.valueOf('success'),
-                      groupValue: route.route.outCome,
+                      groupValue: state.selectedOutCome,
                       label: 'Yup',
                       fontSize: 18,
                       iconProvider: LogBookIcons.smile,
@@ -43,7 +47,8 @@ class OutCome extends StatelessWidget {
                       checkedBgColor: Color(0xff4d000000),
                       unCheckedBgColor: Colors.transparent,
                       onChanged: (val) {
-                        route.outCome = val.toString();
+                        state.selectedOutCome = val;
+                        autoNext();
                       },
                     ),
                   ),
@@ -58,7 +63,7 @@ class OutCome extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: NewCustomRadio.col(
                       value: OutComeEnum.valueOf('failure'),
-                      groupValue: route.route.outCome,
+                      groupValue: state.selectedOutCome,
                       label: 'Tried but failed',
                       fontSize: 18,
                       iconProvider: LogBookIcons.sad,
@@ -67,7 +72,8 @@ class OutCome extends StatelessWidget {
                       checkedBgColor: Color(0xff4d000000),
                       unCheckedBgColor: Colors.transparent,
                       onChanged: (val) {
-                        route.outCome = val.toString();
+                        state.selectedOutCome = val;
+                        autoNext();
                       },
                     ),
                   ),

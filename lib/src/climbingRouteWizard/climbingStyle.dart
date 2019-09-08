@@ -1,15 +1,19 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
-import 'package:climbing_logbook/src/customRadio.dart';
-import 'package:climbing_logbook/src/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:climbing_logbook/src/commons/customRadio.dart';
+import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
-import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ClimbingStyle extends StatelessWidget {
+  final GestureTapCallback autoNext;
+
+  ClimbingStyle({@required this.autoNext});
+
   @override
   Widget build(BuildContext context) {
-    final climbingRoteState = Provider.of<ClimbingRouteState>(context);
+    final state = Provider.of<WizardState>(context);
     return Column(
       children: <Widget>[
         WizardPageTitle(
@@ -23,52 +27,51 @@ class ClimbingStyle extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Flexible(
+                flex: 2,
                 child: AspectRatio(
-                  aspectRatio: 2,
+                  aspectRatio: 1.2,
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
-                    child: NewCustomRadio.row(
-                      value: ClosureEnum.valueOf('onsight'),
-                      groupValue: climbingRoteState.route.closure,
-                      label: 'On Sight',
-                      fontSize: 18,
-                      iconSize: 40,
-                      iconProvider: LogBookIcons.eye,
-                      checkedContentColor: Colors.white,
-                      checkedBgColor: Color(0xff4d000000),
-                      unCheckedBgColor: Colors.transparent,
-                      onChanged: (val) {
-                        climbingRoteState.closure = val.toString();
-                      },
-                    ),
+                    child: NewCustomRadio.col(
+                        value: ClosureEnum.valueOf('onsight'),
+                        groupValue: state.selectedClosure,
+                        label: 'On Sight',
+                        fontSize: 18,
+                        iconSize: 50,
+                        iconProvider: LogBookIcons.eye,
+                        checkedContentColor: Colors.white,
+                        checkedBgColor: Color(0xff4d000000),
+                        unCheckedBgColor: Colors.transparent,
+                        onChanged: (val) {
+                          state.selectedClosure = val;
+                          autoNext();
+                        }),
                   ),
                 ),
               ),
               Flexible(
+                flex: 2,
                 child: AspectRatio(
-                  aspectRatio: 2,
+                  aspectRatio: 1.2,
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
-                    child: NewCustomRadio.row(
-                      value: ClosureEnum.valueOf('flash'),
-                      groupValue: climbingRoteState.route.closure,
-                      label: 'FLASH',
-                      fontSize: 18,
-                      iconSize: 40,
-                      iconProvider: LogBookIcons.flash,
-                      checkedContentColor: Colors.white,
-                      checkedBgColor: Color(0xff4d000000),
-                      unCheckedBgColor: Colors.transparent,
-                      onChanged: (val) {
-                        climbingRoteState.closure = val.toString();
-                      },
-                    ),
+                    child: NewCustomRadio.col(
+                        value: ClosureEnum.valueOf('flash'),
+                        groupValue: state.selectedClosure,
+                        label: 'FLASH',
+                        fontSize: 18,
+                        iconSize: 50,
+                        iconProvider: LogBookIcons.flash,
+                        checkedContentColor: Colors.white,
+                        checkedBgColor: Color(0xff4d000000),
+                        unCheckedBgColor: Colors.transparent,
+                        onChanged: (val) {
+                          state.selectedClosure = val;
+                          autoNext();
+                        }),
                   ),
                 ),
               ),
-              Flexible(
-                child: Container(),
-              )
             ],
           ),
         )

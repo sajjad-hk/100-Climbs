@@ -1,5 +1,5 @@
-import 'package:climbing_logbook/src/auth.dart';
-import 'package:climbing_logbook/src/customIcon.dart';
+import 'package:climbing_logbook/src/services/auth.dart';
+import 'package:climbing_logbook/src/commons/customIcon.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {

@@ -1,10 +1,8 @@
-import 'package:climbing_logbook/src/climbingRoutes.dart';
-import 'package:climbing_logbook/src/colors/LogBookColors.dart';
-import 'package:climbing_logbook/src/customDrawer.dart';
+import 'package:climbing_logbook/src/dashboard/climbingRoutes.dart';
+import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
 import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/stackedBarChart.dart';
 import 'package:climbing_logbook/src/services/climbingRouteService.dart';
-import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
+import 'package:climbing_logbook/src/dashboard/stackedBarChart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,15 +14,13 @@ final Color chartBackgroundTo = Color(0xff0e1823);
 enum RouteWizardMode { CREATE, EDIT, NONE }
 
 class Dashboard extends StatelessWidget {
-
- final Function callback;
+  final Function callback;
 
   Dashboard({this.callback});
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<ClimbingLogBookUser>(context);
-    final route = Provider.of<ClimbingRouteState>(context);
     return Scaffold(
       backgroundColor: listBackground,
       body: CustomScrollView(
@@ -99,7 +95,7 @@ class Dashboard extends StatelessWidget {
           Icons.add,
           size: 45.0,
         ),
-        backgroundColor: LogBookColors.getGradeColor(route.route.grade),
+        backgroundColor: Colors.black, //LogBookColors.getGradeColor(),
       ),
       drawer: CustomDrawer(
           accountType: 'Google'), // todo change static account type

@@ -1,33 +1,31 @@
-import 'package:climbing_logbook/src/climbingRouteWizard/belay.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/belayStyle.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/climbingStyle.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/grade.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/outCome.dart';
-import 'package:climbing_logbook/src/colors/LogBookColors.dart';
-import 'package:climbing_logbook/src/services/climbingRouteService.dart';
-import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tags.dart';
+import 'package:climbing_logbook/src/assets-content/colors/LogBookColors.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
+import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/values.dart';
 
-class RouteWizard extends StatefulWidget {
+class ClimbingRouteWizard extends StatefulWidget {
   final GestureTapCallback onClose;
 
-  RouteWizard.creator({this.onClose}) : super();
-
-  RouteWizard.editor({this.onClose}) : super();
+  ClimbingRouteWizard({@required this.onClose}) : super();
 
   @override
-  _RouteWizardState createState() => _RouteWizardState();
+  _ClimbingRouteWizardState createState() => _ClimbingRouteWizardState();
 }
 
-class _RouteWizardState extends State<RouteWizard> {
+class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
   int currentPageIndex;
-  DateTime d;
 
   @override
-  void didUpdateWidget(RouteWizard oldWidget) {
+  void didUpdateWidget(ClimbingRouteWizard oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
@@ -35,12 +33,11 @@ class _RouteWizardState extends State<RouteWizard> {
   void initState() {
     super.initState();
     currentPageIndex = 0;
-    d = DateTime.now();
   }
 
   _routeWizardWrapper(BuildContext context) {
     PageController _controller = PageController(initialPage: 0);
-    final climbingRoteState = Provider.of<ClimbingRouteState>(context);
+    final state = Provider.of<WizardState>(context);
     final user = Provider.of<ClimbingLogBookUser>(context);
 
     return Container(
@@ -49,7 +46,7 @@ class _RouteWizardState extends State<RouteWizard> {
         padding: const EdgeInsets.all(12.0),
         duration: Duration(microseconds: 500),
         child: Card(
-          color: LogBookColors.getGradeColor(climbingRoteState.route.grade),
+          color: LogBookColors.getGradeColor(state.selectedClimbingGrade),
           child: Column(
             children: <Widget>[
               Container(
@@ -67,23 +64,45 @@ class _RouteWizardState extends State<RouteWizard> {
                   ],
                 ),
               ),
-              Expanded(
+              Flexible(
+                fit: FlexFit.loose,
                 child: Container(
-                    child: PageView(
-                  controller: _controller,
-                  onPageChanged: (ind) {
-                    setState(() {
-                      currentPageIndex = ind;
-                    });
-                  },
-                  children: <Widget>[
-                    OutCome(),
-                    Grade(),
-                    Belay(),
-                    ClimbingStyle(),
-                    Tags(),
-                  ],
-                )),
+                  child: PageView(
+                    controller: _controller,
+                    onPageChanged: (ind) {
+                      setState(() => currentPageIndex = ind);
+                    },
+                    children: <Widget>[
+                      OutCome(
+                        autoNext: () => _controller.nextPage(
+                          duration: Duration(
+                            milliseconds: 500,
+                          ),
+                          curve: Curves.easeIn,
+                        ),
+                      ),
+                      Grade(),
+                      BelayStyle(
+                        autoNext: () => _controller.nextPage(
+                          duration: Duration(
+                            milliseconds: 500,
+                          ),
+                          curve: Curves.easeIn,
+                        ),
+                      ),
+                      if (state.selectedOutCome == OutComeEnum.success)
+                        ClimbingStyle(
+                          autoNext: () => _controller.nextPage(
+                            duration: Duration(
+                              milliseconds: 500,
+                            ),
+                            curve: Curves.easeIn,
+                          ),
+                        ),
+                      Tags(),
+                    ],
+                  ),
+                ),
               ),
               Column(
                 children: <Widget>[
@@ -95,6 +114,7 @@ class _RouteWizardState extends State<RouteWizard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           InkWell(
+                            onTap: () {},
                             child: Row(
                               children: <Widget>[
                                 Icon(
@@ -143,10 +163,7 @@ class _RouteWizardState extends State<RouteWizard> {
                             visible: currentPageIndex >= 2,
                             child: InkWell(
                               onTap: () {
-                                climbingRoteState.uid =
-                                    user.uid; // todo: set id done by default!!
-                                climbingRouteService
-                                    .addRoute(climbingRoteState.route);
+                                climbingRouteService.addRoute(user, state);
                                 widget.onClose();
                               },
                               child: Row(

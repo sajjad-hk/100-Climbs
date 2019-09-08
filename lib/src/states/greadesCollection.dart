@@ -1,7 +1,9 @@
-class GradesCollection {
-  //  @formatter:off
-  var G = {
-    'french': [
+import 'package:climbing_logbook/src/models/enums.dart';
+
+//  @formatter:off
+class Constants {
+  static const grades = {
+    GradingStyleEnum.french: [
       '4a',
       '4a+',
       '4b',
@@ -28,7 +30,7 @@ class GradesCollection {
       '7c+',
       '8a'
     ],
-    'polish': [
+    GradingStyleEnum.polish: [
       'IV+',
       'V-',
       'V',
@@ -48,5 +50,6 @@ class GradesCollection {
       'VI.5+'
     ]
   };
-//   @formatter:on
 }
+
+//   @formatter:on

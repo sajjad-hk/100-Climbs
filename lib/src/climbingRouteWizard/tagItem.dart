@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class TagItem extends StatelessWidget {
   final String text;
   final Function onTab;
-  TagItem({@required this.text, this.onTab});
+  TagItem({@required this.text, @required this.onTab});
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: onTab,
+      onPressed: () => onTab(text),
       child: Container(
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(

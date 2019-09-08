@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:climbing_logbook/src/customIcon.dart';
+import 'package:climbing_logbook/src/commons/customIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

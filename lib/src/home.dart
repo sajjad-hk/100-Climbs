@@ -1,4 +1,5 @@
-import 'package:climbing_logbook/src/dashboard.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:climbing_logbook/src/dashboard/dashboard.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/climbingRouteWizard.dart';
 import 'package:flutter/material.dart';
@@ -33,21 +34,24 @@ class _HomeState extends State<Home> {
               },
             ),
             if (_mode == RouteWizardMode.CREATE)
-              RouteWizard.creator(
-                onClose: () {
-                  setState(
-                    () => _mode = RouteWizardMode.NONE,
-                  );
-                },
+              ChangeNotifierProvider<WizardState>(
+                builder: (context) => WizardState(),
+                child: ClimbingRouteWizard(
+                  onClose: () {
+                    setState(
+                      () => _mode = RouteWizardMode.NONE,
+                    );
+                  },
+                ),
               ),
-            if (_mode == RouteWizardMode.EDIT)
-              RouteWizard.editor(
-                onClose: () {
-                  setState(
-                    () => _mode = RouteWizardMode.NONE,
-                  );
-                },
-              )
+//            if (_mode == RouteWizardMode.EDIT)
+//              ClimbingRouteWizard.editor(
+//                onClose: () {
+//                  setState(
+//                    () => _mode = RouteWizardMode.NONE,
+//                  );
+//                },
+//              )
           ],
         ),
       );

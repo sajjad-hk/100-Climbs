@@ -1,96 +1,131 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tagItem.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tagsHistory.dart';
 import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/services/climbingRouteService.dart';
-import 'package:climbing_logbook/src/states/ClimbingRouteState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-class Tags extends StatelessWidget {
+class Tags extends StatefulWidget {
+  @override
+  _TagsState createState() => _TagsState();
+}
+
+class _TagsState extends State<Tags> {
   static TextEditingController _tagTextController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  List<String> stringTags;
 
-  filterTagsList() {
-    print(_tagTextController.text);
-//    climbingRoteState.userTags = climbingRoteState.usersTags
-//                        .where((String f) => f.startsWith(value) && value != '')
-//                        .toList();
+  @override
+  void initState() {
+    super.initState();
   }
 
-  Tags() {
-    _tagTextController.addListener(() => filterTagsList());
+  filterTagsList(user) {
+    List<String> filter = List<String>();
+    filter.add(_tagTextController.text.toString());
+    filter.addAll(user.tags.toList());
+    user.tags.toList();
+    filter = filter
+        .where((it) => it.startsWith(_tagTextController.text.toString()))
+        .toList();
+    if (mounted) {
+      setState(() => stringTags = filter.toSet().toList());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<WizardState>(context);
+    final user = Provider.of<ClimbingLogBookUser>(context);
+
+    _tagTextController.addListener(() => filterTagsList(user));
     _tagTextController.selection = TextSelection.fromPosition(
       TextPosition(
         offset: _tagTextController.text.length,
       ),
     );
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    if (MediaQuery.of(context).viewInsets.bottom == 0.0) {
-      FocusScope.of(context).requestFocus(new FocusNode());
-    }
-    final climbingRoteState = Provider.of<ClimbingRouteState>(context);
-    final user = Provider.of<ClimbingLogBookUser>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Visibility(
           visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
           child: WizardPageTitle(
-            title: 'Tags',
+            title: "Tags",
           ),
         ),
-        Wrap(
-          alignment: WrapAlignment.spaceEvenly,
-          spacing: 2,
-          children: [
-            for (String tag in climbingRoteState.route.tags)
-              TagItem(
-                text: tag,
-              )
-          ],
+        Text(
+          "${state.selectedTags.length.toString()}/5",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12.0,
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(1.0, 2.0),
+                blurRadius: 3.0,
+                color: Color(0xff29000000),
+              ),
+            ],
+          ),
         ),
         Flexible(
-          flex: 3,
+          flex: 5,
           fit: FlexFit.loose,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MediaQuery.of(context).viewInsets.bottom == 0.0
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                child: TextField(
-                  focusNode: _focusNode,
-                  textCapitalization: TextCapitalization.words,
-                  textAlign: TextAlign.center,
-                  controller: _tagTextController,
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Click to add...',
-                    hintStyle: TextStyle(
+                constraints: BoxConstraints(maxHeight: 150),
+                child: Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  children: [
+                    for (String tag in state.selectedTags)
+                      TagItem(
+                        text: tag,
+                        onTab: (t) => state.removeTag(t),
+                      )
+                  ],
+                ),
+              ),
+              Visibility(
+                visible: state.selectedTags.length < 5,
+                child: Container(
+                  child: TextField(
+                    focusNode: _focusNode,
+                    textCapitalization: TextCapitalization.words,
+                    textAlign: TextAlign.center,
+                    controller: _tagTextController,
+                    cursorColor: Colors.white,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Click to add...',
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xff4c000000),
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    style: TextStyle(
                       fontSize: 18,
                       color: Color(0xff4c000000),
-                      fontStyle: FontStyle.italic,
                     ),
-                  ),
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Color(0xff4c000000),
                   ),
                 ),
               ),
               Visibility(
-                visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+                visible: MediaQuery.of(context).viewInsets.bottom == 0.0 &&
+                    state.selectedTags.length < 5,
                 child: FlatButton(
                   onPressed: () {
                     FocusScope.of(context).requestFocus(_focusNode);
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xff4c000000),
@@ -103,7 +138,18 @@ class Tags extends StatelessWidget {
                   ),
                 ),
               ),
-              TagsHistory(),
+              Visibility(
+                visible: _tagTextController.text != '',
+                child: TagsHistory(
+                  tags: stringTags,
+                  onAdd: (tag) {
+                    _tagTextController.text = '';
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    state.addTag(tag);
+                    print(tag);
+                  },
+                ),
+              ),
             ],
           ),
         ),
