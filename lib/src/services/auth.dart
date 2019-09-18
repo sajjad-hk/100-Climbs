@@ -14,37 +14,41 @@ class AuthService {
   final Firestore _db = Firestore.instance;
 
   final standardSerializers = (serializers.toBuilder()
-    ..addPlugin(StandardJsonPlugin())
-    ..addPlugin(TimestampSerializerPlugin())
-  ).build();
+        ..addPlugin(StandardJsonPlugin())
+        ..addPlugin(TimestampSerializerPlugin()))
+      .build();
 
   Future<FirebaseUser> googleSignIn() async {
-
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-    final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+    final FirebaseUser user =
+        (await _auth.signInWithCredential(credential)).user;
     updateUserData(user);
     return user;
   }
 
   Stream<ClimbingLogBookUser> climbingLogBookUser(String uid) {
-   return  _db.collection('users').document(uid).snapshots().map((data) => standardSerializers.deserializeWith(ClimbingLogBookUser.serializer, data.data));
+    return _db.collection('users').document(uid).snapshots().map((data) =>
+        standardSerializers.deserializeWith(
+            ClimbingLogBookUser.serializer, data.data));
   }
-
-
 
   void updateUserData(FirebaseUser user) async {
     DocumentReference ref = _db.collection('users').document(user.uid);
 
-    return ref.setData(
-        {'uid': user.uid, 'displayName': user.displayName,'photoUrl': user.photoUrl,'email': user.email, 'lastLogin': DateTime.now()},
-        merge: true);
+    return ref.setData({
+      'uid': user.uid,
+      'displayName': user.displayName,
+      'photoUrl': user.photoUrl,
+      'email': user.email,
+      'lastLogin': DateTime.now()
+    }, merge: true);
   }
 
   void signOut(BuildContext context) {
-    _auth.signOut().catchError((_,__) => print('SOS'));
+    _auth.signOut().catchError((_, __) => print('SOS'));
   }
 }
 

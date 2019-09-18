@@ -1,11 +1,12 @@
-import 'package:climbing_logbook/src/dashboard/climbingRouteouteItem.dart';
 import 'package:climbing_logbook/src/assets-content/colors/LogBookColors.dart';
-import 'package:climbing_logbook/src/commons/customIcon.dart';
 import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/commons/customIcon.dart';
+import 'package:climbing_logbook/src/dashboard/climbingRouteouteItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+
 import '../models/values.dart';
 
 class ClimbingRoutes extends StatelessWidget {
@@ -16,42 +17,44 @@ class ClimbingRoutes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var routeMapDate =
-        groupBy(routes, (it) => DateFormat.yMMMMEEEEd().format(it.loggedDate));
-    List dateKeys = routeMapDate.keys.toList()..sort();
-    List dateRoutes = [];
-    for (String dateKey in dateKeys) {
-      dateRoutes.add(dateKey);
-      dateRoutes.addAll(routeMapDate[dateKey]
-        ..sort((a, b) => b.loggedDate.compareTo(a.loggedDate)));
-    }
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        dateRoutes.map((it) {
-          if (it is String) {
-            return Container(
-              padding: const EdgeInsets.all(5),
-              child: Row(
-                children: <Widget>[
-                  CustomIcon(
-                    color: LogBookColors.warmGrey,
-                    path: LogBookIcons.calendar,
-                    size: 30,
-                  ),
-                  Text(
-                    it,
-                    style: TextStyle(color: LogBookColors.warmGrey),
-                  ),
-                ],
+    List<Widget> dateRoutes = [];
+
+    Map<DateTime, List<ClimbingRoute>> col =
+        Provider.of<Map<DateTime, List<ClimbingRoute>>>(context);
+
+    if (col != null) {
+      List<DateTime> ds = col.keys.toList()..sort();
+      ds.reversed.forEach((key) {
+        Widget d = Container(
+          padding: const EdgeInsets.all(5),
+          child: Row(
+            children: <Widget>[
+              CustomIcon(
+                color: LogBookColors.warmGrey,
+                path: LogBookIcons.calendar,
+                size: 30,
               ),
-            );
-          }
-          return ClimbingRouteItem(
+              Text(
+                DateFormat.yMMMMEEEEd().format(key),
+                style: TextStyle(color: LogBookColors.warmGrey),
+              ),
+            ],
+          ),
+        );
+        dateRoutes.add(d);
+        col[key]?.forEach((it) {
+          dateRoutes.add(ClimbingRouteItem(
             route: it,
             edit: onEdit,
-          );
-        }).toList(),
-      ),
+          ));
+        });
+      });
+    } else {
+      dateRoutes.add(Container());
+    }
+
+    return SliverList(
+      delegate: SliverChildListDelegate(dateRoutes),
     );
   }
 }

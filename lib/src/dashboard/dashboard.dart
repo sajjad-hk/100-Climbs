@@ -62,30 +62,10 @@ class Dashboard extends StatelessWidget {
             ),
             expandedHeight: 300,
           ),
-          StreamBuilder<List<ClimbingRoute>>(
-            stream: climbingRouteService.getRouteList(user.uid),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ClimbingRoutes(
-                  routes: snapshot.data,
-                  onEdit: () => callback(RouteWizardMode.EDIT),
-                );
-              } else {
-                return SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      Container(
-                        height: 200,
-                        child: Center(
-                          child: Text('Loading...'),
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              }
-            },
-          )
+          StreamProvider<Map<DateTime, List<ClimbingRoute>>>.value(
+            stream: climbingRouteService.getRouteListGroupByDate(user.uid),
+            child: ClimbingRoutes(),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

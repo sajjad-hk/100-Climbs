@@ -101,23 +101,31 @@ class ClimbingRouteItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           if (route.tags.isNotEmpty)
-                            Container(
-                              padding: const EdgeInsets.all(3.5),
-                              margin: const EdgeInsets.only(left: 10),
-                              decoration: BoxDecoration(
-                                  color: LogBookColors.white,
-                                  border: Border.all(
-                                    color: LogBookColors.whiteTwo,
-                                  )),
-                              child: Wrap(
-                                children: <Widget>[
-                                  for (String tag in route.tags)
-                                    Center(
-                                      child: Text(tag),
+                            Row(
+                              children: <Widget>[
+                                for (String tag in route.tags)
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 2, bottom: 2),
+                                    margin: const EdgeInsets.only(left: 8),
+                                    decoration: BoxDecoration(
+                                        color: LogBookColors.white,
+                                        border: Border.all(
+                                          color: LogBookColors.whiteTwo,
+                                        )),
+                                    child: Container(
+                                      margin: const EdgeInsets.all(2.0),
+                                      child: Center(
+                                        child: Text(
+                                          tag,
+                                          style: TextStyle(
+                                              color: LogBookColors.warmGrey),
+                                        ),
+                                      ),
                                     ),
-                                ],
-                              ),
-                            )
+                                  )
+                              ],
+                            ),
                         ],
                       )
                     ],

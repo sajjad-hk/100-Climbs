@@ -7,6 +7,8 @@ import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/plugin/TimestapmsSerializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
+import 'package:intl/intl.dart';
 
 // todo : not good name this is a route provider for list
 class ClimbingRouteService {
@@ -29,10 +31,23 @@ class ClimbingRouteService {
     },
   );
 
+  StreamTransformer<List<ClimbingRoute>, Map<DateTime, List<ClimbingRoute>>>
+      transformer = StreamTransformer.fromHandlers(handleData: (data, sink) {
+    return sink.add(groupBy(
+        data,
+        (it) => DateTime(
+            it.loggedDate.year, it.loggedDate.month, it.loggedDate.day)));
+  });
+
   Stream<List<ClimbingRoute>> getRouteList(String uid) {
     var ref = _db.collection('routes').where('uid', isEqualTo: uid);
 
     return ref.snapshots().transform(streamTransformer);
+  }
+
+  Stream<Map<DateTime, List<ClimbingRoute>>> getRouteListGroupByDate(
+      String uid) {
+    return getRouteList(uid).transform(transformer);
   }
 
   Future<void> addRoute(ClimbingLogBookUser user, WizardState routeFromWizard) {

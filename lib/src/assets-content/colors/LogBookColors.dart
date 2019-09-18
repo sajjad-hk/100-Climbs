@@ -50,9 +50,8 @@ class LogBookColors {
   static const Color barneyTwo = Color(0xff992bb5);
   static const Color warmPurple = Color(0xff692c8c);
 
-
   static Color getGradeColor(String grade) {
-    switch(grade) {
+    switch (grade) {
       case '4a':
         return lightishPurple;
       case '4a+':
@@ -119,18 +118,18 @@ class LogBookColors {
   }
 
   static Color getClimbingRouteOutcomeColor(OutComeEnum outCome) {
-    switch(outCome) {
+    switch (outCome) {
       case OutComeEnum.failure:
         return paleGrey;
       case OutComeEnum.success:
-        return white;
+        return Colors.white;
       default:
         return null;
     }
   }
 
   static Color getClimbingRouteOutcomeBorderColor(OutComeEnum outCome) {
-    switch(outCome) {
+    switch (outCome) {
       case OutComeEnum.failure:
         return coolGrey;
       case OutComeEnum.success:
