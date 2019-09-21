@@ -1,7 +1,7 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/commons/customRadio.dart';
-import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +38,7 @@ class ClimbingStyle extends StatelessWidget {
                         label: 'On Sight',
                         fontSize: 18,
                         iconSize: 50,
-                        iconProvider: LogBookIcons.eye,
+                        iconProvider: AppIcons.eye,
                         checkedContentColor: Colors.white,
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,
@@ -61,7 +61,7 @@ class ClimbingStyle extends StatelessWidget {
                         label: 'FLASH',
                         fontSize: 18,
                         iconSize: 50,
-                        iconProvider: LogBookIcons.flash,
+                        iconProvider: AppIcons.flash,
                         checkedContentColor: Colors.white,
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,

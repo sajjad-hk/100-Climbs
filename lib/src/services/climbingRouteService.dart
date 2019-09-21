@@ -10,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 
-// todo : not good name this is a route provider for list
 class ClimbingRouteService {
   final Firestore _db = Firestore.instance;
 
@@ -19,8 +18,8 @@ class ClimbingRouteService {
         ..addPlugin(TimestampSerializerPlugin()))
       .build();
 
-  StreamTransformer<QuerySnapshot, List<ClimbingRoute>> streamTransformer =
-      StreamTransformer.fromHandlers(
+  StreamTransformer<QuerySnapshot, List<ClimbingRoute>>
+      _jsonToClimbingRoutesTransformer = StreamTransformer.fromHandlers(
     handleData: (data, sink) {
       return sink.add(data.documents.map(
         (document) {
@@ -32,44 +31,66 @@ class ClimbingRouteService {
   );
 
   StreamTransformer<List<ClimbingRoute>, Map<DateTime, List<ClimbingRoute>>>
-      transformer = StreamTransformer.fromHandlers(handleData: (data, sink) {
-    return sink.add(groupBy(
-        data,
-        (it) => DateTime(
-            it.loggedDate.year, it.loggedDate.month, it.loggedDate.day)));
-  });
+      _dateGroupByTransformer = StreamTransformer.fromHandlers(
+    handleData: (data, sink) {
+      return sink.add(
+        groupBy(
+          data,
+          (it) => DateTime(
+            it.loggedDate.year,
+            it.loggedDate.month,
+            it.loggedDate.day,
+          ),
+        ),
+      );
+    },
+  );
 
-  Stream<List<ClimbingRoute>> getRouteList(String uid) {
+  Stream<List<ClimbingRoute>> getClimbingRoutes(String uid) {
     var ref = _db.collection('routes').where('uid', isEqualTo: uid);
-
-    return ref.snapshots().transform(streamTransformer);
+    return ref.snapshots().transform(_jsonToClimbingRoutesTransformer);
   }
 
-  Stream<Map<DateTime, List<ClimbingRoute>>> getRouteListGroupByDate(
+  Stream<Map<DateTime, List<ClimbingRoute>>> getClimbingRoutesGroupByDate(
       String uid) {
-    return getRouteList(uid).transform(transformer);
+    return getClimbingRoutes(uid).transform(_dateGroupByTransformer);
   }
 
-  Future<void> addRoute(ClimbingLogBookUser user, WizardState routeFromWizard) {
-    ClimbingRoute climbingRoute = ClimbingRoute(
+  ClimbingRoute _getClimbingRouteFromWizardState(
+      String uid, WizardState wizardState) {
+    return ClimbingRoute(
       (route) => route
-        ..uid = user.uid
-        ..outCome = routeFromWizard.selectedOutCome
-        ..gradingStyle = routeFromWizard.selectedGradingStyle
-        ..grade = routeFromWizard.selectedClimbingGrade
-        ..belayingStyle = routeFromWizard.selectedBelayStyle
-        ..closure = routeFromWizard.selectedClosure
-        ..tags = SetBuilder<String>(routeFromWizard.selectedTags)
+        ..uid = uid
+        ..outCome = wizardState.selectedOutCome
+        ..gradingStyle = wizardState.selectedGradingStyle
+        ..grade = wizardState.selectedClimbingGrade
+        ..belayingStyle = wizardState.selectedBelayStyle
+        ..closure = wizardState.selectedClosure
+        ..tags = SetBuilder<String>(wizardState.selectedTags)
         ..loggedDate = DateTime.now(),
     );
+  }
 
-    _db.collection('users').document(climbingRoute.uid).setData({
-      'tags': [...user.tags, ...routeFromWizard.selectedTags].toSet().toList()
-    }, merge: true);
+  Future<void> saveNewTagsToFirebase(AppUser user, List<String> tags) {
+    List<String> distinctTags = [...user.tags, ...tags].toSet().toList();
+    return _db
+        .collection('users')
+        .document(user.uid)
+        .setData({'tags': distinctTags}, merge: true);
+  }
 
+  Future<void> saveClimbingRouteToFirebase(ClimbingRoute climbingRoute) {
     dynamic climbingRouteJson = standardSerializers.serializeWith(
         ClimbingRoute.serializer, climbingRoute);
     return _db.collection('routes').add(climbingRouteJson);
+  }
+
+  Future<void> saveNewClimbingRouteAndNewTags(
+      AppUser user, WizardState wizardState) {
+    ClimbingRoute climbingRoute =
+        _getClimbingRouteFromWizardState(user.uid, wizardState);
+    saveNewTagsToFirebase(user, wizardState.selectedTags);
+    return saveClimbingRouteToFirebase(climbingRoute);
   }
 }
 

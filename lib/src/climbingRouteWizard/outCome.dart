@@ -1,7 +1,7 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/commons/customRadio.dart';
-import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +41,7 @@ class OutCome extends StatelessWidget {
                       groupValue: state.selectedOutCome,
                       label: 'Yup',
                       fontSize: 18,
-                      iconProvider: LogBookIcons.smile,
+                      iconProvider: AppIcons.smile,
                       iconSize: 40,
                       checkedContentColor: Colors.white,
                       checkedBgColor: Color(0xff4d000000),
@@ -66,7 +66,7 @@ class OutCome extends StatelessWidget {
                       groupValue: state.selectedOutCome,
                       label: 'Tried but failed',
                       fontSize: 18,
-                      iconProvider: LogBookIcons.sad,
+                      iconProvider: AppIcons.sad,
                       iconSize: 40,
                       checkedContentColor: Colors.white,
                       checkedBgColor: Color(0xff4d000000),

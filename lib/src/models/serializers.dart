@@ -11,7 +11,7 @@ part 'serializers.g.dart';
 
 @SerializersFor(const [
   ClimbingRoute,
-  ClimbingLogBookUser,
+  AppUser,
   OutComeEnum,
   BelayingStyleEnum,
   GradingStyleEnum,

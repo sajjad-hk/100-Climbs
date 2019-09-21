@@ -1,6 +1,6 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,7 @@ class BelayStyle extends StatelessWidget {
                         value: BelayingStyleEnum.valueOf('lead'),
                         groupValue: state.selectedBelayStyle,
                         iconSize: 50,
-                        iconProvider: LogBookIcons.lead,
+                        iconProvider: AppIcons.lead,
                         checkedContentColor: Colors.white,
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,
@@ -76,7 +76,7 @@ class BelayStyle extends StatelessWidget {
                         value: BelayingStyleEnum.valueOf('auto'),
                         groupValue: state.selectedBelayStyle,
                         iconSize: 50,
-                        iconProvider: LogBookIcons.auto,
+                        iconProvider: AppIcons.auto,
                         checkedContentColor: Colors.white,
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,
@@ -106,7 +106,7 @@ class BelayStyle extends StatelessWidget {
                         value: BelayingStyleEnum.valueOf('toprope'),
                         groupValue: state.selectedBelayStyle,
                         iconSize: 50,
-                        iconProvider: LogBookIcons.toprope,
+                        iconProvider: AppIcons.toprope,
                         checkedContentColor: Colors.white,
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,

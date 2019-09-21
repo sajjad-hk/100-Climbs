@@ -39,7 +39,7 @@ class _TagsState extends State<Tags> {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<WizardState>(context);
-    final user = Provider.of<ClimbingLogBookUser>(context);
+    final user = Provider.of<AppUser>(context);
 
     _tagTextController.addListener(() => filterTagsList(user));
     _tagTextController.selection = TextSelection.fromPosition(

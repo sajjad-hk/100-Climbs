@@ -1,3 +1,4 @@
+import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/services/auth.dart';
 import 'package:climbing_logbook/src/home.dart';
 import 'package:climbing_logbook/src/login.dart';
@@ -26,10 +27,13 @@ class ClimbingLogbook extends StatelessWidget {
             if (firebaseUser != null) {
               return MultiProvider(
                 providers: [
-                  StreamProvider<ClimbingLogBookUser>.value(
+                  StreamProvider<AppUser>.value(
                     stream: authService.climbingLogBookUser(firebaseUser.uid),
                     catchError: (_, __) => null,
                   ),
+                  ChangeNotifierProvider.value(
+                    notifier: DashboardState(),
+                  )
                 ],
                 child: Home(),
               );

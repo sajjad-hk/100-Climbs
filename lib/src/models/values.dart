@@ -33,8 +33,7 @@ abstract class ClimbingRoute
   static Serializer<ClimbingRoute> get serializer => _$climbingRouteSerializer;
 }
 
-abstract class ClimbingLogBookUser
-    implements Built<ClimbingLogBookUser, ClimbingLogBookUserBuilder> {
+abstract class AppUser implements Built<AppUser, AppUserBuilder> {
   String get uid;
 
   String get displayName;
@@ -49,12 +48,9 @@ abstract class ClimbingLogBookUser
 
   DateTime get lastLogin;
 
-  ClimbingLogBookUser._();
+  AppUser._();
 
-  factory ClimbingLogBookUser(
-          [void Function(ClimbingLogBookUserBuilder) updates]) =
-      _$ClimbingLogBookUser;
+  factory AppUser([void Function(AppUserBuilder) updates]) = _$AppUser;
 
-  static Serializer<ClimbingLogBookUser> get serializer =>
-      _$climbingLogBookUserSerializer;
+  static Serializer<AppUser> get serializer => _$appUserSerializer;
 }

@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:flutter/material.dart';
 
-class LogBookColors {
-  LogBookColors._();
+class AppColors {
+  AppColors._();
 
   static const Color white = Color(0xfff6f6f6);
   static const Color whiteTwo = Color(0xffe8e8e8);

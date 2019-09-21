@@ -1,5 +1,5 @@
-import 'package:climbing_logbook/src/assets-content/colors/LogBookColors.dart';
-import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
+import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/commons/customIcon.dart';
 import 'package:climbing_logbook/src/dashboard/climbingRouteouteItem.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,51 +10,62 @@ import 'package:intl/intl.dart';
 import '../models/values.dart';
 
 class ClimbingRoutes extends StatelessWidget {
-  final List<ClimbingRoute> routes;
-  final GestureTapCallback onEdit;
-
-  ClimbingRoutes({this.routes, this.onEdit});
-
   @override
   Widget build(BuildContext context) {
-    List<Widget> dateRoutes = [];
-
-    Map<DateTime, List<ClimbingRoute>> col =
+    Map<DateTime, List<ClimbingRoute>> groupedRoutes =
         Provider.of<Map<DateTime, List<ClimbingRoute>>>(context);
-
-    if (col != null) {
-      List<DateTime> ds = col.keys.toList()..sort();
-      ds.reversed.forEach((key) {
-        Widget d = Container(
-          padding: const EdgeInsets.all(5),
-          child: Row(
-            children: <Widget>[
-              CustomIcon(
-                color: LogBookColors.warmGrey,
-                path: LogBookIcons.calendar,
-                size: 30,
-              ),
-              Text(
-                DateFormat.yMMMMEEEEd().format(key),
-                style: TextStyle(color: LogBookColors.warmGrey),
-              ),
-            ],
-          ),
-        );
-        dateRoutes.add(d);
-        col[key]?.forEach((it) {
-          dateRoutes.add(ClimbingRouteItem(
-            route: it,
-            edit: onEdit,
-          ));
-        });
-      });
-    } else {
-      dateRoutes.add(Container());
-    }
-
     return SliverList(
-      delegate: SliverChildListDelegate(dateRoutes),
+      delegate: SliverChildListDelegate(
+        flattenGroupedRoutes(groupedRoutes),
+      ),
     );
+  }
+
+  List<Widget> flattenGroupedRoutes(
+      Map<DateTime, List<ClimbingRoute>> groupedRoutes) {
+    if (getDateTimeKeys(groupedRoutes).isEmpty) return [Container()];
+    return getDateTimeKeys(groupedRoutes)
+        .reversed
+        .map((it) {
+          return [createDateItem(it), ...createRouteItems(groupedRoutes[it])];
+        })
+        .expand((i) => i)
+        .toList();
+  }
+
+  List<DateTime> getDateTimeKeys(
+      Map<DateTime, List<ClimbingRoute>> groupedRoutes) {
+    return groupedRoutes == null ? [] : groupedRoutes.keys.toList()
+      ..sort();
+  }
+
+  Widget createDateItem(DateTime date) {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      child: Row(
+        children: <Widget>[
+          CustomIcon(
+            color: AppColors.warmGrey,
+            path: AppIcons.calendar,
+            size: 30,
+          ),
+          Text(
+            DateFormat.yMMMMEEEEd().format(date),
+            style: TextStyle(color: AppColors.warmGrey),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> createRouteItems(List<ClimbingRoute> routes) {
+    routes.sort((a, b) => a.loggedDate.compareTo(b.loggedDate));
+    return routes.reversed
+        .map(
+          (it) => ClimbingRouteItem(
+            route: it,
+          ),
+        )
+        .toList();
   }
 }

@@ -1,6 +1,6 @@
-import 'package:climbing_logbook/src/assets-content/colors/LogBookColors.dart';
+import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/commons/customIcon.dart';
-import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class ClimbingRouteItem extends StatelessWidget {
       child: Material(
         elevation: 2,
         shadowColor: Color(0xff290000),
-        color: LogBookColors.getClimbingRouteOutcomeColor(route.outCome),
+        color: AppColors.getClimbingRouteOutcomeColor(route.outCome),
         child: InkWell(
           highlightColor: Colors.grey,
           onTap: () => edit(),
@@ -28,7 +28,7 @@ class ClimbingRouteItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  color: LogBookColors.getGradeColor(route.grade),
+                  color: AppColors.getGradeColor(route.grade),
                   height: 110,
                   width: 6,
                 ),
@@ -60,15 +60,15 @@ class ClimbingRouteItem extends StatelessWidget {
                                   width: 35,
                                   child: Center(
                                     child: CustomIcon(
-                                      path: LogBookIcons.getBelayStyleIcon(
+                                      path: AppIcons.getBelayStyleIcon(
                                           route.belayingStyle),
-                                      color: LogBookColors.black_30,
+                                      color: AppColors.black_30,
                                       size: 17,
                                     ),
                                   ),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: LogBookColors.silver,
+                                    color: AppColors.silver,
                                   ),
                                 ),
                                 if (route.closure != null)
@@ -79,16 +79,16 @@ class ClimbingRouteItem extends StatelessWidget {
                                       width: 35,
                                       child: Center(
                                         child: CustomIcon(
-                                          path: LogBookIcons
-                                              .getRouteClimbClosureIcon(
+                                          path:
+                                              AppIcons.getRouteClimbClosureIcon(
                                                   route.closure),
-                                          color: LogBookColors.black_30,
+                                          color: AppColors.black_30,
                                           size: 17,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: LogBookColors.paleGrey,
+                                        color: AppColors.paleGrey,
                                       ),
                                     ),
                                   )
@@ -109,9 +109,9 @@ class ClimbingRouteItem extends StatelessWidget {
                                         top: 2, bottom: 2),
                                     margin: const EdgeInsets.only(left: 8),
                                     decoration: BoxDecoration(
-                                        color: LogBookColors.white,
+                                        color: AppColors.white,
                                         border: Border.all(
-                                          color: LogBookColors.whiteTwo,
+                                          color: AppColors.whiteTwo,
                                         )),
                                     child: Container(
                                       margin: const EdgeInsets.all(2.0),
@@ -119,7 +119,7 @@ class ClimbingRouteItem extends StatelessWidget {
                                         child: Text(
                                           tag,
                                           style: TextStyle(
-                                              color: LogBookColors.warmGrey),
+                                              color: AppColors.warmGrey),
                                         ),
                                       ),
                                     ),

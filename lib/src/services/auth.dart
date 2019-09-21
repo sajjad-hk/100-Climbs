@@ -29,10 +29,9 @@ class AuthService {
     return user;
   }
 
-  Stream<ClimbingLogBookUser> climbingLogBookUser(String uid) {
+  Stream<AppUser> climbingLogBookUser(String uid) {
     return _db.collection('users').document(uid).snapshots().map((data) =>
-        standardSerializers.deserializeWith(
-            ClimbingLogBookUser.serializer, data.data));
+        standardSerializers.deserializeWith(AppUser.serializer, data.data));
   }
 
   void updateUserData(FirebaseUser user) async {

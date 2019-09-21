@@ -1,5 +1,7 @@
 import 'package:climbing_logbook/src/dashboard/climbingRoutes.dart';
 import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
+import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
+import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:climbing_logbook/src/dashboard/stackedBarChart.dart';
@@ -11,16 +13,13 @@ final Color appBarBackground = Color(0xFF000000);
 final Color chartBackgroundFrom = Color(0xff165571);
 final Color chartBackgroundTo = Color(0xff0e1823);
 
-enum RouteWizardMode { CREATE, EDIT, NONE }
-
 class Dashboard extends StatelessWidget {
-  final Function callback;
-
-  Dashboard({this.callback});
+  Dashboard();
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<ClimbingLogBookUser>(context);
+    final user = Provider.of<AppUser>(context);
+    final state = Provider.of<DashboardState>(context);
     return Scaffold(
       backgroundColor: listBackground,
       body: CustomScrollView(
@@ -63,14 +62,14 @@ class Dashboard extends StatelessWidget {
             expandedHeight: 300,
           ),
           StreamProvider<Map<DateTime, List<ClimbingRoute>>>.value(
-            stream: climbingRouteService.getRouteListGroupByDate(user.uid),
+            stream: climbingRouteService.getClimbingRoutesGroupByDate(user.uid),
             child: ClimbingRoutes(),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 3.0,
-        onPressed: () => callback(RouteWizardMode.CREATE),
+        onPressed: () => state.openNew(),
         child: Icon(
           Icons.add,
           size: 45.0,

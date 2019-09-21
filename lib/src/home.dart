@@ -1,5 +1,6 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/dashboard/dashboard.dart';
+import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/climbingRouteWizard.dart';
 import 'package:flutter/material.dart';
@@ -16,42 +17,21 @@ final Color chartBackgroundFrom = Color(0xff165571);
 final Color chartBackgroundTo = Color(0xff0e1823);
 
 class _HomeState extends State<Home> {
-  RouteWizardMode _mode = RouteWizardMode.NONE;
-
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<ClimbingLogBookUser>(context);
+    final user = Provider.of<AppUser>(context);
+    final state = Provider.of<DashboardState>(context);
 
     if (user != null) {
       return SafeArea(
-        child: Stack(
+        child: IndexedStack(
+          index: state.mode,
           children: <Widget>[
-            Dashboard(
-              callback: (RouteWizardMode mode) => {
-                setState(
-                  () => _mode = mode,
-                )
-              },
+            Dashboard(),
+            ChangeNotifierProvider<WizardState>(
+              builder: (context) => WizardState(),
+              child: ClimbingRouteWizard(),
             ),
-            if (_mode == RouteWizardMode.CREATE)
-              ChangeNotifierProvider<WizardState>(
-                builder: (context) => WizardState(),
-                child: ClimbingRouteWizard(
-                  onClose: () {
-                    setState(
-                      () => _mode = RouteWizardMode.NONE,
-                    );
-                  },
-                ),
-              ),
-//            if (_mode == RouteWizardMode.EDIT)
-//              ClimbingRouteWizard.editor(
-//                onClose: () {
-//                  setState(
-//                    () => _mode = RouteWizardMode.NONE,
-//                  );
-//                },
-//              )
           ],
         ),
       );

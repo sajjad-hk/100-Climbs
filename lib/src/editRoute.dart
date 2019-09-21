@@ -1,4 +1,4 @@
-//import 'package:climbing_logbook/src/colors/LogBookColors.dart';
+//import 'package:climbing_logbook/src/colors/AppColors.dart';
 //import 'package:climbing_logbook/src/customIcon.dart';
 //import 'package:climbing_logbook/src/customRadio.dart';
 //import 'package:climbing_logbook/src/models/enums.dart';
@@ -7,7 +7,7 @@
 //import 'package:intl/intl.dart';
 //import 'package:provider/provider.dart';
 //
-//import 'icons/LogBookIcons.dart';
+//import 'icons/AppIcons.dart';
 //
 //class EditRoute extends StatefulWidget {
 //  @override

@@ -8,8 +8,7 @@ part of 'values.dart';
 
 Serializer<ClimbingRoute> _$climbingRouteSerializer =
     new _$ClimbingRouteSerializer();
-Serializer<ClimbingLogBookUser> _$climbingLogBookUserSerializer =
-    new _$ClimbingLogBookUserSerializer();
+Serializer<AppUser> _$appUserSerializer = new _$AppUserSerializer();
 
 class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
   @override
@@ -110,19 +109,14 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
   }
 }
 
-class _$ClimbingLogBookUserSerializer
-    implements StructuredSerializer<ClimbingLogBookUser> {
+class _$AppUserSerializer implements StructuredSerializer<AppUser> {
   @override
-  final Iterable<Type> types = const [
-    ClimbingLogBookUser,
-    _$ClimbingLogBookUser
-  ];
+  final Iterable<Type> types = const [AppUser, _$AppUser];
   @override
-  final String wireName = 'ClimbingLogBookUser';
+  final String wireName = 'AppUser';
 
   @override
-  Iterable<Object> serialize(
-      Serializers serializers, ClimbingLogBookUser object,
+  Iterable<Object> serialize(Serializers serializers, AppUser object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'uid',
@@ -154,10 +148,9 @@ class _$ClimbingLogBookUserSerializer
   }
 
   @override
-  ClimbingLogBookUser deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+  AppUser deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ClimbingLogBookUserBuilder();
+    final result = new AppUserBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -399,7 +392,7 @@ class ClimbingRouteBuilder
   }
 }
 
-class _$ClimbingLogBookUser extends ClimbingLogBookUser {
+class _$AppUser extends AppUser {
   @override
   final String uid;
   @override
@@ -413,11 +406,10 @@ class _$ClimbingLogBookUser extends ClimbingLogBookUser {
   @override
   final DateTime lastLogin;
 
-  factory _$ClimbingLogBookUser(
-          [void Function(ClimbingLogBookUserBuilder) updates]) =>
-      (new ClimbingLogBookUserBuilder()..update(updates)).build();
+  factory _$AppUser([void Function(AppUserBuilder) updates]) =>
+      (new AppUserBuilder()..update(updates)).build();
 
-  _$ClimbingLogBookUser._(
+  _$AppUser._(
       {this.uid,
       this.displayName,
       this.photoUrl,
@@ -426,32 +418,30 @@ class _$ClimbingLogBookUser extends ClimbingLogBookUser {
       this.lastLogin})
       : super._() {
     if (uid == null) {
-      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'uid');
+      throw new BuiltValueNullFieldError('AppUser', 'uid');
     }
     if (displayName == null) {
-      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'displayName');
+      throw new BuiltValueNullFieldError('AppUser', 'displayName');
     }
     if (email == null) {
-      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'email');
+      throw new BuiltValueNullFieldError('AppUser', 'email');
     }
     if (lastLogin == null) {
-      throw new BuiltValueNullFieldError('ClimbingLogBookUser', 'lastLogin');
+      throw new BuiltValueNullFieldError('AppUser', 'lastLogin');
     }
   }
 
   @override
-  ClimbingLogBookUser rebuild(
-          void Function(ClimbingLogBookUserBuilder) updates) =>
+  AppUser rebuild(void Function(AppUserBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ClimbingLogBookUserBuilder toBuilder() =>
-      new ClimbingLogBookUserBuilder()..replace(this);
+  AppUserBuilder toBuilder() => new AppUserBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ClimbingLogBookUser &&
+    return other is AppUser &&
         uid == other.uid &&
         displayName == other.displayName &&
         photoUrl == other.photoUrl &&
@@ -474,7 +464,7 @@ class _$ClimbingLogBookUser extends ClimbingLogBookUser {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ClimbingLogBookUser')
+    return (newBuiltValueToStringHelper('AppUser')
           ..add('uid', uid)
           ..add('displayName', displayName)
           ..add('photoUrl', photoUrl)
@@ -485,9 +475,8 @@ class _$ClimbingLogBookUser extends ClimbingLogBookUser {
   }
 }
 
-class ClimbingLogBookUserBuilder
-    implements Builder<ClimbingLogBookUser, ClimbingLogBookUserBuilder> {
-  _$ClimbingLogBookUser _$v;
+class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
+  _$AppUser _$v;
 
   String _uid;
   String get uid => _$this._uid;
@@ -513,9 +502,9 @@ class ClimbingLogBookUserBuilder
   DateTime get lastLogin => _$this._lastLogin;
   set lastLogin(DateTime lastLogin) => _$this._lastLogin = lastLogin;
 
-  ClimbingLogBookUserBuilder();
+  AppUserBuilder();
 
-  ClimbingLogBookUserBuilder get _$this {
+  AppUserBuilder get _$this {
     if (_$v != null) {
       _uid = _$v.uid;
       _displayName = _$v.displayName;
@@ -529,24 +518,24 @@ class ClimbingLogBookUserBuilder
   }
 
   @override
-  void replace(ClimbingLogBookUser other) {
+  void replace(AppUser other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$ClimbingLogBookUser;
+    _$v = other as _$AppUser;
   }
 
   @override
-  void update(void Function(ClimbingLogBookUserBuilder) updates) {
+  void update(void Function(AppUserBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$ClimbingLogBookUser build() {
-    _$ClimbingLogBookUser _$result;
+  _$AppUser build() {
+    _$AppUser _$result;
     try {
       _$result = _$v ??
-          new _$ClimbingLogBookUser._(
+          new _$AppUser._(
               uid: uid,
               displayName: displayName,
               photoUrl: photoUrl,
@@ -560,7 +549,7 @@ class ClimbingLogBookUserBuilder
         _tags?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'ClimbingLogBookUser', _$failedField, e.toString());
+            'AppUser', _$failedField, e.toString());
       }
       rethrow;
     }

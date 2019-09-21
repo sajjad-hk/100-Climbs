@@ -7,8 +7,8 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(AppUser.serializer)
       ..add(BelayingStyleEnum.serializer)
-      ..add(ClimbingLogBookUser.serializer)
       ..add(ClimbingRoute.serializer)
       ..add(ClosureEnum.serializer)
       ..add(GradingStyleEnum.serializer)

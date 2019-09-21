@@ -1,7 +1,7 @@
 import 'package:climbing_logbook/src/models/enums.dart';
 
-class LogBookIcons {
-  LogBookIcons._();
+class AppIcons {
+  AppIcons._();
 
   static const String lead = 'assets/icons/lead_icon.png';
   static const String auto = 'assets/icons/auto_icon.png';

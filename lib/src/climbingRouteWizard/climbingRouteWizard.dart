@@ -4,7 +4,8 @@ import 'package:climbing_logbook/src/climbingRouteWizard/grade.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/outCome.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tags.dart';
-import 'package:climbing_logbook/src/assets-content/colors/LogBookColors.dart';
+import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
+import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,6 @@ import 'package:provider/provider.dart';
 import '../models/values.dart';
 
 class ClimbingRouteWizard extends StatefulWidget {
-  final GestureTapCallback onClose;
-
-  ClimbingRouteWizard({@required this.onClose}) : super();
-
   @override
   _ClimbingRouteWizardState createState() => _ClimbingRouteWizardState();
 }
@@ -35,10 +32,16 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
     currentPageIndex = 0;
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return _routeWizardWrapper(context);
+  }
+
   _routeWizardWrapper(BuildContext context) {
     PageController _controller = PageController(initialPage: 0);
-    final state = Provider.of<WizardState>(context);
-    final user = Provider.of<ClimbingLogBookUser>(context);
+    final wizardState = Provider.of<WizardState>(context);
+    final dashboardState = Provider.of<DashboardState>(context);
+    final user = Provider.of<AppUser>(context);
 
     return Container(
       child: AnimatedContainer(
@@ -46,7 +49,7 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
         padding: const EdgeInsets.all(12.0),
         duration: Duration(microseconds: 500),
         child: Card(
-          color: LogBookColors.getGradeColor(state.selectedClimbingGrade),
+          color: AppColors.getGradeColor(wizardState.selectedClimbingGrade),
           child: Column(
             children: <Widget>[
               Container(
@@ -59,7 +62,7 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                         Icons.close,
                         color: Colors.white,
                       ),
-                      onPressed: widget.onClose,
+                      onPressed: () => dashboardState.close(),
                     ),
                   ],
                 ),
@@ -90,7 +93,7 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                           curve: Curves.easeIn,
                         ),
                       ),
-                      if (state.selectedOutCome == OutComeEnum.success)
+                      if (wizardState.selectedOutCome == OutComeEnum.success)
                         ClimbingStyle(
                           autoNext: () => _controller.nextPage(
                             duration: Duration(
@@ -163,8 +166,10 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                             visible: currentPageIndex >= 2,
                             child: InkWell(
                               onTap: () {
-                                climbingRouteService.addRoute(user, state);
-                                widget.onClose();
+                                climbingRouteService
+                                    .saveNewClimbingRouteAndNewTags(
+                                        user, wizardState);
+                                onClose();
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -226,8 +231,5 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return _routeWizardWrapper(context);
-  }
+  onClose() {}
 }

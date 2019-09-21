@@ -1,5 +1,5 @@
 import 'package:climbing_logbook/src/commons/customIcon.dart';
-import 'package:climbing_logbook/src/assets-content/icons/LogBookIcons.dart';
+import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -22,7 +22,7 @@ class GradePickerControllers extends StatelessWidget {
             width: 60,
             height: 60,
             child: CustomIcon(
-              path: LogBookIcons.minus,
+              path: AppIcons.minus,
             ),
           ),
         ),
@@ -52,7 +52,7 @@ class GradePickerControllers extends StatelessWidget {
             width: 60,
             height: 60,
             child: CustomIcon(
-              path: LogBookIcons.plus,
+              path: AppIcons.plus,
             ),
           ),
         ),
