@@ -14,7 +14,7 @@ class GradePicker extends StatefulWidget {
 }
 
 class _GradePickerState extends State<GradePicker> {
-  double knobAngle = 0;
+  double knobAngle;
   final GlobalKey _key = GlobalKey();
 
   static calculateAngle(Offset pos, Offset center, double width) {
@@ -68,6 +68,9 @@ class _GradePickerState extends State<GradePicker> {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<WizardState>(context);
+    List<String> grades = Constants.grades[state.selectedGradingStyle];
+    int indexOfGrade = grades.indexOf(state.selectedClimbingGrade);
+    knobAngle = indexOfGrade * 2 * pi / grades.length;
     return Container(
       padding: const EdgeInsets.all(5),
       key: _key,

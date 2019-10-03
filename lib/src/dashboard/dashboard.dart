@@ -1,3 +1,4 @@
+import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/dashboard/climbingRoutes.dart';
 import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
 import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
@@ -74,7 +75,8 @@ class Dashboard extends StatelessWidget {
           Icons.add,
           size: 45.0,
         ),
-        backgroundColor: Colors.black, //LogBookColors.getGradeColor(),
+        backgroundColor: AppColors.getGradeColor(
+            user.lastClimb.grade), //LogBookColors.getGradeColor(),
       ),
       drawer: CustomDrawer(
           accountType: 'Google'), // todo change static account type

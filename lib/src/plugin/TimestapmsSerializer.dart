@@ -4,8 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class TimestampSerializerPlugin implements SerializerPlugin {
   @override
   Object beforeSerialize(Object object, FullType specifiedType) {
-    if (object is DateTime && specifiedType.root == DateTime)
-      return object.toUtc();
+    if (object is DateTime && specifiedType.root == DateTime) {
+      return object.toUtc().add(DateTime.now().timeZoneOffset);
+    }
     return object;
   }
 

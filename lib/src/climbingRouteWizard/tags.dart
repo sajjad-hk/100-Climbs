@@ -27,9 +27,9 @@ class _TagsState extends State<Tags> {
     List<String> filter = List<String>();
     filter.add(_tagTextController.text.toString());
     filter.addAll(user.tags.toList());
-    user.tags.toList();
     filter = filter
         .where((it) => it.startsWith(_tagTextController.text.toString()))
+        .take(3)
         .toList();
     if (mounted) {
       setState(() => stringTags = filter.toSet().toList());

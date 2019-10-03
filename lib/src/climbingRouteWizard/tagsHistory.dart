@@ -11,7 +11,7 @@ class TagsHistory extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(15.0),
       constraints: BoxConstraints(
-        maxHeight: 100,
+        maxHeight: 120,
       ),
       child: ListView.builder(
         itemCount: tags.length,

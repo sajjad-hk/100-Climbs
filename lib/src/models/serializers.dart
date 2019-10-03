@@ -16,6 +16,7 @@ part 'serializers.g.dart';
   BelayingStyleEnum,
   GradingStyleEnum,
   ClosureEnum,
-  Timestamp
+  Timestamp,
+  Climb
 ])
 final Serializers serializers = _$serializers;

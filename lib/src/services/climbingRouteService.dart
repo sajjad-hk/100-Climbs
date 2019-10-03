@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/plugin/TimestapmsSerializer.dart';
@@ -23,8 +24,9 @@ class ClimbingRouteService {
     handleData: (data, sink) {
       return sink.add(data.documents.map(
         (document) {
-          return standardSerializers.deserializeWith(
-              ClimbingRoute.serializer, document.data);
+          return standardSerializers
+              .deserializeWith(ClimbingRoute.serializer, document.data)
+              .rebuild((it) => it..documentId = document.documentID);
         },
       ).toList());
     },
@@ -56,6 +58,17 @@ class ClimbingRouteService {
     return getClimbingRoutes(uid).transform(_dateGroupByTransformer);
   }
 
+  Future<void> saveNewClimbingRouteAndNewTags(
+      AppUser user, WizardState wizardState) {
+    ClimbingRoute climbingRoute =
+        _getClimbingRouteFromWizardState(user.uid, wizardState);
+    Climb lastClimb =
+        _createLastClimb(climbingRoute.grade, climbingRoute.gradingStyle);
+    saveNewTagsToFirebase(user, wizardState.selectedTags);
+    saveLastClimb(user, lastClimb);
+    return saveClimbingRouteToFirebase(climbingRoute);
+  }
+
   ClimbingRoute _getClimbingRouteFromWizardState(
       String uid, WizardState wizardState) {
     return ClimbingRoute(
@@ -69,6 +82,12 @@ class ClimbingRouteService {
         ..tags = SetBuilder<String>(wizardState.selectedTags)
         ..loggedDate = DateTime.now(),
     );
+  }
+
+  Climb _createLastClimb(String grade, GradingStyleEnum gradingStyle) {
+    return Climb((c) => c
+      ..grade = grade
+      ..gradingStyle = gradingStyle);
   }
 
   Future<void> saveNewTagsToFirebase(AppUser user, List<String> tags) {
@@ -85,12 +104,26 @@ class ClimbingRouteService {
     return _db.collection('routes').add(climbingRouteJson);
   }
 
-  Future<void> saveNewClimbingRouteAndNewTags(
-      AppUser user, WizardState wizardState) {
-    ClimbingRoute climbingRoute =
-        _getClimbingRouteFromWizardState(user.uid, wizardState);
-    saveNewTagsToFirebase(user, wizardState.selectedTags);
-    return saveClimbingRouteToFirebase(climbingRoute);
+  Future<void> saveLastClimb(AppUser user, Climb lastClimb) {
+    dynamic lastClimbJson =
+        standardSerializers.serializeWith(Climb.serializer, lastClimb);
+    return _db
+        .collection('users')
+        .document(user.uid)
+        .setData({'lastClimb': lastClimbJson}, merge: true);
+  }
+
+  Future<void> removeClimbingRoute(String documentId) {
+    return _db.collection('routes').document(documentId).delete();
+  }
+
+  Future<void> updateClimbingRoute(ClimbingRoute route) {
+    dynamic routeJson =
+        standardSerializers.serializeWith(ClimbingRoute.serializer, route);
+    return _db
+        .collection('routes')
+        .document(route.documentId)
+        .updateData(routeJson);
   }
 }
 

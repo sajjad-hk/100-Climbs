@@ -7,6 +7,9 @@ part 'values.g.dart';
 
 abstract class ClimbingRoute
     implements Built<ClimbingRoute, ClimbingRouteBuilder> {
+  @nullable
+  String get documentId;
+
   OutComeEnum get outCome;
 
   String get uid;
@@ -33,6 +36,17 @@ abstract class ClimbingRoute
   static Serializer<ClimbingRoute> get serializer => _$climbingRouteSerializer;
 }
 
+abstract class Climb implements Built<Climb, ClimbBuilder> {
+  String get grade;
+  GradingStyleEnum get gradingStyle;
+
+  Climb._();
+
+  factory Climb([void Function(ClimbBuilder) updates]) = _$Climb;
+
+  static Serializer<Climb> get serializer => _$climbSerializer;
+}
+
 abstract class AppUser implements Built<AppUser, AppUserBuilder> {
   String get uid;
 
@@ -47,6 +61,9 @@ abstract class AppUser implements Built<AppUser, AppUserBuilder> {
   BuiltSet<String> get tags;
 
   DateTime get lastLogin;
+
+  @nullable
+  Climb get lastClimb;
 
   AppUser._();
 

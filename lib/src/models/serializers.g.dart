@@ -9,6 +9,7 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AppUser.serializer)
       ..add(BelayingStyleEnum.serializer)
+      ..add(Climb.serializer)
       ..add(ClimbingRoute.serializer)
       ..add(ClosureEnum.serializer)
       ..add(GradingStyleEnum.serializer)

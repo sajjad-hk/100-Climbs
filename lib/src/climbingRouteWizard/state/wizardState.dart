@@ -3,10 +3,11 @@ import 'package:climbing_logbook/src/models/values.dart';
 import 'package:flutter/cupertino.dart';
 
 class WizardState with ChangeNotifier {
-  WizardState() {
-    _selectedGradingStyle = GradingStyleEnum.french;
+  WizardState(Climb lastClimb) {
+    _selectedGradingStyle = lastClimb.gradingStyle;
     _selectedTags = List<String>();
-    _selectedClimbingGrade = '4a';
+    _selectedClimbingGrade = lastClimb.grade;
+    _currentPageIndex = 0;
   }
 
   OutComeEnum _selectedOutCome;
@@ -16,6 +17,7 @@ class WizardState with ChangeNotifier {
   ClosureEnum _selectedClosure;
   DateTime _selectedLoggedDate;
   List<String> _selectedTags;
+  int _currentPageIndex;
 
   OutComeEnum get selectedOutCome => _selectedOutCome;
 
@@ -30,6 +32,8 @@ class WizardState with ChangeNotifier {
   DateTime get selectedLoggedDate => _selectedLoggedDate;
 
   List<String> get selectedTags => _selectedTags;
+
+  int get currentPageIndex => _currentPageIndex;
 
   set selectedOutCome(OutComeEnum outCome) {
     _selectedOutCome = outCome;
@@ -53,6 +57,21 @@ class WizardState with ChangeNotifier {
 
   set selectedClosure(ClosureEnum closure) {
     _selectedClosure = closure;
+    notifyListeners();
+  }
+
+  set currentPageIndex(int index) {
+    _currentPageIndex = index;
+    notifyListeners();
+  }
+
+  flush() {
+    selectedOutCome = null;
+    selectedBelayStyle = null;
+    selectedClosure = null;
+    setLoggedDate();
+    currentPageIndex = 0;
+    _selectedTags = List<String>();
     notifyListeners();
   }
 

@@ -77,42 +77,7 @@
 //                  ),
 //                ],
 //              ),
-//              Row(
-//                children: <Widget>[
-//                  FlatButton(
-//                    child: Container(
-//                      height: 45,
-////                      padding: const EdgeInsets.all(10.0),
-//                      decoration: BoxDecoration(
-//                        color: LogBookColors.black_30,
-//                        borderRadius: BorderRadius.all(
-//                          Radius.circular(4),
-//                        ),
-//                      ),
-//                      child: Row(
-//                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                        children: <Widget>[
-//                          CustomIcon(
-//                            color: Colors.white,
-//                            path: LogBookIcons.calendar,
-//                          ),
-//                          Text(
-//                            DateFormat.yMMMd().format(d).toString(),
-//                            style: TextStyle(color: Colors.white),
-//                            textAlign: TextAlign.center,
-//                          ),
-//                          Icon(
-//                            Icons.keyboard_arrow_down,
-//                            color: Colors.white,
-//                          )
-//                        ],
-//                      ),
-//                    ),
-//                    color: Colors.transparent,
-//                    onPressed: _selectDate,
-//                  )
-//                ],
-//              ),
+//
 //              Row(
 //                children: <Widget>[
 //                  Container(

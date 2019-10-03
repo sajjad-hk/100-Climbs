@@ -1,17 +1,29 @@
 import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/commons/customIcon.dart';
 import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
+import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/models/values.dart';
+import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ClimbingRouteItem extends StatelessWidget {
   final ClimbingRoute route;
-  final Function edit;
-  ClimbingRouteItem({@required this.route, this.edit});
+  ClimbingRouteItem({@required this.route});
 
   @override
   Widget build(BuildContext context) {
+    final dashboardState = Provider.of<DashboardState>(context);
     return Container(
+//      CustomPaint(
+//        painter: DashedBorderPainter(
+//          strokeWidth: 2.0,
+//          color: Colors.black,
+//          dashLength: 4.5,
+//          skipLength: 3.0,
+//        ),
+//        child: Container(),
+//      ),
       padding: EdgeInsets.all(8.0),
       child: Material(
         elevation: 2,
@@ -19,7 +31,13 @@ class ClimbingRouteItem extends StatelessWidget {
         color: AppColors.getClimbingRouteOutcomeColor(route.outCome),
         child: InkWell(
           highlightColor: Colors.grey,
-          onTap: () => edit(),
+          onDoubleTap: () {
+            climbingRouteService.removeClimbingRoute(route.documentId);
+          },
+          onTap: () {
+            dashboardState.selectClimbingRoute(route);
+            dashboardState.openEdit();
+          },
           child: Container(
             decoration: BoxDecoration(
               color: Colors.transparent,

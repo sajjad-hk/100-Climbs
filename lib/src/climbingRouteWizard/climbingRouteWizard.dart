@@ -13,35 +13,18 @@ import 'package:provider/provider.dart';
 
 import '../models/values.dart';
 
-class ClimbingRouteWizard extends StatefulWidget {
-  @override
-  _ClimbingRouteWizardState createState() => _ClimbingRouteWizardState();
-}
-
-class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
-  int currentPageIndex;
-
-  @override
-  void didUpdateWidget(ClimbingRouteWizard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    currentPageIndex = 0;
-  }
-
+class ClimbingRouteWizard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _routeWizardWrapper(context);
   }
 
   _routeWizardWrapper(BuildContext context) {
-    PageController _controller = PageController(initialPage: 0);
     final wizardState = Provider.of<WizardState>(context);
     final dashboardState = Provider.of<DashboardState>(context);
     final user = Provider.of<AppUser>(context);
+    PageController _controller =
+        PageController(initialPage: wizardState.currentPageIndex);
 
     return Container(
       child: AnimatedContainer(
@@ -62,7 +45,11 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                         Icons.close,
                         color: Colors.white,
                       ),
-                      onPressed: () => dashboardState.close(),
+                      onPressed: () {
+                        _controller.jumpToPage(0);
+                        wizardState.currentPageIndex = 0;
+                        dashboardState.close();
+                      },
                     ),
                   ],
                 ),
@@ -72,9 +59,8 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                 child: Container(
                   child: PageView(
                     controller: _controller,
-                    onPageChanged: (ind) {
-                      setState(() => currentPageIndex = ind);
-                    },
+                    onPageChanged: (index) =>
+                        wizardState.currentPageIndex = index,
                     children: <Widget>[
                       OutCome(
                         autoNext: () => _controller.nextPage(
@@ -110,7 +96,7 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
               Column(
                 children: <Widget>[
                   Visibility(
-                    visible: currentPageIndex >= 2,
+                    visible: wizardState.currentPageIndex >= 2,
                     child: Container(
                       padding: const EdgeInsets.only(top: 15, bottom: 20),
                       child: Row(
@@ -128,7 +114,9 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                                 Text(
                                   'SEVE AND LOG ANOTHER',
                                   style: TextStyle(
-                                      fontSize: 18, color: Color(0xff4d000000)),
+                                    fontSize: 18,
+                                    color: Color(0xff4d000000),
+                                  ),
                                 ),
                               ],
                             ),
@@ -143,7 +131,7 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                         Flexible(
                           fit: FlexFit.tight,
                           child: Visibility(
-                            visible: currentPageIndex != 0,
+                            visible: wizardState.currentPageIndex != 0,
                             child: IconButton(
                               iconSize: 50,
                               icon: Icon(
@@ -163,13 +151,15 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                           flex: 3,
                           fit: FlexFit.tight,
                           child: Visibility(
-                            visible: currentPageIndex >= 2,
+                            visible: wizardState.currentPageIndex >= 2,
                             child: InkWell(
                               onTap: () {
                                 climbingRouteService
                                     .saveNewClimbingRouteAndNewTags(
                                         user, wizardState);
-                                onClose();
+                                wizardState.flush();
+                                _controller.jumpToPage(0);
+                                dashboardState.close();
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -201,7 +191,7 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
                         Flexible(
                           fit: FlexFit.tight,
                           child: Visibility(
-                            visible: currentPageIndex != 4,
+                            visible: wizardState.currentPageIndex != 4,
                             child: IconButton(
                               iconSize: 50,
                               icon: Icon(
@@ -230,6 +220,4 @@ class _ClimbingRouteWizardState extends State<ClimbingRouteWizard> {
       ),
     );
   }
-
-  onClose() {}
 }

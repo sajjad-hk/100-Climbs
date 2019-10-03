@@ -23,7 +23,13 @@ class ClimbingRoutes extends StatelessWidget {
 
   List<Widget> flattenGroupedRoutes(
       Map<DateTime, List<ClimbingRoute>> groupedRoutes) {
-    if (getDateTimeKeys(groupedRoutes).isEmpty) return [Container()];
+    if (getDateTimeKeys(groupedRoutes).isEmpty)
+      return [
+        Container(
+          height: double.maxFinite,
+          color: Colors.deepPurple,
+        )
+      ];
     return getDateTimeKeys(groupedRoutes)
         .reversed
         .map((it) {

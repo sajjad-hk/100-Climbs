@@ -1,6 +1,7 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/dashboard/dashboard.dart';
 import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
+import 'package:climbing_logbook/src/editeRouteWizard/editRouteWizard.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/climbingRouteWizard.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +30,10 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Dashboard(),
             ChangeNotifierProvider<WizardState>(
-              builder: (context) => WizardState(),
+              builder: (context) => WizardState(user.lastClimb),
               child: ClimbingRouteWizard(),
             ),
+            EditRouteWizard(),
           ],
         ),
       );
