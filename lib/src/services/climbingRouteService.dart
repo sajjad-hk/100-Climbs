@@ -9,7 +9,6 @@ import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/plugin/TimestapmsSerializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
-import 'package:intl/intl.dart';
 
 class ClimbingRouteService {
   final Firestore _db = Firestore.instance;

@@ -4,6 +4,7 @@ import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
 import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
 import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/models/values.dart';
+import 'package:climbing_logbook/src/services/climbingCountChartService.dart';
 import 'package:climbing_logbook/src/services/climbingRouteService.dart';
 import 'package:climbing_logbook/src/dashboard/stackedBarChart.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,13 @@ class Dashboard extends StatelessWidget {
                       flex: 4,
                       child: Container(
                         padding: const EdgeInsets.all(10),
-                        child: StackedBarChart.withSampleData(),
+                        child: StreamProvider<
+                            Map<String,
+                                Map<DateTime, List<ClimbingRoute>>>>.value(
+                          stream: climbingCountChartService
+                              .getClimbingCountChartData(user.uid),
+                          child: StackedBarChart.withData(),
+                        ),
                       ),
                     ),
                   ],
