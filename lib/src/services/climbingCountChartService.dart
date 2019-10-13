@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:built_value/standard_json_plugin.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/plugin/TimestapmsSerializer.dart';
@@ -33,7 +34,7 @@ class ClimbingCountChartService {
       _climbingRoutesToChartTransformer =
       StreamTransformer.fromHandlers(handleData: (data, sink) {
     Map groupByMonth = groupBy(
-      data,
+      data.where((it) => it.outCome == OutComeEnum.success),
       (it) => it.grade,
     );
     Map<String, Map<DateTime, List<ClimbingRoute>>> groupByGrade =
