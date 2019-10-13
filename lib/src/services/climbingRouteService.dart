@@ -116,6 +116,11 @@ class ClimbingRouteService {
     return _db.collection('routes').document(documentId).delete();
   }
 
+  void removeClimbingRoutes(List<String> documentIds) {
+    for (String id in documentIds)
+      _db.collection('routes').document(id).delete();
+  }
+
   Future<void> updateClimbingRoute(ClimbingRoute route) {
     dynamic routeJson =
         standardSerializers.serializeWith(ClimbingRoute.serializer, route);

@@ -1,7 +1,7 @@
 import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/commons/customIcon.dart';
-import 'package:climbing_logbook/src/dashboard/climbingRouteouteItem.dart';
+import 'package:climbing_logbook/src/dashboard/climbingRouteTiles/tileClimbingRouteoutes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +14,12 @@ class ClimbingRoutes extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<DateTime, List<ClimbingRoute>> groupedRoutes =
         Provider.of<Map<DateTime, List<ClimbingRoute>>>(context);
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        flattenGroupedRoutes(groupedRoutes),
+    return SliverPadding(
+      padding: const EdgeInsets.only(bottom: kFloatingActionButtonMargin + 60),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate(
+          flattenGroupedRoutes(groupedRoutes),
+        ),
       ),
     );
   }
@@ -68,7 +71,7 @@ class ClimbingRoutes extends StatelessWidget {
     routes.sort((a, b) => a.loggedDate.compareTo(b.loggedDate));
     return routes.reversed
         .map(
-          (it) => ClimbingRouteItem(
+          (it) => ClimbingRouteTile(
             route: it,
           ),
         )

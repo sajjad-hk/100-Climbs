@@ -9,6 +9,7 @@ class AppColors {
   static const Color white = Color(0xfff6f6f6);
   static const Color whiteTwo = Color(0xffe8e8e8);
   static const Color paleGrey = Color(0xffe7ecee);
+  static const Color paleGrey2 = Color(0xfff1f4f5);
   static const Color silver = Color(0xffd8e2e5);
   static const Color coolGrey = Color(0xff95989a);
   static const Color warmGrey = Color(0xff8b8b8b);
@@ -16,7 +17,7 @@ class AppColors {
   static const Color lightNavy = Color(0xff165571);
   static const Color black_50 = Color(0x80000000);
   static const Color black_30 = Color(0x4d000000);
-  static const Color black_7 = Color(0x12000000);
+  static const Color black7 = Color(0x12000000);
   static const Color dandelion = Color(0xffffe600);
   static const Color darkSalmon = Color(0xffd46666);
   static const Color lightishPurple = Color(0xff943ee0);
@@ -49,6 +50,9 @@ class AppColors {
   static const Color barney = Color(0xffc522a9);
   static const Color barneyTwo = Color(0xff992bb5);
   static const Color warmPurple = Color(0xff692c8c);
+  static const Color greyish = Color(0xffb1b1b1);
+  static const Color iceBlue28 = Color(0x47f1f9ff);
+  static const Color green = Color(0xff15cb39);
 
   static Color getGradeColor(String grade) {
     switch (grade) {
@@ -131,7 +135,7 @@ class AppColors {
   static Color getClimbingRouteOutcomeBorderColor(OutComeEnum outCome) {
     switch (outCome) {
       case OutComeEnum.failure:
-        return coolGrey;
+        return paleGrey;
       case OutComeEnum.success:
         return Colors.transparent;
       default:

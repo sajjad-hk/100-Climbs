@@ -1,12 +1,11 @@
 import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/dashboard/climbingRoutes.dart';
 import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
-import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
+import 'package:climbing_logbook/src/dashboard/stackedBarChart.dart';
 import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/models/values.dart';
 import 'package:climbing_logbook/src/services/climbingCountChartService.dart';
 import 'package:climbing_logbook/src/services/climbingRouteService.dart';
-import 'package:climbing_logbook/src/dashboard/stackedBarChart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -77,6 +76,7 @@ class Dashboard extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 3.0,
+        autofocus: true,
         onPressed: () => state.openNew(),
         child: Icon(
           Icons.add,
@@ -85,8 +85,72 @@ class Dashboard extends StatelessWidget {
         backgroundColor: AppColors.getGradeColor(
             user.lastClimb.grade), //LogBookColors.getGradeColor(),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       drawer: CustomDrawer(
-          accountType: 'Google'), // todo change static account type
+        accountType: 'Google',
+      ), // todo change static account type
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
+        child: Visibility(
+          visible: state.selectedClimbingRoutes.isNotEmpty,
+          child: Container(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Flexible(
+                  child: IconButton(
+                    onPressed: () => state.clearSelections(),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 3,
+                  child: Center(
+                    child: Text(
+                      '${state.selectedClimbingRoutes.length} Route${state.selectedClimbingRoutes.length > 1 ? 's' : ''} selected',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: FlatButton(
+                    onPressed: () {
+                      climbingRouteService.removeClimbingRoutes(state
+                          .selectedClimbingRoutes
+                          .map((i) => i.documentId)
+                          .toList());
+                      state.clearSelections();
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.delete,
+                          size: 32,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          'DELETE',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

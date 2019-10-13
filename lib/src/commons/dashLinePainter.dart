@@ -27,7 +27,7 @@ class DashedBorderPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
     double start = strokeWidth / 2;
-    double end = size.height + strokeWidth;
+//    double end = size.height + strokeWidth;
     double step = dashLength + skipLength;
     for (double i = -start; i < size.height; i += step) {
       Offset beginLeft = Offset(0, i);

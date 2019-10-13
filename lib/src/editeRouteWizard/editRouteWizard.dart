@@ -14,7 +14,7 @@ final Color chartBackgroundFrom = Color(0xff165571);
 final Color chartBackgroundTo = Color(0xff0e1823);
 
 class EditRouteWizard extends StatelessWidget {
-  ScrollController scrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     final dashboardState = Provider.of<DashboardState>(context);
@@ -115,7 +115,7 @@ class EditRouteWizard extends StatelessWidget {
                 iconProvider: AppIcons.smile,
                 iconSize: 40,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..outCome = val));
                 },
@@ -139,7 +139,7 @@ class EditRouteWizard extends StatelessWidget {
                 iconProvider: AppIcons.sad,
                 iconSize: 40,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..outCome = val));
                 },
@@ -169,7 +169,7 @@ class EditRouteWizard extends StatelessWidget {
                 label: 'French',
                 fontSize: 16,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..gradingStyle = val));
                 },
@@ -191,7 +191,7 @@ class EditRouteWizard extends StatelessWidget {
                 label: 'Polish',
                 fontSize: 16,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..gradingStyle = val));
                 },
@@ -220,7 +220,7 @@ class EditRouteWizard extends StatelessWidget {
           }
           return InkWell(
             onTap: () {
-              dashboardState.selectClimbingRoute(dashboardState
+              dashboardState.pickClimbingRoute(dashboardState
                   .selectedClimbingRoute
                   .rebuild((r) => r..grade = grades[index]));
             },
@@ -279,7 +279,7 @@ class EditRouteWizard extends StatelessWidget {
                 fontSize: 16,
                 iconSize: 40,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..belayingStyle = val));
                 },
@@ -303,7 +303,7 @@ class EditRouteWizard extends StatelessWidget {
                 label: 'Auto',
                 fontSize: 16,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..belayingStyle = val));
                 },
@@ -327,7 +327,7 @@ class EditRouteWizard extends StatelessWidget {
                 label: 'Toprope',
                 fontSize: 16,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..belayingStyle = val));
                 },
@@ -359,7 +359,7 @@ class EditRouteWizard extends StatelessWidget {
                 iconProvider: AppIcons.eye,
                 iconSize: 40,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..closure = val));
                 },
@@ -383,7 +383,7 @@ class EditRouteWizard extends StatelessWidget {
                 iconProvider: AppIcons.flash,
                 iconSize: 40,
                 onChanged: (val) {
-                  dashboardState.selectClimbingRoute(dashboardState
+                  dashboardState.pickClimbingRoute(dashboardState
                       .selectedClimbingRoute
                       .rebuild((r) => r..closure = val));
                 },
