@@ -7,6 +7,8 @@ import 'package:climbing_logbook/src/climbingRouteWizard/climbingRouteWizard.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'dashboard/state/DashboardMode.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -25,22 +27,22 @@ class _HomeState extends State<Home> {
 
     if (user != null) {
       return SafeArea(
-        child: IndexedStack(
-          index: state.mode,
+        child: Stack(
           children: <Widget>[
             Dashboard(),
-            ChangeNotifierProvider<WizardState>(
-              builder: (context) => WizardState(user.lastClimb),
-              child: ClimbingRouteWizard(),
-            ),
-            EditRouteWizard(),
+            if (state.mode == DashboardMode.newClimbingRouteWizardOpen)
+              ChangeNotifierProvider<WizardState>(
+                builder: (context) => WizardState(user?.lastClimb),
+                child: ClimbingRouteWizard(),
+              ),
+            if (state.mode == DashboardMode.editClimbingRoutePageOpen)
+              EditRouteWizard(),
           ],
         ),
       );
     } else {
-      return Container(
-        color: Colors.orange,
-      );
+      // Todo add on user loading some how
+      return Container();
     }
   }
 }

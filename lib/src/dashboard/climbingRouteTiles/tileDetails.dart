@@ -20,7 +20,7 @@ class TileDetails extends StatelessWidget {
           TileIconsWrapper(
             icon: CustomIcon(
               path: AppIcons.getBelayStyleIcon(belayingStyle),
-              color: AppColors.black_30,
+              color: AppColors.black30,
               size: 32,
             ),
             color: AppColors.silver,
@@ -31,7 +31,7 @@ class TileDetails extends StatelessWidget {
               child: TileIconsWrapper(
                 icon: CustomIcon(
                   path: AppIcons.getRouteClimbClosureIcon(closure),
-                  color: AppColors.black_30,
+                  color: AppColors.black30,
                   size: 32,
                 ),
                 color: AppColors.paleGrey,

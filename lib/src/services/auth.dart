@@ -1,6 +1,9 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/standard_json_plugin.dart';
+import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/models/serializers.dart';
 import 'package:climbing_logbook/src/models/values.dart';
+import 'package:climbing_logbook/src/states/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,24 +33,40 @@ class AuthService {
   }
 
   Stream<AppUser> climbingLogBookUser(String uid) {
-    return _db.collection('users').document(uid).snapshots().map((data) =>
-        standardSerializers.deserializeWith(AppUser.serializer, data.data));
+    if (uid != null)
+      return _db.collection('users').document(uid).snapshots().map((data) =>
+          standardSerializers.deserializeWith(AppUser.serializer, data.data));
   }
 
   void updateUserData(FirebaseUser user) async {
     DocumentReference ref = _db.collection('users').document(user.uid);
 
-    return ref.setData({
-      'uid': user.uid,
-      'displayName': user.displayName,
-      'photoUrl': user.photoUrl,
-      'email': user.email,
-      'lastLogin': DateTime.now()
-    }, merge: true);
+    Climb lastClimb = Climb((c) => c
+      ..outCome = OutComeEnum.success
+      ..gradingStyle = GradingStyleEnum.french
+      ..grade = Constants.grades[c.gradingStyle][0]
+      ..belayingStyle = BelayingStyleEnum.lead);
+
+    // todo if user exists we should merge it with this data
+    SetBuilder<String> tags = SetBuilder(Constants.defaultTags);
+
+    AppUser appUser = AppUser((u) => u
+      ..uid = user.uid
+      ..displayName = user.displayName
+      ..photoUrl = user.photoUrl
+      ..email = user.email
+      ..lastLogin = DateTime.now()
+      ..lastClimb = lastClimb.toBuilder()
+      ..tags = tags);
+
+    dynamic appUserJson =
+        standardSerializers.serializeWith(AppUser.serializer, appUser);
+
+    return ref.setData(appUserJson, merge: true);
   }
 
   void signOut(BuildContext context) {
-    _auth.signOut().catchError((_, __) => print('SOS'));
+    _auth.signOut();
   }
 }
 

@@ -26,10 +26,11 @@ class _TagsState extends State<Tags> {
   filterTagsList(user) {
     List<String> filter = List<String>();
     filter.add(_tagTextController.text.toString());
-    filter.addAll(user.tags.toList());
+    if (_tagTextController.text.isNotEmpty) filter.addAll(user.tags.toList());
     filter = filter
-        .where((it) => it.startsWith(_tagTextController.text.toString()))
-        .take(3)
+        .where((it) =>
+            it.startsWith(_tagTextController.text.toString().toLowerCase()))
+        .take(4)
         .toList();
     if (mounted) {
       setState(() => stringTags = filter.toSet().toList());
@@ -97,7 +98,6 @@ class _TagsState extends State<Tags> {
                 child: Container(
                   child: TextField(
                     focusNode: _focusNode,
-                    textCapitalization: TextCapitalization.words,
                     textAlign: TextAlign.center,
                     controller: _tagTextController,
                     cursorColor: Colors.white,
@@ -139,7 +139,7 @@ class _TagsState extends State<Tags> {
                 ),
               ),
               Visibility(
-                visible: _tagTextController.text != '',
+                visible: MediaQuery.of(context).viewInsets.bottom != 0,
                 child: TagsHistory(
                   tags: stringTags,
                   onAdd: (tag) {

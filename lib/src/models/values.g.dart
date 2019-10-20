@@ -58,6 +58,12 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
             specifiedType:
                 const FullType(BuiltSet, const [const FullType(String)])));
     }
+    if (object.comment != null) {
+      result
+        ..add('comment')
+        ..add(serializers.serialize(object.comment,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -113,6 +119,10 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
           result.loggedDate = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
+        case 'comment':
+          result.comment = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -137,7 +147,18 @@ class _$ClimbSerializer implements StructuredSerializer<Climb> {
       serializers.serialize(object.gradingStyle,
           specifiedType: const FullType(GradingStyleEnum)),
     ];
-
+    if (object.outCome != null) {
+      result
+        ..add('outCome')
+        ..add(serializers.serialize(object.outCome,
+            specifiedType: const FullType(OutComeEnum)));
+    }
+    if (object.belayingStyle != null) {
+      result
+        ..add('belayingStyle')
+        ..add(serializers.serialize(object.belayingStyle,
+            specifiedType: const FullType(BelayingStyleEnum)));
+    }
     return result;
   }
 
@@ -152,6 +173,10 @@ class _$ClimbSerializer implements StructuredSerializer<Climb> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'outCome':
+          result.outCome = serializers.deserialize(value,
+              specifiedType: const FullType(OutComeEnum)) as OutComeEnum;
+          break;
         case 'grade':
           result.grade = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -160,6 +185,11 @@ class _$ClimbSerializer implements StructuredSerializer<Climb> {
           result.gradingStyle = serializers.deserialize(value,
                   specifiedType: const FullType(GradingStyleEnum))
               as GradingStyleEnum;
+          break;
+        case 'belayingStyle':
+          result.belayingStyle = serializers.deserialize(value,
+                  specifiedType: const FullType(BelayingStyleEnum))
+              as BelayingStyleEnum;
           break;
       }
     }
@@ -279,6 +309,8 @@ class _$ClimbingRoute extends ClimbingRoute {
   final BuiltSet<String> tags;
   @override
   final DateTime loggedDate;
+  @override
+  final String comment;
 
   factory _$ClimbingRoute([void Function(ClimbingRouteBuilder) updates]) =>
       (new ClimbingRouteBuilder()..update(updates)).build();
@@ -292,7 +324,8 @@ class _$ClimbingRoute extends ClimbingRoute {
       this.belayingStyle,
       this.closure,
       this.tags,
-      this.loggedDate})
+      this.loggedDate,
+      this.comment})
       : super._() {
     if (outCome == null) {
       throw new BuiltValueNullFieldError('ClimbingRoute', 'outCome');
@@ -333,7 +366,8 @@ class _$ClimbingRoute extends ClimbingRoute {
         belayingStyle == other.belayingStyle &&
         closure == other.closure &&
         tags == other.tags &&
-        loggedDate == other.loggedDate;
+        loggedDate == other.loggedDate &&
+        comment == other.comment;
   }
 
   @override
@@ -345,15 +379,17 @@ class _$ClimbingRoute extends ClimbingRoute {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, documentId.hashCode),
-                                    outCome.hashCode),
-                                uid.hashCode),
-                            gradingStyle.hashCode),
-                        grade.hashCode),
-                    belayingStyle.hashCode),
-                closure.hashCode),
-            tags.hashCode),
-        loggedDate.hashCode));
+                                $jc(
+                                    $jc($jc(0, documentId.hashCode),
+                                        outCome.hashCode),
+                                    uid.hashCode),
+                                gradingStyle.hashCode),
+                            grade.hashCode),
+                        belayingStyle.hashCode),
+                    closure.hashCode),
+                tags.hashCode),
+            loggedDate.hashCode),
+        comment.hashCode));
   }
 
   @override
@@ -367,7 +403,8 @@ class _$ClimbingRoute extends ClimbingRoute {
           ..add('belayingStyle', belayingStyle)
           ..add('closure', closure)
           ..add('tags', tags)
-          ..add('loggedDate', loggedDate))
+          ..add('loggedDate', loggedDate)
+          ..add('comment', comment))
         .toString();
   }
 }
@@ -414,6 +451,10 @@ class ClimbingRouteBuilder
   DateTime get loggedDate => _$this._loggedDate;
   set loggedDate(DateTime loggedDate) => _$this._loggedDate = loggedDate;
 
+  String _comment;
+  String get comment => _$this._comment;
+  set comment(String comment) => _$this._comment = comment;
+
   ClimbingRouteBuilder();
 
   ClimbingRouteBuilder get _$this {
@@ -427,6 +468,7 @@ class ClimbingRouteBuilder
       _closure = _$v.closure;
       _tags = _$v.tags?.toBuilder();
       _loggedDate = _$v.loggedDate;
+      _comment = _$v.comment;
       _$v = null;
     }
     return this;
@@ -459,7 +501,8 @@ class ClimbingRouteBuilder
               belayingStyle: belayingStyle,
               closure: closure,
               tags: _tags?.build(),
-              loggedDate: loggedDate);
+              loggedDate: loggedDate,
+              comment: comment);
     } catch (_) {
       String _$failedField;
       try {
@@ -478,14 +521,19 @@ class ClimbingRouteBuilder
 
 class _$Climb extends Climb {
   @override
+  final OutComeEnum outCome;
+  @override
   final String grade;
   @override
   final GradingStyleEnum gradingStyle;
+  @override
+  final BelayingStyleEnum belayingStyle;
 
   factory _$Climb([void Function(ClimbBuilder) updates]) =>
       (new ClimbBuilder()..update(updates)).build();
 
-  _$Climb._({this.grade, this.gradingStyle}) : super._() {
+  _$Climb._({this.outCome, this.grade, this.gradingStyle, this.belayingStyle})
+      : super._() {
     if (grade == null) {
       throw new BuiltValueNullFieldError('Climb', 'grade');
     }
@@ -505,26 +553,37 @@ class _$Climb extends Climb {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Climb &&
+        outCome == other.outCome &&
         grade == other.grade &&
-        gradingStyle == other.gradingStyle;
+        gradingStyle == other.gradingStyle &&
+        belayingStyle == other.belayingStyle;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, grade.hashCode), gradingStyle.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, outCome.hashCode), grade.hashCode),
+            gradingStyle.hashCode),
+        belayingStyle.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Climb')
+          ..add('outCome', outCome)
           ..add('grade', grade)
-          ..add('gradingStyle', gradingStyle))
+          ..add('gradingStyle', gradingStyle)
+          ..add('belayingStyle', belayingStyle))
         .toString();
   }
 }
 
 class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
   _$Climb _$v;
+
+  OutComeEnum _outCome;
+  OutComeEnum get outCome => _$this._outCome;
+  set outCome(OutComeEnum outCome) => _$this._outCome = outCome;
 
   String _grade;
   String get grade => _$this._grade;
@@ -535,12 +594,19 @@ class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
   set gradingStyle(GradingStyleEnum gradingStyle) =>
       _$this._gradingStyle = gradingStyle;
 
+  BelayingStyleEnum _belayingStyle;
+  BelayingStyleEnum get belayingStyle => _$this._belayingStyle;
+  set belayingStyle(BelayingStyleEnum belayingStyle) =>
+      _$this._belayingStyle = belayingStyle;
+
   ClimbBuilder();
 
   ClimbBuilder get _$this {
     if (_$v != null) {
+      _outCome = _$v.outCome;
       _grade = _$v.grade;
       _gradingStyle = _$v.gradingStyle;
+      _belayingStyle = _$v.belayingStyle;
       _$v = null;
     }
     return this;
@@ -561,8 +627,12 @@ class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
 
   @override
   _$Climb build() {
-    final _$result =
-        _$v ?? new _$Climb._(grade: grade, gradingStyle: gradingStyle);
+    final _$result = _$v ??
+        new _$Climb._(
+            outCome: outCome,
+            grade: grade,
+            gradingStyle: gradingStyle,
+            belayingStyle: belayingStyle);
     replace(_$result);
     return _$result;
   }

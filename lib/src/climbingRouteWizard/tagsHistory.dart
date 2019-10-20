@@ -11,7 +11,7 @@ class TagsHistory extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(15.0),
       constraints: BoxConstraints(
-        maxHeight: 120,
+        maxHeight: 200,
       ),
       child: ListView.builder(
         itemCount: tags.length,
@@ -20,16 +20,19 @@ class TagsHistory extends StatelessWidget {
             onTap: () => onAdd(tags[index]),
             child: Container(
               margin: const EdgeInsets.all(0.5),
-              padding: const EdgeInsets.all(2.5),
+              padding: const EdgeInsets.all(8.0),
               color: Color(0xff4c000000),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
+                    padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
                       tags[index],
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Icon(

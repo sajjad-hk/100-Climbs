@@ -120,7 +120,7 @@ class Dashboard extends StatelessWidget {
                   ),
                 ),
                 Flexible(
-                  flex: 2,
+                  flex: 3,
                   child: FlatButton(
                     onPressed: () {
                       climbingRouteService.removeClimbingRoutes(state
@@ -130,17 +130,16 @@ class Dashboard extends StatelessWidget {
                       state.clearSelections();
                     },
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Icon(
                           Icons.delete,
-                          size: 32,
+                          size: 25,
                           color: Colors.white,
                         ),
                         Text(
                           'DELETE',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ],
                     ),

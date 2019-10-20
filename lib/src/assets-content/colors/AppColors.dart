@@ -16,7 +16,7 @@ class AppColors {
   static const Color dark = Color(0xff0e1823);
   static const Color lightNavy = Color(0xff165571);
   static const Color black_50 = Color(0x80000000);
-  static const Color black_30 = Color(0x4d000000);
+  static const Color black30 = Color(0x4d000000);
   static const Color black7 = Color(0x12000000);
   static const Color dandelion = Color(0xffffe600);
   static const Color darkSalmon = Color(0xffd46666);

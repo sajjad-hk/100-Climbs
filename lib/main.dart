@@ -19,23 +19,17 @@ class ClimbingLogbook extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<FirebaseUser>.value(
       stream: FirebaseAuth.instance.onAuthStateChanged,
-      catchError: (_, __) => null,
       child: MaterialApp(
         title: 'CLIMBING LOGBOOK',
         home: Consumer<FirebaseUser>(
           builder: (context, firebaseUser, _) {
             if (firebaseUser != null) {
-              return MultiProvider(
-                providers: [
-                  StreamProvider<AppUser>.value(
-                    stream: authService.climbingLogBookUser(firebaseUser.uid),
-                    catchError: (_, __) => null,
-                  ),
-                  ChangeNotifierProvider.value(
-                    notifier: DashboardState(),
-                  )
-                ],
-                child: Home(),
+              return StreamProvider<AppUser>.value(
+                stream: authService.climbingLogBookUser(firebaseUser?.uid),
+                child: ChangeNotifierProvider.value(
+                  notifier: DashboardState(),
+                  child: Home(),
+                ),
               );
             } else {
               return Login();

@@ -18,7 +18,7 @@ class AppDatePicker extends StatelessWidget {
       child: Container(
         height: 45,
         decoration: BoxDecoration(
-          color: AppColors.black_30,
+          color: AppColors.black30,
           borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),

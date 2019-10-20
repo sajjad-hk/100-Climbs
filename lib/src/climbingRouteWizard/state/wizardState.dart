@@ -1,12 +1,16 @@
 import 'package:climbing_logbook/src/models/enums.dart';
 import 'package:climbing_logbook/src/models/values.dart';
+import 'package:climbing_logbook/src/states/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class WizardState with ChangeNotifier {
   WizardState(Climb lastClimb) {
-    _selectedGradingStyle = lastClimb.gradingStyle;
+    _selectedOutCome = lastClimb?.outCome ?? OutComeEnum.success;
+    _selectedGradingStyle = lastClimb?.gradingStyle ?? GradingStyleEnum.french;
+    _selectedClimbingGrade =
+        lastClimb?.grade ?? Constants.grades[lastClimb.gradingStyle][0];
+    _selectedBelayStyle = lastClimb?.belayingStyle ?? BelayingStyleEnum.lead;
     _selectedTags = List<String>();
-    _selectedClimbingGrade = lastClimb.grade;
     _currentPageIndex = 0;
   }
 

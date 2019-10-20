@@ -28,6 +28,9 @@ abstract class ClimbingRoute
 
   DateTime get loggedDate;
 
+  @nullable
+  String get comment;
+
   ClimbingRoute._();
 
   factory ClimbingRoute([void Function(ClimbingRouteBuilder) updates]) =
@@ -37,8 +40,12 @@ abstract class ClimbingRoute
 }
 
 abstract class Climb implements Built<Climb, ClimbBuilder> {
+  @nullable
+  OutComeEnum get outCome;
   String get grade;
   GradingStyleEnum get gradingStyle;
+  @nullable
+  BelayingStyleEnum get belayingStyle;
 
   Climb._();
 
