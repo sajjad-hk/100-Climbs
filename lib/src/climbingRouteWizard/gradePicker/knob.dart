@@ -4,8 +4,8 @@ class Knob extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -19,8 +19,8 @@ class Knob extends StatelessWidget {
       ),
       child: Center(
         child: Container(
-          width: 32,
-          height: 32,
+          width: 25,
+          height: 25,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

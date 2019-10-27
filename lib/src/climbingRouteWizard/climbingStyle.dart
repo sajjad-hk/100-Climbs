@@ -15,12 +15,10 @@ class ClimbingStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<WizardState>(context);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         WizardPageTitle(
           title: 'Style',
-        ),
-        Flexible(
-          child: Container(),
         ),
         Flexible(
           flex: 5,

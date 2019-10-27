@@ -58,23 +58,10 @@ class Tags extends StatelessWidget {
                 ),
               ),
               Visibility(
-                visible: state.selectedTags.length < 5,
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    'Click to add...',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color(0xff4c000000),
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ),
-              ),
-              Visibility(
                 visible: MediaQuery.of(context).viewInsets.bottom == 0.0 &&
                     state.selectedTags.length < 5,
                 child: FlatButton(
+                  highlightColor: Colors.transparent,
                   onPressed: () => ds.openTagsEdit(),
                   child: Container(
                     padding: const EdgeInsets.all(5.0),

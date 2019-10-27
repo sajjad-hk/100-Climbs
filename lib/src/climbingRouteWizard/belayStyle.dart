@@ -22,9 +22,6 @@ class BelayStyle extends StatelessWidget {
           title: 'Belay',
         ),
         Flexible(
-          child: Container(),
-        ),
-        Flexible(
           flex: 8,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +31,7 @@ class BelayStyle extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: AspectRatio(
-                    aspectRatio: 2,
+                    aspectRatio: 2.2,
                     child: Container(
                       child: NewCustomRadio.row(
                         label: 'Lead',
@@ -60,7 +57,7 @@ class BelayStyle extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: AspectRatio(
-                    aspectRatio: 2,
+                    aspectRatio: 2.2,
                     child: Container(
                       child: NewCustomRadio.row(
                         label: 'Auto',
@@ -86,7 +83,7 @@ class BelayStyle extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: AspectRatio(
-                    aspectRatio: 2,
+                    aspectRatio: 2.2,
                     child: Container(
                       child: NewCustomRadio.row(
                         label: 'Toprope',

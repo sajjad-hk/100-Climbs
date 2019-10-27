@@ -28,8 +28,6 @@ class NewRouteWizard extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        print(constraints.maxWidth);
-        print(constraints.maxHeight);
         return Container(
           child: AnimatedContainer(
             color: Color(0xffb3000000),
@@ -53,6 +51,8 @@ class NewRouteWizard extends StatelessWidget {
                             _controller.jumpToPage(0);
                             wizardState.currentPageIndex = 0;
                             dashboardState.closeNewRouteWizard();
+                            FocusScope.of(context)
+                                .requestFocus(new FocusNode());
                           },
                         ),
                       ],
@@ -100,10 +100,10 @@ class NewRouteWizard extends StatelessWidget {
                   ),
                   Column(
                     children: <Widget>[
-                      Visibility(
-                        visible: wizardState.currentPageIndex >= 2,
-                        child: Container(
-                          padding: const EdgeInsets.only(top: 15, bottom: 20),
+                      Container(
+                        padding: const EdgeInsets.only(top: 15, bottom: 20),
+                        child: Visibility(
+                          visible: wizardState.currentPageIndex >= 2,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[

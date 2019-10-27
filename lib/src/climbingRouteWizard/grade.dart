@@ -8,19 +8,14 @@ class Grade extends StatelessWidget {
     return Column(
       children: <Widget>[
         Flexible(
-          flex: 2,
+          flex: 1,
           fit: FlexFit.loose,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              WizardPageTitle(
-                title: 'Scale and Grade',
-              ),
-            ],
+          child: WizardPageTitle(
+            title: 'Grade',
           ),
         ),
         Flexible(
-          flex: 5,
+          flex: 4,
           child: GradePicker(),
         ),
       ],

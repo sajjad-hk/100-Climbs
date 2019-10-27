@@ -10,7 +10,7 @@ class TagsHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     var ts = tags ?? [];
     return Container(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0),
       constraints: BoxConstraints(
         maxHeight: 200,
       ),

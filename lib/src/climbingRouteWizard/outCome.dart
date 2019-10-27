@@ -16,13 +16,10 @@ class OutCome extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<WizardState>(context);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         WizardPageTitle(
           title: 'Succeded?',
-        ),
-        Flexible(
-          flex: 1,
-          child: Container(),
         ),
         Flexible(
           flex: 5,
@@ -70,9 +67,6 @@ class OutCome extends StatelessWidget {
                   },
                 ),
               ),
-              Flexible(
-                child: Container(),
-              )
             ],
           ),
         ),

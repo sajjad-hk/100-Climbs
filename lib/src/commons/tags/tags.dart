@@ -2,6 +2,7 @@ import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tagsHistory.dart';
 import 'package:climbing_logbook/src/commons/appBar.dart';
+import 'package:climbing_logbook/src/commons/appBar.dart' as prefix0;
 import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
 import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/models/values.dart';
@@ -16,6 +17,7 @@ class TagsL extends StatefulWidget {
 
 class _State extends State<TagsL> {
   final TextEditingController _tagTextController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
   List<String> stringTags;
 
   @override
@@ -31,32 +33,35 @@ class _State extends State<TagsL> {
     WizardState ws = Provider.of<WizardState>(context);
     AppUser user = Provider.of<AppUser>(context);
     _tagTextController.addListener(() {
+      List<String> sts = user.tags
+          .where((i) => i.startsWith(_tagTextController.text))
+          .take(4)
+          .toList();
+      sts.removeWhere((i) => ws.selectedTags.contains(i));
       setState(() {
-        stringTags = user.tags
-            .where(
-              (i) => i.startsWith(_tagTextController.text),
-            )
-            .take(4)
-            .toList();
+        stringTags = sts;
       });
     });
+    if (ds.mode == DashboardMode.tagEditor)
+      FocusScope.of(context).requestFocus(_focusNode);
     return SafeArea(
       child: Scaffold(
         appBar: PreferredAppBar.tag(),
         backgroundColor:
-            AppColors.getGradeColor(ds.selectedClimbingRoute?.grade),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
+            ds.previousMode == DashboardMode.editClimbingRoutePageOpen
+                ? AppColors.getGradeColor(ds.selectedClimbingRoute?.grade)
+                : AppColors.getGradeColor(ws.selectedClimbingGrade),
+        body: ListView(
           children: [
             Container(
               height: 30,
               width: 120,
-              margin: const EdgeInsets.only(top: 30.0),
+              margin: const EdgeInsets.only(top: 30.0, left: 15),
               padding: const EdgeInsets.all(3.0),
               child: TextField(
+                focusNode: _focusNode,
                 autofocus: true,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 controller: _tagTextController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -85,6 +90,7 @@ class _State extends State<TagsL> {
                   else
                     ws.addTag(tag);
                   ds.closeTagEdit();
+                  _tagTextController.text = '';
                   FocusScope.of(context).requestFocus(new FocusNode());
                 },
               ),

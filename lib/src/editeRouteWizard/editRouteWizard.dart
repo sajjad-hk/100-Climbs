@@ -28,14 +28,19 @@ class _State extends State<EditRouteWizard> {
   final ScrollController scrollController = ScrollController();
   final _commentTextController = TextEditingController();
   final _tagTextController = TextEditingController();
-  static final _focusNode = FocusNode()..addListener(onFocusChange);
+  ScrollController _scrollController = ScrollController();
 
-  static var onFocusChange = () => print(_focusNode.hasFocus);
   List<String> stringTags = List<String>();
 
   @override
+  void didUpdateWidget(Widget oldWidget) {
+    _scrollController.animateTo(_scrollController.position.minScrollExtent,
+        duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print(_focusNode.hasFocus);
     final dashboardState = Provider.of<DashboardState>(context);
     List<String> grades = Constants.grades[GradingStyleEnum.french];
     _commentTextController.text = dashboardState.selectedClimbingRoute?.comment;
@@ -60,6 +65,7 @@ class _State extends State<EditRouteWizard> {
           color: AppColors.getGradeColor(
               dashboardState.selectedClimbingRoute?.grade),
           child: ListView(
+            controller: _scrollController,
             children: <Widget>[
               itemSection('Date', [createDatePicker(context)]),
               itemSection('Succeded?', [createSuccess(context)]),
@@ -86,7 +92,10 @@ class _State extends State<EditRouteWizard> {
                 color: Colors.white,
                 size: 35,
               ),
-              onPressed: () => dashboardState.close(),
+              onPressed: () {
+                dashboardState.close();
+                FocusScope.of(context).requestFocus(new FocusNode());
+              },
             ),
             FlatButton(
               onPressed: () {
@@ -96,14 +105,17 @@ class _State extends State<EditRouteWizard> {
               },
               child: Row(
                 children: <Widget>[
-                  Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                    size: 25,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ),
                   Text(
                     'DELETE',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ],
               ),

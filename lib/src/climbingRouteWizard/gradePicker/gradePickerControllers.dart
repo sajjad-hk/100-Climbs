@@ -28,7 +28,7 @@ class GradePickerControllers extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.all(5),
-          width: 90,
+          width: 80,
           child: Text(
             grade,
             style: TextStyle(

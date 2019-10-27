@@ -72,7 +72,7 @@ class _GradePickerState extends State<GradePicker> {
     int indexOfGrade = grades.indexOf(state.selectedClimbingGrade);
     knobAngle = indexOfGrade * 2 * pi / grades.length;
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(10),
       key: _key,
       child: Stack(
         alignment: Alignment.center,

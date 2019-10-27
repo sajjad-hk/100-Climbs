@@ -89,12 +89,12 @@ class CustomDrawer extends StatelessWidget {
                             Expanded(
                               flex: 2,
                               child: Container(
+                                height: 80,
                                 padding: const EdgeInsets.all(10.0),
                                 child: RaisedButton(
                                   color: Colors.black,
                                   textColor: Colors.white,
                                   child: Container(
-                                    height: double.infinity,
                                     child: Center(
                                       child: Text('SIGN OUT'),
                                     ),
