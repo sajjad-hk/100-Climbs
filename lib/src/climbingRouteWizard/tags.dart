@@ -1,53 +1,17 @@
 import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tagItem.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/tagsHistory.dart';
-import 'package:climbing_logbook/src/models/values.dart';
+import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-class Tags extends StatefulWidget {
-  @override
-  _TagsState createState() => _TagsState();
-}
-
-class _TagsState extends State<Tags> {
-  static TextEditingController _tagTextController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-  List<String> stringTags;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  filterTagsList(user) {
-    List<String> filter = List<String>();
-    filter.add(_tagTextController.text.toString());
-    if (_tagTextController.text.isNotEmpty) filter.addAll(user.tags.toList());
-    filter = filter
-        .where((it) =>
-            it.startsWith(_tagTextController.text.toString().toLowerCase()))
-        .take(4)
-        .toList();
-    if (mounted) {
-      setState(() => stringTags = filter.toSet().toList());
-    }
-  }
-
+class Tags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<WizardState>(context);
-    final user = Provider.of<AppUser>(context);
-
-    _tagTextController.addListener(() => filterTagsList(user));
-    _tagTextController.selection = TextSelection.fromPosition(
-      TextPosition(
-        offset: _tagTextController.text.length,
-      ),
-    );
+    final ds = Provider.of<DashboardState>(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -96,23 +60,13 @@ class _TagsState extends State<Tags> {
               Visibility(
                 visible: state.selectedTags.length < 5,
                 child: Container(
-                  child: TextField(
-                    focusNode: _focusNode,
-                    textAlign: TextAlign.center,
-                    controller: _tagTextController,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Click to add...',
-                      hintStyle: TextStyle(
-                        fontSize: 18,
-                        color: Color(0xff4c000000),
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    'Click to add...',
                     style: TextStyle(
                       fontSize: 18,
                       color: Color(0xff4c000000),
+                      fontStyle: FontStyle.italic,
                     ),
                   ),
                 ),
@@ -121,9 +75,7 @@ class _TagsState extends State<Tags> {
                 visible: MediaQuery.of(context).viewInsets.bottom == 0.0 &&
                     state.selectedTags.length < 5,
                 child: FlatButton(
-                  onPressed: () {
-                    FocusScope.of(context).requestFocus(_focusNode);
-                  },
+                  onPressed: () => ds.openTagsEdit(),
                   child: Container(
                     padding: const EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
@@ -136,18 +88,6 @@ class _TagsState extends State<Tags> {
                       size: 40,
                     ),
                   ),
-                ),
-              ),
-              Visibility(
-                visible: MediaQuery.of(context).viewInsets.bottom != 0,
-                child: TagsHistory(
-                  tags: stringTags,
-                  onAdd: (tag) {
-                    _tagTextController.text = '';
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                    state.addTag(tag);
-                    print(tag);
-                  },
                 ),
               ),
             ],

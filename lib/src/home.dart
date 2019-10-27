@@ -3,10 +3,11 @@ import 'package:climbing_logbook/src/dashboard/dashboard.dart';
 import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
 import 'package:climbing_logbook/src/editeRouteWizard/editRouteWizard.dart';
 import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/climbingRouteWizard.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/newRouteWizard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'commons/tags/tags.dart';
 import 'dashboard/state/DashboardMode.dart';
 
 class Home extends StatefulWidget {
@@ -27,19 +28,17 @@ class _HomeState extends State<Home> {
 
     if (user != null) {
       return SafeArea(
-        child: Stack(
+          child: ChangeNotifierProvider(
+        builder: (context) => WizardState(user?.lastClimb),
+        child: IndexedStack(
+          index: state.mode,
           children: <Widget>[
             Dashboard(),
-            if (state.mode == DashboardMode.newClimbingRouteWizardOpen)
-              ChangeNotifierProvider<WizardState>(
-                builder: (context) => WizardState(user?.lastClimb),
-                child: ClimbingRouteWizard(),
-              ),
-            if (state.mode == DashboardMode.editClimbingRoutePageOpen)
-              EditRouteWizard(),
+            EditRouteWizard(),
+            TagsL(),
           ],
         ),
-      );
+      ));
     } else {
       // Todo add on user loading some how
       return Container();

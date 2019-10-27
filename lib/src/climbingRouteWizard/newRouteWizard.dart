@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 
 import '../models/values.dart';
 
-class ClimbingRouteWizard extends StatelessWidget {
+class NewRouteWizard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _routeWizardWrapper(context);
@@ -52,7 +52,7 @@ class ClimbingRouteWizard extends StatelessWidget {
                           onPressed: () {
                             _controller.jumpToPage(0);
                             wizardState.currentPageIndex = 0;
-                            dashboardState.close();
+                            dashboardState.closeNewRouteWizard();
                           },
                         ),
                       ],
@@ -196,7 +196,12 @@ class ClimbingRouteWizard extends StatelessWidget {
                             Flexible(
                               fit: FlexFit.tight,
                               child: Visibility(
-                                visible: wizardState.currentPageIndex != 4,
+                                visible: (wizardState.selectedOutCome ==
+                                            OutComeEnum.success &&
+                                        wizardState.currentPageIndex != 4) ||
+                                    (wizardState.selectedOutCome ==
+                                            OutComeEnum.failure &&
+                                        wizardState.currentPageIndex != 3),
                                 child: IconButton(
                                   iconSize: 50,
                                   icon: Icon(

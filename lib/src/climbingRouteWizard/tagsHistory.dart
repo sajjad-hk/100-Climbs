@@ -8,16 +8,17 @@ class TagsHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var ts = tags ?? [];
     return Container(
       padding: const EdgeInsets.all(15.0),
       constraints: BoxConstraints(
         maxHeight: 200,
       ),
       child: ListView.builder(
-        itemCount: tags.length,
+        itemCount: ts.length,
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
-            onTap: () => onAdd(tags[index]),
+            onTap: () => onAdd(ts[index]),
             child: Container(
               margin: const EdgeInsets.all(0.5),
               padding: const EdgeInsets.all(8.0),
@@ -28,7 +29,7 @@ class TagsHistory extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
-                      tags[index],
+                      ts[index],
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,

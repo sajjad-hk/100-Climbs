@@ -27,19 +27,15 @@ class BelayStyle extends StatelessWidget {
         Flexible(
           flex: 8,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Flexible(
                 fit: FlexFit.tight,
                 child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 230,
-                    maxHeight: 80,
-                  ),
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: AspectRatio(
                     aspectRatio: 2,
                     child: Container(
-                      padding: const EdgeInsets.all(15.0),
                       child: NewCustomRadio.row(
                         label: 'Lead',
                         fontSize: 18,
@@ -62,14 +58,10 @@ class BelayStyle extends StatelessWidget {
               Flexible(
                 fit: FlexFit.tight,
                 child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 230,
-                    maxHeight: 80,
-                  ),
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: AspectRatio(
-                    aspectRatio: 2.5,
+                    aspectRatio: 2,
                     child: Container(
-                      padding: const EdgeInsets.all(15.0),
                       child: NewCustomRadio.row(
                         label: 'Auto',
                         fontSize: 18,
@@ -92,14 +84,10 @@ class BelayStyle extends StatelessWidget {
               Flexible(
                 fit: FlexFit.tight,
                 child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 230,
-                    maxHeight: 80,
-                  ),
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: AspectRatio(
-                    aspectRatio: 2.2,
+                    aspectRatio: 2,
                     child: Container(
-                      padding: const EdgeInsets.all(15.0),
                       child: NewCustomRadio.row(
                         label: 'Toprope',
                         fontSize: 18,

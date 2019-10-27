@@ -1,4 +1,5 @@
 import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
+import 'package:climbing_logbook/src/climbingRouteWizard/newRouteWizard.dart';
 import 'package:climbing_logbook/src/dashboard/climbingRoutes.dart';
 import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
 import 'package:climbing_logbook/src/dashboard/stackedBarChart.dart';
@@ -21,135 +22,142 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<AppUser>(context);
     final state = Provider.of<DashboardState>(context);
-    return Scaffold(
-      backgroundColor: listBackground,
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text("CLIMBING LOGBOOK"),
-            centerTitle: true,
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          backgroundColor: listBackground,
+          body: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                centerTitle: true,
+                leading: Builder(
+                  builder: (context) => IconButton(
+                    icon: Icon(Icons.menu),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
+                ),
+                backgroundColor: appBarBackground,
+                floating: true,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Container(
+                    padding: EdgeInsets.only(top: 50.0),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 4,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            child: StreamProvider<
+                                Map<String,
+                                    Map<DateTime, List<ClimbingRoute>>>>.value(
+                              stream: climbingCountChartService
+                                  .getClimbingCountChartData(user.uid),
+                              child: StackedBarChart.withData(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [chartBackgroundFrom, chartBackgroundTo],
+                      ),
+                    ),
+                  ),
+                ),
+                expandedHeight: 300,
               ),
+              StreamProvider<Map<DateTime, List<ClimbingRoute>>>.value(
+                stream:
+                    climbingRouteService.getClimbingRoutesGroupByDate(user.uid),
+                child: ClimbingRoutes(),
+              ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            heroTag: 'Hero2',
+            elevation: 3.0,
+            autofocus: true,
+            onPressed: () => state.openNew(),
+            child: Icon(
+              Icons.add,
+              size: 45.0,
             ),
-            backgroundColor: appBarBackground,
-            floating: true,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                padding: EdgeInsets.only(top: 50.0),
-                child: Column(
+            backgroundColor: AppColors.getGradeColor(
+                user.lastClimb.grade), //LogBookColors.getGradeColor(),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+          drawer: CustomDrawer(
+            accountType: 'Google',
+          ), // todo change static account type
+          bottomNavigationBar: BottomAppBar(
+            color: Colors.black,
+            child: Visibility(
+              visible: state.selectedClimbingRoutes.isNotEmpty,
+              child: Container(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: StreamProvider<
-                            Map<String,
-                                Map<DateTime, List<ClimbingRoute>>>>.value(
-                          stream: climbingCountChartService
-                              .getClimbingCountChartData(user.uid),
-                          child: StackedBarChart.withData(),
+                    Flexible(
+                      child: IconButton(
+                        onPressed: () => state.clearSelections(),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 3,
+                      child: Center(
+                        child: Text(
+                          '${state.selectedClimbingRoutes.length} Route${state.selectedClimbingRoutes.length > 1 ? 's' : ''} selected',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 3,
+                      child: FlatButton(
+                        onPressed: () {
+                          climbingRouteService.removeClimbingRoutes(state
+                              .selectedClimbingRoutes
+                              .map((i) => i.documentId)
+                              .toList());
+                          state.clearSelections();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Icon(
+                              Icons.delete,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              'DELETE',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ],
                 ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [chartBackgroundFrom, chartBackgroundTo],
-                  ),
-                ),
               ),
             ),
-            expandedHeight: 300,
-          ),
-          StreamProvider<Map<DateTime, List<ClimbingRoute>>>.value(
-            stream: climbingRouteService.getClimbingRoutesGroupByDate(user.uid),
-            child: ClimbingRoutes(),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 3.0,
-        autofocus: true,
-        onPressed: () => state.openNew(),
-        child: Icon(
-          Icons.add,
-          size: 45.0,
-        ),
-        backgroundColor: AppColors.getGradeColor(
-            user.lastClimb.grade), //LogBookColors.getGradeColor(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      drawer: CustomDrawer(
-        accountType: 'Google',
-      ), // todo change static account type
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.black,
-        child: Visibility(
-          visible: state.selectedClimbingRoutes.isNotEmpty,
-          child: Container(
-            height: 60,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Flexible(
-                  child: IconButton(
-                    onPressed: () => state.clearSelections(),
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 32,
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 3,
-                  child: Center(
-                    child: Text(
-                      '${state.selectedClimbingRoutes.length} Route${state.selectedClimbingRoutes.length > 1 ? 's' : ''} selected',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 3,
-                  child: FlatButton(
-                    onPressed: () {
-                      climbingRouteService.removeClimbingRoutes(state
-                          .selectedClimbingRoutes
-                          .map((i) => i.documentId)
-                          .toList());
-                      state.clearSelections();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Icon(
-                          Icons.delete,
-                          size: 25,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'DELETE',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
-      ),
+        if (state.isNewModalOpen) NewRouteWizard(),
+      ],
     );
   }
 }

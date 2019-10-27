@@ -1,5 +1,6 @@
 class DashboardMode {
   static int defaultDashboard = 0;
-  static int newClimbingRouteWizardOpen = 1;
-  static int editClimbingRoutePageOpen = 2;
+  static bool newClimbingRouteWizardOpen = false;
+  static int editClimbingRoutePageOpen = 1;
+  static int tagEditor = 2;
 }

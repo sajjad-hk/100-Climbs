@@ -2,6 +2,7 @@ import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tagItem.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tagsHistory.dart';
+import 'package:climbing_logbook/src/commons/appBar.dart';
 import 'package:climbing_logbook/src/commons/customRadio.dart';
 import 'package:climbing_logbook/src/commons/dashLinePainter.dart';
 import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
@@ -22,8 +23,6 @@ class EditRouteWizard extends StatefulWidget {
   @override
   _State createState() => _State();
 }
-
-EventChannel channel = EventChannel('some');
 
 class _State extends State<EditRouteWizard> {
   final ScrollController scrollController = ScrollController();
@@ -55,33 +54,7 @@ class _State extends State<EditRouteWizard> {
       });
     });
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(null, 60),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [chartBackgroundFrom, chartBackgroundTo],
-            ),
-          ),
-          child: Row(
-            children: <Widget>[
-              LayoutBuilder(
-                builder: (context, constraint) {
-                  return IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    ),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+      appBar: PreferredAppBar.main(),
       body: Center(
         child: Container(
           color: AppColors.getGradeColor(
@@ -196,48 +169,33 @@ class _State extends State<EditRouteWizard> {
     return Column(
       children: <Widget>[
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Visibility(
               visible: _tagTextController.text.isEmpty,
-              child: FlatButton(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: () {
-                  FocusScope.of(context).requestFocus(_focusNode);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xff4c000000),
-                  ),
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 30,
-                  ),
+              child: FloatingActionButton(
+                heroTag: 'EDITE_TAGS',
+                onPressed: () => dashboardState.openTagsEdit(),
+                elevation: 0,
+                mini: true,
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
                 ),
+                backgroundColor: Color(0xff4c000000),
               ),
             ),
             Container(
               height: 30,
               width: 120,
-              child: TextField(
-                focusNode: _focusNode,
+              padding: const EdgeInsets.all(3.0),
+              child: Text(
+                'Click to add...',
                 textAlign: TextAlign.center,
-                controller: _tagTextController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Click to add...',
-                  hintStyle: TextStyle(
-                    fontSize: 18,
-                    color: Color(0xff4c000000),
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
                 style: TextStyle(
                   fontSize: 18,
                   color: Color(0xff4c000000),
+                  fontStyle: FontStyle.italic,
                 ),
               ),
             ),

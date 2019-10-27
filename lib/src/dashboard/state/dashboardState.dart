@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 
 class DashboardState extends ChangeNotifier {
   int _mode;
+  int _previousMode;
+  bool _newRouteOpen = false;
   ClimbingRoute _selectedClimbingRoute;
   List<ClimbingRoute> _selectedClimbingRoutes;
 
@@ -13,6 +15,8 @@ class DashboardState extends ChangeNotifier {
         super();
 
   int get mode => _mode;
+  bool get isNewModalOpen => _newRouteOpen;
+  int get previousMode => _previousMode;
   ClimbingRoute get selectedClimbingRoute => _selectedClimbingRoute;
   List<ClimbingRoute> get selectedClimbingRoutes => _selectedClimbingRoutes;
 
@@ -43,18 +47,36 @@ class DashboardState extends ChangeNotifier {
     return _selectedClimbingRoutes.contains(route);
   }
 
+  closeNewRouteWizard() {
+    _newRouteOpen = false;
+    notifyListeners();
+  }
+
   close() {
     _mode = DashboardMode.defaultDashboard;
     notifyListeners();
   }
 
   openNew() {
-    _mode = DashboardMode.newClimbingRouteWizardOpen;
+    _previousMode = DashboardMode.defaultDashboard;
+    _newRouteOpen = true;
     notifyListeners();
   }
 
   openEdit() {
+    _previousMode = _mode;
     _mode = DashboardMode.editClimbingRoutePageOpen;
+    notifyListeners();
+  }
+
+  openTagsEdit() {
+    _previousMode = _mode;
+    _mode = DashboardMode.tagEditor;
+    notifyListeners();
+  }
+
+  closeTagEdit() {
+    _mode = _previousMode;
     notifyListeners();
   }
 }
