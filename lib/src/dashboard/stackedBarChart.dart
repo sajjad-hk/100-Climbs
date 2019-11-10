@@ -87,7 +87,7 @@ class StackedBarChart extends StatelessWidget {
           minimumPaddingBetweenLabelsPx: 10,
           labelStyle: charts.TextStyleSpec(
             fontSize: 14, // size in Pts.
-            color: charts.ColorUtil.fromDartColor(AppColors.greyish),
+            color: charts.ColorUtil.fromDartColor(AppColors.greyIsh),
           ),
           labelAnchor: charts.TickLabelAnchor.centered,
           labelRotation: 40,

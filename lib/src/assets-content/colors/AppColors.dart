@@ -15,107 +15,92 @@ class AppColors {
   static const Color warmGrey = Color(0xff8b8b8b);
   static const Color dark = Color(0xff0e1823);
   static const Color lightNavy = Color(0xff165571);
-  static const Color black_50 = Color(0x80000000);
+  static const Color black50 = Color(0x80000000);
   static const Color black30 = Color(0x4d000000);
   static const Color black7 = Color(0x12000000);
-  static const Color dandelion = Color(0xffffe600);
-  static const Color darkSalmon = Color(0xffd46666);
-  static const Color lightishPurple = Color(0xff943ee0);
-  static const Color lighterPurple = Color(0xff883ff5);
-  static const Color warmBlue = Color(0xff614edf);
+
+  static const Color iceBlue28 = Color(0x47f1f9ff);
+  static const Color greyIsh = Color(0xffb1b1b1);
+  static const Color green = Color(0xff15cb39);
+
+  static const Color blurPle = Color(0xff4f3bd5);
   static const Color azul = Color(0xff3b5de8);
-  static const Color clearBlue = Color(0xff1f85fa);
-  static const Color azure = Color(0xff00abff);
-  static const Color lightBlue = Color(0xff62cee8);
-  static const Color tealish = Color(0xff2fc4b5);
-  static const Color lightSeaGreen = Color(0xff10a28c);
-  static const Color elfGreen = Color(0xff179863);
-  static const Color fruitSalad = Color(0xff48a657);
-  static const Color emerald = Color(0xff4dbe86);
-  static const Color grass = Color(0xff5cb133);
+  static const Color azureTwo = Color(0xff009fee);
+  static const Color brightSkyBlue = Color(0xff0ec2f0);
+  static const Color topaz = Color(0xff15cdcb);
+  static const Color turquoise = Color(0xff0abfa4);
+  static const Color darkSeaFoam = Color(0xff1cb371);
+  static const Color mediumGreen = Color(0xff42c054);
+  static const Color apple = Color(0xff6bc440);
   static const Color grossGreen = Color(0xffa7ca12);
   static const Color mustardYellow = Color(0xffe0d00a);
   static const Color sunflowerYellow = Color(0xffffcc00);
-  static const Color mango = Color(0xffffaa2b);
+  static const Color mangoTwo = Color(0xffffac2e);
   static const Color tangerine = Color(0xffff9200);
-  static const Color pinkishOrange = Color(0xffff7043);
-  static const Color grapefruit = Color(0xfffd5e5e);
-  static const Color coral = Color(0xfff14c4c);
-  static const Color lightRed = Color(0xffff4052);
-  static const Color tomato = Color(0xffe32727);
-  static const Color pinkishRed = Color(0xffec1b5a);
-  static const Color darkishPink = Color(0xffe82c7f);
-  static const Color strongPink = Color(0xffff2b87);
-  static const Color purplePink = Color(0xffec34b4);
+  static const Color pinkishOrangeTwo = Color(0xffff6c41);
+  static const Color coralTwo = Color(0xfff74444);
+  static const Color strawberry = Color(0xffef2d3f);
+  static const Color pinkishRedTwo = Color(0xffdf0e3e);
+  static const Color cerise = Color(0xffe20866);
+  static const Color strongPinkTwo = Color(0xfff71888);
+  static const Color purplePinkTwo = Color(0xffe524aa);
   static const Color barney = Color(0xffc522a9);
-  static const Color barneyTwo = Color(0xff992bb5);
-  static const Color warmPurple = Color(0xff692c8c);
-  static const Color greyish = Color(0xffb1b1b1);
-  static const Color iceBlue28 = Color(0x47f1f9ff);
-  static const Color green = Color(0xff15cb39);
+  static const Color barneyThree = Color(0xffa71ab2);
+  static const Color purple = Color(0xff7c1eb2);
+  static const Color violetBlue = Color(0xff7108cd);
 
   static Color getGradeColor(String grade) {
     switch (grade) {
-      case '4a':
-        return lightishPurple;
-      case '4a+':
-        return lighterPurple;
-      case '4b':
-        return warmBlue;
-      case '4b+':
-        return azul;
-      case '4c':
-        return clearBlue;
-      case '4c+':
-        return azure;
+      case '4':
+        return blurPle;
       case '5a':
-        return lightBlue;
+        return azul;
       case '5a+':
-        return tealish;
+        return azureTwo;
       case '5b':
-        return lightSeaGreen;
+        return brightSkyBlue;
       case '5b+':
-        return elfGreen;
+        return topaz;
       case '5c':
-        return fruitSalad;
+        return turquoise;
       case '5c+':
-        return emerald;
+        return darkSeaFoam;
       case '6a':
-        return grass;
+        return mediumGreen;
       case '6a+':
-        return grossGreen;
+        return apple;
       case '6b':
-        return mustardYellow;
+        return grossGreen;
       case '6b+':
-        return sunflowerYellow;
+        return mustardYellow;
       case '6c':
-        return mango;
+        return sunflowerYellow;
       case '6c+':
-        return tangerine;
+        return mangoTwo;
       case '7a':
-        return pinkishOrange;
+        return tangerine;
       case '7a+':
-        return grapefruit;
+        return pinkishOrangeTwo;
       case '7b':
-        return coral;
+        return coralTwo;
       case '7b+':
-        return lightRed;
+        return strawberry;
       case '7c':
-        return tomato;
+        return pinkishRedTwo;
       case '7c+':
-        return pinkishRed;
+        return cerise;
       case '8a':
-        return darkishPink;
+        return strongPinkTwo;
       case '8a+':
-        return strongPink;
+        return purplePinkTwo;
       case '8b':
-        return purplePink;
-      case '8b+':
         return barney;
+      case '8b+':
+        return barneyThree;
       case '8c':
-        return barneyTwo;
+        return purple;
       case '8c+':
-        return warmPurple;
+        return violetBlue;
       default:
         return Colors.white;
     }

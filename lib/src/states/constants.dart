@@ -4,12 +4,7 @@ import 'package:hundred_climbs/src/models/enums.dart';
 class Constants {
   static const grades = {
     GradingStyleEnum.french: [
-      '4a',
-      '4a+',
-      '4b',
-      '4b+',
-      '4c',
-      '4c+',
+      '4',
       '5a',
       '5a+',
       '5b',
