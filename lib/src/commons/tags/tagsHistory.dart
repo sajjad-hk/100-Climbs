@@ -1,4 +1,4 @@
-import 'package:climbing_logbook/src/commons/tags/tags.dart';
+import 'package:hundred_climbs/src/commons/tags/tags.dart';
 import 'package:flutter/material.dart';
 
 class TagsHistory extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
-import 'package:climbing_logbook/src/commons/dashLinePainter.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/commons/dashLinePainter.dart';
 import 'package:flutter/material.dart';
 
 class FailureTileWrapper extends StatelessWidget {

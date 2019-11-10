@@ -1,9 +1,9 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:climbing_logbook/src/models/enums.dart';
-import 'package:climbing_logbook/src/models/serializers.dart';
-import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/states/constants.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
+import 'package:hundred_climbs/src/models/serializers.dart';
+import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/states/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class AuthService {
     return user;
   }
 
-  Stream<AppUser> climbingLogBookUser(String uid) {
+  Stream<AppUser> hundredClimbsUser(String uid) {
     if (uid != null)
       return _db.collection('users').document(uid).snapshots().map((data) =>
           standardSerializers.deserializeWith(AppUser.serializer, data.data));

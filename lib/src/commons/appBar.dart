@@ -1,4 +1,4 @@
-import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
+import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

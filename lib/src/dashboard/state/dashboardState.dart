@@ -1,5 +1,5 @@
-import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
-import 'package:climbing_logbook/src/models/values.dart';
+import 'package:hundred_climbs/src/dashboard/state/DashboardMode.dart';
+import 'package:hundred_climbs/src/models/values.dart';
 import 'package:flutter/widgets.dart';
 
 class DashboardState extends ChangeNotifier {

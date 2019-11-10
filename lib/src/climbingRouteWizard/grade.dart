@@ -1,5 +1,5 @@
-import 'package:climbing_logbook/src/climbingRouteWizard/gradePicker/gradePicker.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/gradePicker/gradePicker.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/pageTitle.dart';
 import 'package:flutter/material.dart';
 
 class Grade extends StatelessWidget {

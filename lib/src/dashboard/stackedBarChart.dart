@@ -1,6 +1,6 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
-import 'package:climbing_logbook/src/models/values.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/models/values.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

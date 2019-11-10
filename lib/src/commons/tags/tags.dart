@@ -1,11 +1,11 @@
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/commons/tags/tagsHistory.dart';
-import 'package:climbing_logbook/src/commons/appBar.dart';
-import 'package:climbing_logbook/src/commons/appBar.dart' as prefix0;
-import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
-import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
-import 'package:climbing_logbook/src/models/values.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:hundred_climbs/src/commons/tags/tagsHistory.dart';
+import 'package:hundred_climbs/src/commons/appBar.dart';
+import 'package:hundred_climbs/src/commons/appBar.dart' as prefix0;
+import 'package:hundred_climbs/src/dashboard/state/DashboardMode.dart';
+import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
+import 'package:hundred_climbs/src/models/values.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

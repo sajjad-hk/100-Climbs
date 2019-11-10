@@ -1,8 +1,8 @@
 import 'dart:math';
-import 'package:climbing_logbook/src/climbingRouteWizard/gradePicker/gradePickerControllers.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/gradePicker/knob.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/states/constants.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/gradePicker/gradePickerControllers.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/gradePicker/knob.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:hundred_climbs/src/states/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

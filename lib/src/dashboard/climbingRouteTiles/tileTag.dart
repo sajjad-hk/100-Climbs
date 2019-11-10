@@ -1,4 +1,4 @@
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:flutter/material.dart';
 
 class TileTags extends StatelessWidget {

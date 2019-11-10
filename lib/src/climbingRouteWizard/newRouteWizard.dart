@@ -1,13 +1,13 @@
-import 'package:climbing_logbook/src/climbingRouteWizard/belayStyle.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/climbingStyle.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/grade.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/outCome.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/tags.dart';
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
-import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
-import 'package:climbing_logbook/src/models/enums.dart';
-import 'package:climbing_logbook/src/services/climbingRouteService.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/belayStyle.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/climbingStyle.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/grade.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/outCome.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/tags.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
+import 'package:hundred_climbs/src/services/climbingRouteService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

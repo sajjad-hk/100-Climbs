@@ -1,13 +1,13 @@
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
-import 'package:climbing_logbook/src/commons/customIcon.dart';
-import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
-import 'package:climbing_logbook/src/commons/dashLinePainter.dart';
-import 'package:climbing_logbook/src/dashboard/climbingRouteTiles/tileFailureWrapper.dart';
-import 'package:climbing_logbook/src/dashboard/climbingRouteTiles/tileContent.dart';
-import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
-import 'package:climbing_logbook/src/models/enums.dart';
-import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/services/climbingRouteService.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/commons/customIcon.dart';
+import 'package:hundred_climbs/src/assets-content/icons/AppIcons.dart';
+import 'package:hundred_climbs/src/commons/dashLinePainter.dart';
+import 'package:hundred_climbs/src/dashboard/climbingRouteTiles/tileFailureWrapper.dart';
+import 'package:hundred_climbs/src/dashboard/climbingRouteTiles/tileContent.dart';
+import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
+import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/services/climbingRouteService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

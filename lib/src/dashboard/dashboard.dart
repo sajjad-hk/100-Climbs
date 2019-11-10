@@ -1,12 +1,12 @@
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/newRouteWizard.dart';
-import 'package:climbing_logbook/src/dashboard/climbingRoutes.dart';
-import 'package:climbing_logbook/src/dashboard/customDrawer.dart';
-import 'package:climbing_logbook/src/dashboard/stackedBarChart.dart';
-import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
-import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/services/climbingCountChartService.dart';
-import 'package:climbing_logbook/src/services/climbingRouteService.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/newRouteWizard.dart';
+import 'package:hundred_climbs/src/dashboard/climbingRoutes.dart';
+import 'package:hundred_climbs/src/dashboard/customDrawer.dart';
+import 'package:hundred_climbs/src/dashboard/stackedBarChart.dart';
+import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
+import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/services/climbingCountChartService.dart';
+import 'package:hundred_climbs/src/services/climbingRouteService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

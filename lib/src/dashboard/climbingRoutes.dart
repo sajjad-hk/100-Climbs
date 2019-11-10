@@ -1,7 +1,7 @@
-import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
-import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
-import 'package:climbing_logbook/src/commons/customIcon.dart';
-import 'package:climbing_logbook/src/dashboard/climbingRouteTiles/tileClimbingRouteoutes.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/assets-content/icons/AppIcons.dart';
+import 'package:hundred_climbs/src/commons/customIcon.dart';
+import 'package:hundred_climbs/src/dashboard/climbingRouteTiles/tileClimbingRouteoutes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

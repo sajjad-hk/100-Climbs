@@ -1,4 +1,4 @@
-import 'package:climbing_logbook/src/models/enums.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
 
 //  @formatter:off
 class Constants {

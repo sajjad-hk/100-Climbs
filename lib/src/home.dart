@@ -1,9 +1,9 @@
-import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/dashboard/dashboard.dart';
-import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
-import 'package:climbing_logbook/src/editeRouteWizard/editRouteWizard.dart';
-import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/newRouteWizard.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:hundred_climbs/src/dashboard/dashboard.dart';
+import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
+import 'package:hundred_climbs/src/editeRouteWizard/editRouteWizard.dart';
+import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/newRouteWizard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

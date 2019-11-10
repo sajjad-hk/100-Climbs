@@ -1,7 +1,7 @@
-import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/tagItem.dart';
-import 'package:climbing_logbook/src/dashboard/state/dashboardState.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/pageTitle.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/tagItem.dart';
+import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';

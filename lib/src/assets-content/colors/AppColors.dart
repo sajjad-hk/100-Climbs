@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:climbing_logbook/src/models/enums.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:flutter/material.dart';
 
 class AppColors {

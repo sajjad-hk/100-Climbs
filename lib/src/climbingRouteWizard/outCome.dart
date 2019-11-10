@@ -1,8 +1,8 @@
-import 'package:climbing_logbook/src/climbingRouteWizard/pageTitle.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/commons/customRadio.dart';
-import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
-import 'package:climbing_logbook/src/models/enums.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/pageTitle.dart';
+import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:hundred_climbs/src/commons/customRadio.dart';
+import 'package:hundred_climbs/src/assets-content/icons/AppIcons.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

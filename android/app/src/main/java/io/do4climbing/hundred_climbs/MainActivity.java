@@ -1,4 +1,4 @@
-package io.do4climbing.climbing_logbook;
+package io.do4climbing.hundred_climbs;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

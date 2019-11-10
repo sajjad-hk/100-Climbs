@@ -1,6 +1,6 @@
-import 'package:climbing_logbook/src/models/enums.dart';
-import 'package:climbing_logbook/src/models/values.dart';
-import 'package:climbing_logbook/src/states/constants.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
+import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/states/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class WizardState with ChangeNotifier {
