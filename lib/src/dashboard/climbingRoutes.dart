@@ -56,7 +56,7 @@ class ClimbingRoutes extends StatelessWidget {
           CustomIcon(
             color: AppColors.warmGrey,
             path: AppIcons.calendar,
-            size: 30,
+            size: 25,
           ),
           Text(
             DateFormat.yMMMMEEEEd().format(date),

@@ -6,7 +6,7 @@ class AppIcons {
   static const String lead = 'assets/icons/lead_icon.png';
   static const String auto = 'assets/icons/auto_icon.png';
   static const String toprope = 'assets/icons/toprope_icon.png';
-  static const String calendar = 'assets/icons/calendar-icon.png';
+  static const String calendar = 'assets/icons/calendar_icon.png';
   static const String arrowLeft = 'assets/icons/arrow_left-icon.png';
   static const String envelope = 'assets/icons/envelope-icon.png';
   static const String eye = 'assets/icons/onsight_icon.png';

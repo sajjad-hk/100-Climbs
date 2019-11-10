@@ -72,7 +72,7 @@ class Dashboard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    expandedHeight: constraints.maxHeight / 2.5,
+                    expandedHeight: constraints.maxHeight / 2.2,
                   ),
                   StreamProvider<Map<DateTime, List<ClimbingRoute>>>.value(
                     stream: climbingRouteService
@@ -141,15 +141,18 @@ class Dashboard extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                Icon(
-                                  Icons.delete,
-                                  size: 25,
-                                  color: Colors.white,
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Icon(
+                                    Icons.delete,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 Text(
                                   'DELETE',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
+                                      color: Colors.white, fontSize: 16),
                                 ),
                               ],
                             ),

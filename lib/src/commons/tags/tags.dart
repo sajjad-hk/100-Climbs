@@ -1,6 +1,6 @@
 import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/state/wizardState.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/tagsHistory.dart';
+import 'package:climbing_logbook/src/commons/tags/tagsHistory.dart';
 import 'package:climbing_logbook/src/commons/appBar.dart';
 import 'package:climbing_logbook/src/commons/appBar.dart' as prefix0;
 import 'package:climbing_logbook/src/dashboard/state/DashboardMode.dart';
@@ -18,7 +18,7 @@ class TagsL extends StatefulWidget {
 class _State extends State<TagsL> {
   final TextEditingController _tagTextController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  List<String> stringTags;
+  List<TagModel> stringTags;
 
   @override
   void initState() {
@@ -36,10 +36,14 @@ class _State extends State<TagsL> {
       List<String> sts = user.tags
           .where((i) => i.startsWith(_tagTextController.text))
           .take(4)
-          .toList();
-      sts.removeWhere((i) => ws.selectedTags.contains(i));
+          .toList()
+            ..add(_tagTextController.text);
+      List<TagModel> tagModels = List();
+      sts.toSet().toList()
+        ..reversed.forEach((i) =>
+            tagModels.add(TagModel(i, ws.selectedTags.contains(i.trim()))));
       setState(() {
-        stringTags = sts;
+        stringTags = tagModels;
       });
     });
     if (ds.mode == DashboardMode.tagEditor)
@@ -86,9 +90,9 @@ class _State extends State<TagsL> {
                   if (ds.previousMode ==
                       DashboardMode.editClimbingRoutePageOpen)
                     ds.pickClimbingRoute(ds.selectedClimbingRoute
-                        .rebuild((r) => r..tags.add(tag)));
+                        .rebuild((r) => r..tags.add(tag.value)));
                   else
-                    ws.addTag(tag);
+                    ws.addTag(tag.value);
                   ds.closeTagEdit();
                   _tagTextController.text = '';
                   FocusScope.of(context).requestFocus(new FocusNode());
@@ -100,4 +104,10 @@ class _State extends State<TagsL> {
       ),
     );
   }
+}
+
+class TagModel {
+  String value;
+  bool alreadyAdded;
+  TagModel(this.value, this.alreadyAdded);
 }

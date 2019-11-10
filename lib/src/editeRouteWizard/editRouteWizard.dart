@@ -1,7 +1,8 @@
 import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
 import 'package:climbing_logbook/src/assets-content/icons/AppIcons.dart';
 import 'package:climbing_logbook/src/climbingRouteWizard/tagItem.dart';
-import 'package:climbing_logbook/src/climbingRouteWizard/tagsHistory.dart';
+import 'package:climbing_logbook/src/commons/tags/tags.dart';
+import 'package:climbing_logbook/src/commons/tags/tagsHistory.dart';
 import 'package:climbing_logbook/src/commons/appBar.dart';
 import 'package:climbing_logbook/src/commons/customRadio.dart';
 import 'package:climbing_logbook/src/commons/dashLinePainter.dart';
@@ -30,7 +31,7 @@ class _State extends State<EditRouteWizard> {
   final _tagTextController = TextEditingController();
   ScrollController _scrollController = ScrollController();
 
-  List<String> stringTags = List<String>();
+  List<TagModel> stringTags = List();
 
   @override
   void didUpdateWidget(Widget oldWidget) {
@@ -55,6 +56,8 @@ class _State extends State<EditRouteWizard> {
               (i) => i.startsWith(_tagTextController.text),
             )
             .take(4)
+            .toList()
+            .map((i) => TagModel(i, false))
             .toList();
       });
     });
@@ -74,7 +77,7 @@ class _State extends State<EditRouteWizard> {
               ]),
               itemSection('Belay', [createBelayStyle(context)]),
               itemSection('Style', [createClimbingStyle(context)]),
-              itemSection('Keywords', [createTagsSection(context)]),
+              itemSection('Tags', [createTagsSection(context)]),
               itemSection('Comments', [createCommentSection(context)]),
             ],
           ),
@@ -185,29 +188,18 @@ class _State extends State<EditRouteWizard> {
           children: <Widget>[
             Visibility(
               visible: _tagTextController.text.isEmpty,
-              child: FloatingActionButton(
-                heroTag: 'EDITE_TAGS',
-                onPressed: () => dashboardState.openTagsEdit(),
-                elevation: 0,
-                mini: true,
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                backgroundColor: Color(0xff4c000000),
-              ),
-            ),
-            Container(
-              height: 30,
-              width: 120,
-              padding: const EdgeInsets.all(3.0),
-              child: Text(
-                'Click to add...',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xff4c000000),
-                  fontStyle: FontStyle.italic,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FloatingActionButton(
+                  heroTag: 'EDITE_TAGS',
+                  onPressed: () => dashboardState.openTagsEdit(),
+                  elevation: 0,
+                  mini: true,
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                  backgroundColor: Color(0xff4c000000),
                 ),
               ),
             ),
@@ -254,7 +246,6 @@ class _State extends State<EditRouteWizard> {
 
   Widget createDatePicker(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         AppDatePicker(),
       ],
@@ -372,7 +363,7 @@ class _State extends State<EditRouteWizard> {
   Widget createListViewGradePicker(BuildContext context, List<String> grades) {
     final dashboardState = Provider.of<DashboardState>(context);
     return Container(
-      height: 68,
+      height: 48,
       child: ListView.builder(
         itemCount: grades.length,
         scrollDirection: Axis.horizontal,
@@ -381,7 +372,7 @@ class _State extends State<EditRouteWizard> {
         cacheExtent: grades.length * 68.0,
         itemBuilder: (context, index) {
           if (grades[index] == dashboardState.selectedClimbingRoute?.grade) {
-            scrollController.animateTo((index - 2) * 68.0,
+            scrollController.animateTo((index - 2) * 72.0,
                 duration: Duration(milliseconds: 200), curve: Curves.easeIn);
           }
           return InkWell(
@@ -393,7 +384,7 @@ class _State extends State<EditRouteWizard> {
             child: Container(
               margin: const EdgeInsets.all(4),
               width: 60,
-              height: 60,
+              height: 40,
               decoration: BoxDecoration(
                 color:
                     grades[index] == dashboardState.selectedClimbingRoute?.grade
@@ -576,8 +567,10 @@ class _State extends State<EditRouteWizard> {
         skipLength: 3.0,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Row(
               children: <Widget>[
@@ -594,7 +587,7 @@ class _State extends State<EditRouteWizard> {
   Widget createTitle(String title) {
     return Container(
       padding: const EdgeInsets.only(
-        left: 20.0,
+        left: 10.0,
         bottom: 5.0,
         top: 20,
       ),

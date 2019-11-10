@@ -108,7 +108,14 @@ class NewRouteWizard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               InkWell(
-                                onTap: () {},
+                                highlightColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                onTap: () {
+                                  climbingRouteService
+                                      .saveNewClimbingRouteAndNewTags(
+                                          user, wizardState);
+                                  _controller.jumpToPage(0);
+                                },
                                 child: Row(
                                   children: <Widget>[
                                     Icon(
@@ -158,6 +165,8 @@ class NewRouteWizard extends StatelessWidget {
                               child: Visibility(
                                 visible: wizardState.currentPageIndex >= 2,
                                 child: InkWell(
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
                                   onTap: () {
                                     climbingRouteService
                                         .saveNewClimbingRouteAndNewTags(

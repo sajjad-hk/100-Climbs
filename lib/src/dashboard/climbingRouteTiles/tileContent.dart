@@ -42,11 +42,11 @@ class TileContent extends StatelessWidget {
             children: <Widget>[
               Container(
                 color: AppColors.getGradeColor(route.grade),
-                height: 110,
+                height: 100,
                 width: 6,
               ),
               Container(
-                height: 110,
+                height: 100,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

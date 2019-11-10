@@ -47,7 +47,6 @@ class Tags extends StatelessWidget {
               Container(
                 constraints: BoxConstraints(maxHeight: 150),
                 child: Wrap(
-                  alignment: WrapAlignment.spaceEvenly,
                   children: [
                     for (String tag in state.selectedTags)
                       TagItem(

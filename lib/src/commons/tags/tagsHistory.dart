@@ -1,7 +1,8 @@
+import 'package:climbing_logbook/src/commons/tags/tags.dart';
 import 'package:flutter/material.dart';
 
 class TagsHistory extends StatelessWidget {
-  final List<String> tags;
+  final List<TagModel> tags;
   final Function onAdd;
 
   TagsHistory({@required this.tags, @required this.onAdd});
@@ -17,9 +18,36 @@ class TagsHistory extends StatelessWidget {
       child: ListView.builder(
         itemCount: ts.length,
         itemBuilder: (BuildContext context, int index) {
-          return InkWell(
-            onTap: () => onAdd(ts[index]),
-            child: Container(
+          if (!ts[index].alreadyAdded)
+            return InkWell(
+              onTap: () => onAdd(ts[index]),
+              child: Container(
+                margin: const EdgeInsets.all(0.5),
+                padding: const EdgeInsets.all(8.0),
+                color: Color(0xff4c000000),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        ts[index].value,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          else
+            return Container(
               margin: const EdgeInsets.all(0.5),
               padding: const EdgeInsets.all(8.0),
               color: Color(0xff4c000000),
@@ -29,7 +57,7 @@ class TagsHistory extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
-                      ts[index],
+                      ts[index].value,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -37,13 +65,12 @@ class TagsHistory extends StatelessWidget {
                     ),
                   ),
                   Icon(
-                    Icons.add,
+                    Icons.check,
                     color: Colors.white,
                   ),
                 ],
               ),
-            ),
-          );
+            );
         },
       ),
     );

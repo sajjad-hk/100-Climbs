@@ -21,6 +21,9 @@ class ClimbingStyle extends StatelessWidget {
           title: 'Style',
         ),
         Flexible(
+          child: Container(),
+        ),
+        Flexible(
           flex: 5,
           child: Column(
             children: <Widget>[
@@ -41,7 +44,8 @@ class ClimbingStyle extends StatelessWidget {
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,
                         onChanged: (val) {
-                          state.selectedClosure = val;
+                          state.selectedClosure =
+                              state.selectedClosure == val ? null : val;
                           autoNext();
                         }),
                   ),
@@ -64,7 +68,8 @@ class ClimbingStyle extends StatelessWidget {
                         checkedBgColor: Color(0xff4d000000),
                         unCheckedBgColor: Colors.transparent,
                         onChanged: (val) {
-                          state.selectedClosure = val;
+                          state.selectedClosure =
+                              state.selectedClosure == val ? null : val;
                           autoNext();
                         }),
                   ),

@@ -21,7 +21,7 @@ class ClimbingRouteTile extends StatelessWidget {
     final selected = dashboardState.isSelected(route);
     if (route.outCome == OutComeEnum.failure && !selected) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: FailureTileWrapper(
           tileContent: TileContent(
             route: route,
@@ -32,7 +32,7 @@ class ClimbingRouteTile extends StatelessWidget {
     }
     if (selected) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
@@ -48,7 +48,7 @@ class ClimbingRouteTile extends StatelessWidget {
       );
     }
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(5.0),
       child: TileContent(
         route: route,
         selected: selected,

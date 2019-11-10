@@ -54,6 +54,7 @@ class DashboardState extends ChangeNotifier {
 
   close() {
     _mode = DashboardMode.defaultDashboard;
+    _newRouteOpen = false;
     notifyListeners();
   }
 

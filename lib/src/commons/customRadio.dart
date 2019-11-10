@@ -91,7 +91,8 @@ class NewCustomRadio<T> extends StatelessWidget {
             flex: 2,
             fit: FlexFit.loose,
             child: Container(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(
+                  top: 10.0, right: 15, bottom: 10, left: 20),
               child: CustomIcon(
                 path: iconProvider,
                 size: iconSize ?? 20,

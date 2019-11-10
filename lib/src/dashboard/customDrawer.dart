@@ -1,3 +1,5 @@
+import 'package:climbing_logbook/src/assets-content/colors/AppColors.dart';
+import 'package:climbing_logbook/src/commons/customIcon.dart';
 import 'package:climbing_logbook/src/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +24,8 @@ class CustomDrawer extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 35.0, top: 25.0),
-              child: Text(
-                'CLIMBING LOGBOOK',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+              child: Image(
+                image: AssetImage('assets/icons/100_climbs.png'),
               ),
             ),
             Expanded(
@@ -37,17 +36,33 @@ class CustomDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    user.photoUrl == null
-                        ? Icon(
-                            Icons.account_circle,
-                            color: Color(0xff14d8e2e5),
-                            size: 100,
-                          )
-                        : CircleAvatar(
-                            radius: 50,
-                            backgroundImage: NetworkImage(user.photoUrl),
-                            backgroundColor: Color(0x14d8e2e5),
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          width: 105,
+                          height: 105,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.getGradeColor('5b'),
                           ),
+                        ),
+                        Positioned(
+                            left: 2.5,
+                            top: 2.5,
+                            child: user.photoUrl == null
+                                ? Icon(
+                                    Icons.account_circle,
+                                    color: Color(0xff14d8e2e5),
+                                    size: 100,
+                                  )
+                                : CircleAvatar(
+                                    radius: 50,
+                                    backgroundImage:
+                                        NetworkImage(user.photoUrl),
+                                    backgroundColor: Color(0x14d8e2e5),
+                                  )),
+                      ],
+                    ),
                     Container(
                       padding: const EdgeInsets.all(5),
                       child: Text(
@@ -81,67 +96,30 @@ class CustomDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                height: 80,
-                                padding: const EdgeInsets.all(10.0),
-                                child: RaisedButton(
-                                  color: Colors.black,
-                                  textColor: Colors.white,
-                                  child: Container(
-                                    child: Center(
-                                      child: Text('SIGN OUT'),
-                                    ),
-                                  ),
-                                  onPressed: () => authService.signOut(context),
-                                ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30.0),
+                      child: FlatButton(
+                        color: Colors.black,
+                        onPressed: () => authService.signOut(context),
+                        child: Container(
+                          width: 100,
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Icon(
+                                Icons.exit_to_app,
+                                color: Colors.white,
+                                size: 25,
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(),
-                            )
-                          ],
+                              Text(
+                                'SIGN OUT',
+                                style: TextStyle(color: Colors.white),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Container(),
-                    ),
-                    FlatButton(
-                      color: chartBackgroundTo,
-                      textColor: Colors.white,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.bug_report),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text('REPORT BUG'),
-                          ),
-                        ],
-                      ),
-                      onPressed: () => null,
-                    ),
-                    FlatButton(
-                      color: chartBackgroundTo,
-                      textColor: Colors.white,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.send),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text('REQUEST A FEATURE'),
-                          ),
-                        ],
-                      ),
-                      onPressed: () => null,
                     ),
                   ],
                 ),

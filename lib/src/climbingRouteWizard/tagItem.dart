@@ -10,32 +10,32 @@ class TagItem extends StatelessWidget {
     return FlatButton(
       onPressed: () => onTab(text),
       child: Container(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: Color(0xff4c000000),
           borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),
         ),
-        width: text.length * 9.0 + 40,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: 10.0, right: 8.0, top: 0, bottom: 4.0),
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: TextStyle(color: Colors.white),
+              children: <TextSpan>[
+                TextSpan(
+                  text: text,
+                  style: TextStyle(fontSize: 14),
                 ),
-              ),
+                TextSpan(
+                  text: '  \u00D7',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
             ),
-            Icon(
-              Icons.close,
-              color: Colors.white,
-            ),
-          ],
+          ),
         ),
       ),
     );

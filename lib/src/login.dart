@@ -28,13 +28,8 @@ class Login extends StatelessWidget {
               child: Container(
                 alignment: Alignment.bottomCenter,
                 padding: const EdgeInsets.all(40.0),
-                child: Text(
-                  'CLIMBING LOGBOOK',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    decoration: TextDecoration.none,
-                  ),
+                child: Image(
+                  image: AssetImage('assets/icons/100_climbs.png'),
                 ),
               ),
             ),
@@ -65,52 +60,53 @@ class Login extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: Container(),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: LoginButton(
-                            label: 'Sign in with Facebook',
-                            path: facebookIconPath,
-                            onPressed: () {},
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: Container(),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: LoginButton(
-                            label: 'Sign in with email',
-                            path: envelopeIconPath,
-                            onPressed: () {},
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                  ),
+// TOdo in future
+//                  Expanded(
+//                    flex: 2,
+//                    child: Row(
+//                      children: <Widget>[
+//                        Expanded(
+//                          flex: 1,
+//                          child: Container(),
+//                        ),
+//                        Expanded(
+//                          flex: 4,
+//                          child: LoginButton(
+//                            label: 'Sign in with Facebook',
+//                            path: facebookIconPath,
+//                            onPressed: () {},
+//                          ),
+//                        ),
+//                        Expanded(
+//                          flex: 1,
+//                          child: Container(),
+//                        ),
+//                      ],
+//                    ),
+//                  ),
+//                  Expanded(
+//                    flex: 2,
+//                    child: Row(
+//                      children: <Widget>[
+//                        Expanded(
+//                          flex: 1,
+//                          child: Container(),
+//                        ),
+//                        Expanded(
+//                          flex: 4,
+//                          child: LoginButton(
+//                            label: 'Sign in with email',
+//                            path: envelopeIconPath,
+//                            onPressed: () {},
+//                          ),
+//                        ),
+//                        Expanded(
+//                          flex: 1,
+//                          child: Container(),
+//                        ),
+//                      ],
+//                    ),
+//                  ),
                   Expanded(
                     flex: 4,
                     child: Container(),
