@@ -15,11 +15,6 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-final Color listBackground = Color(0xffd8e2e5);
-final Color appBarBackground = Color(0xFF000000);
-final Color chartBackgroundFrom = Color(0xff165571);
-final Color chartBackgroundTo = Color(0xff0e1823);
-
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {

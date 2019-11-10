@@ -1,3 +1,4 @@
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:hundred_climbs/src/commons/customIcon.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,6 @@ class Login extends StatelessWidget {
   final facebookIconPath = 'assets/icons/facebook-icon.png';
   final envelopeIconPath = 'assets/icons/envelope-icon.png';
 
-  final Color backgroundFrom = Color(0xff165571);
-  final Color backgroundTo = Color(0xff0e1823);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,7 +16,7 @@ class Login extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [backgroundFrom, backgroundTo],
+            colors: [AppColors.lightNavy, AppColors.dark],
           ),
         ),
         child: Column(
@@ -128,7 +126,6 @@ class LoginButton extends StatelessWidget {
   final String label;
   final GestureTapCallback onPressed;
   final path;
-  final Color backgroundButton = Color(0xFF0e1823);
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +139,7 @@ class LoginButton extends StatelessWidget {
           ),
         ),
         textColor: Colors.white,
-        color: backgroundButton,
+        color: AppColors.dark,
         onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

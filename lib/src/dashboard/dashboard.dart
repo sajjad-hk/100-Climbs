@@ -10,11 +10,6 @@ import 'package:hundred_climbs/src/services/climbingRouteService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-final Color listBackground = Color(0xffd8e2e5);
-final Color appBarBackground = Color(0xFF000000);
-final Color chartBackgroundFrom = Color(0xff165571);
-final Color chartBackgroundTo = Color(0xff0e1823);
-
 class Dashboard extends StatelessWidget {
   Dashboard();
 
@@ -27,7 +22,7 @@ class Dashboard extends StatelessWidget {
         return Stack(
           children: <Widget>[
             Scaffold(
-              backgroundColor: listBackground,
+              backgroundColor: AppColors.silver,
               body: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
@@ -38,7 +33,7 @@ class Dashboard extends StatelessWidget {
                         onPressed: () => Scaffold.of(context).openDrawer(),
                       ),
                     ),
-                    backgroundColor: appBarBackground,
+                    backgroundColor: Colors.black,
                     floating: true,
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
@@ -67,7 +62,7 @@ class Dashboard extends StatelessWidget {
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [chartBackgroundFrom, chartBackgroundTo],
+                            colors: [AppColors.lightNavy, AppColors.dark],
                           ),
                         ),
                       ),

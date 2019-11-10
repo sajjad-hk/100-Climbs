@@ -17,9 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-final Color chartBackgroundFrom = Color(0xff165571);
-final Color chartBackgroundTo = Color(0xff0e1823);
-
 class EditRouteWizard extends StatefulWidget {
   @override
   _State createState() => _State();

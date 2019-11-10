@@ -5,9 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-final Color chartBackgroundTo = Color(0xff0e1823);
-final Color text = Color(0xFFd8e2e5);
-
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({@required this.accountType});
 
@@ -18,7 +15,7 @@ class CustomDrawer extends StatelessWidget {
     var user = Provider.of<FirebaseUser>(context);
     return Drawer(
       child: Container(
-        color: chartBackgroundTo,
+        color: AppColors.dark,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -68,7 +65,7 @@ class CustomDrawer extends StatelessWidget {
                       child: Text(
                         "Signed in with " + accountType + " account as",
                         style: TextStyle(
-                          color: text,
+                          color: AppColors.silver,
                           fontSize: 14,
                         ),
                       ),
