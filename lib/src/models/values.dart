@@ -5,8 +5,7 @@ import 'package:hundred_climbs/src/models/enums.dart';
 
 part 'values.g.dart';
 
-abstract class ClimbingRoute
-    implements Built<ClimbingRoute, ClimbingRouteBuilder> {
+abstract class Climb implements Built<Climb, ClimbBuilder> {
   @nullable
   String get documentId;
 
@@ -30,22 +29,6 @@ abstract class ClimbingRoute
 
   @nullable
   String get comment;
-
-  ClimbingRoute._();
-
-  factory ClimbingRoute([void Function(ClimbingRouteBuilder) updates]) =
-      _$ClimbingRoute;
-
-  static Serializer<ClimbingRoute> get serializer => _$climbingRouteSerializer;
-}
-
-abstract class Climb implements Built<Climb, ClimbBuilder> {
-  @nullable
-  OutComeEnum get outCome;
-  String get grade;
-  GradingStyleEnum get gradingStyle;
-  @nullable
-  BelayingStyleEnum get belayingStyle;
 
   Climb._();
 
@@ -71,6 +54,11 @@ abstract class AppUser implements Built<AppUser, AppUserBuilder> {
 
   @nullable
   Climb get lastClimb;
+
+  @nullable
+  Climb get bestClimb;
+
+  int get totalNumOfClimbs;
 
   AppUser._();
 

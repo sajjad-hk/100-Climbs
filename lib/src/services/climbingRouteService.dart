@@ -18,20 +18,20 @@ class ClimbingRouteService {
         ..addPlugin(TimestampSerializerPlugin()))
       .build();
 
-  StreamTransformer<QuerySnapshot, List<ClimbingRoute>>
+  StreamTransformer<QuerySnapshot, List<Climb>>
       _jsonToClimbingRoutesTransformer = StreamTransformer.fromHandlers(
     handleData: (data, sink) {
       return sink.add(data.documents.map(
         (document) {
           return standardSerializers
-              .deserializeWith(ClimbingRoute.serializer, document.data)
+              .deserializeWith(Climb.serializer, document.data)
               .rebuild((it) => it..documentId = document.documentID);
         },
       ).toList());
     },
   );
 
-  StreamTransformer<List<ClimbingRoute>, Map<DateTime, List<ClimbingRoute>>>
+  StreamTransformer<List<Climb>, Map<DateTime, List<Climb>>>
       _dateGroupByTransformer = StreamTransformer.fromHandlers(
     handleData: (data, sink) {
       return sink.add(
@@ -47,30 +47,26 @@ class ClimbingRouteService {
     },
   );
 
-  Stream<List<ClimbingRoute>> getClimbingRoutes(String uid) {
+  Stream<List<Climb>> getClimbingRoutes(String uid) {
     var ref = _db.collection('routes').where('uid', isEqualTo: uid);
     return ref.snapshots().transform(_jsonToClimbingRoutesTransformer);
   }
 
-  Stream<Map<DateTime, List<ClimbingRoute>>> getClimbingRoutesGroupByDate(
-      String uid) {
+  Stream<Map<DateTime, List<Climb>>> getClimbingRoutesGroupByDate(String uid) {
     return getClimbingRoutes(uid).transform(_dateGroupByTransformer);
   }
 
   Future<void> saveNewClimbingRouteAndNewTags(
       AppUser user, WizardState wizardState) {
-    ClimbingRoute climbingRoute =
+    Climb climbingRoute =
         _getClimbingRouteFromWizardState(user.uid, wizardState);
-    Climb lastClimb =
-        _createLastClimb(climbingRoute.grade, climbingRoute.gradingStyle);
+
     saveNewTagsToFirebase(user, wizardState.selectedTags);
-    saveLastClimb(user, lastClimb);
     return saveClimbingRouteToFirebase(climbingRoute);
   }
 
-  ClimbingRoute _getClimbingRouteFromWizardState(
-      String uid, WizardState wizardState) {
-    return ClimbingRoute(
+  Climb _getClimbingRouteFromWizardState(String uid, WizardState wizardState) {
+    return Climb(
       (route) => route
         ..uid = uid
         ..outCome = wizardState.selectedOutCome
@@ -97,9 +93,9 @@ class ClimbingRouteService {
         .setData({'tags': distinctTags}, merge: true);
   }
 
-  Future<void> saveClimbingRouteToFirebase(ClimbingRoute climbingRoute) {
-    dynamic climbingRouteJson = standardSerializers.serializeWith(
-        ClimbingRoute.serializer, climbingRoute);
+  Future<void> saveClimbingRouteToFirebase(Climb climbingRoute) {
+    dynamic climbingRouteJson =
+        standardSerializers.serializeWith(Climb.serializer, climbingRoute);
     return _db.collection('routes').add(climbingRouteJson);
   }
 
@@ -121,9 +117,9 @@ class ClimbingRouteService {
       _db.collection('routes').document(id).delete();
   }
 
-  Future<void> updateClimbingRoute(ClimbingRoute route) {
+  Future<void> updateClimbingRoute(Climb route) {
     dynamic routeJson =
-        standardSerializers.serializeWith(ClimbingRoute.serializer, route);
+        standardSerializers.serializeWith(Climb.serializer, route);
     return _db
         .collection('routes')
         .document(route.documentId)

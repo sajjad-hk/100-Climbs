@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ClimbingRouteTile extends StatelessWidget {
-  final ClimbingRoute route;
+  final Climb route;
   ClimbingRouteTile({@required this.route});
 
   @override

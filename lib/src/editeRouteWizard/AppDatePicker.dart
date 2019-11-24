@@ -64,7 +64,7 @@ class AppDatePicker extends StatelessWidget {
         );
       },
     );
-    ClimbingRoute route = dashboardState.selectedClimbingRoute.rebuild(
+    Climb route = dashboardState.selectedClimbingRoute.rebuild(
         (r) => r..loggedDate = picked ?? dashboardState.selectedClimbingRoute);
     dashboardState.pickClimbingRoute(route);
     return route.loggedDate;

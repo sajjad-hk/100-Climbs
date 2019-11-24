@@ -6,19 +6,17 @@ part of 'values.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<ClimbingRoute> _$climbingRouteSerializer =
-    new _$ClimbingRouteSerializer();
 Serializer<Climb> _$climbSerializer = new _$ClimbSerializer();
 Serializer<AppUser> _$appUserSerializer = new _$AppUserSerializer();
 
-class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
+class _$ClimbSerializer implements StructuredSerializer<Climb> {
   @override
-  final Iterable<Type> types = const [ClimbingRoute, _$ClimbingRoute];
+  final Iterable<Type> types = const [Climb, _$Climb];
   @override
-  final String wireName = 'ClimbingRoute';
+  final String wireName = 'Climb';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ClimbingRoute object,
+  Iterable<Object> serialize(Serializers serializers, Climb object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'outCome',
@@ -68,10 +66,9 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
   }
 
   @override
-  ClimbingRoute deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+  Climb deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ClimbingRouteBuilder();
+    final result = new ClimbBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -130,74 +127,6 @@ class _$ClimbingRouteSerializer implements StructuredSerializer<ClimbingRoute> {
   }
 }
 
-class _$ClimbSerializer implements StructuredSerializer<Climb> {
-  @override
-  final Iterable<Type> types = const [Climb, _$Climb];
-  @override
-  final String wireName = 'Climb';
-
-  @override
-  Iterable<Object> serialize(Serializers serializers, Climb object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'grade',
-      serializers.serialize(object.grade,
-          specifiedType: const FullType(String)),
-      'gradingStyle',
-      serializers.serialize(object.gradingStyle,
-          specifiedType: const FullType(GradingStyleEnum)),
-    ];
-    if (object.outCome != null) {
-      result
-        ..add('outCome')
-        ..add(serializers.serialize(object.outCome,
-            specifiedType: const FullType(OutComeEnum)));
-    }
-    if (object.belayingStyle != null) {
-      result
-        ..add('belayingStyle')
-        ..add(serializers.serialize(object.belayingStyle,
-            specifiedType: const FullType(BelayingStyleEnum)));
-    }
-    return result;
-  }
-
-  @override
-  Climb deserialize(Serializers serializers, Iterable<Object> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new ClimbBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current as String;
-      iterator.moveNext();
-      final dynamic value = iterator.current;
-      switch (key) {
-        case 'outCome':
-          result.outCome = serializers.deserialize(value,
-              specifiedType: const FullType(OutComeEnum)) as OutComeEnum;
-          break;
-        case 'grade':
-          result.grade = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'gradingStyle':
-          result.gradingStyle = serializers.deserialize(value,
-                  specifiedType: const FullType(GradingStyleEnum))
-              as GradingStyleEnum;
-          break;
-        case 'belayingStyle':
-          result.belayingStyle = serializers.deserialize(value,
-                  specifiedType: const FullType(BelayingStyleEnum))
-              as BelayingStyleEnum;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
 class _$AppUserSerializer implements StructuredSerializer<AppUser> {
   @override
   final Iterable<Type> types = const [AppUser, _$AppUser];
@@ -219,6 +148,9 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
       'lastLogin',
       serializers.serialize(object.lastLogin,
           specifiedType: const FullType(DateTime)),
+      'totalNumOfClimbs',
+      serializers.serialize(object.totalNumOfClimbs,
+          specifiedType: const FullType(int)),
     ];
     if (object.photoUrl != null) {
       result
@@ -237,6 +169,12 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
       result
         ..add('lastClimb')
         ..add(serializers.serialize(object.lastClimb,
+            specifiedType: const FullType(Climb)));
+    }
+    if (object.bestClimb != null) {
+      result
+        ..add('bestClimb')
+        ..add(serializers.serialize(object.bestClimb,
             specifiedType: const FullType(Climb)));
     }
     return result;
@@ -283,6 +221,14 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
           result.lastClimb.replace(serializers.deserialize(value,
               specifiedType: const FullType(Climb)) as Climb);
           break;
+        case 'bestClimb':
+          result.bestClimb.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Climb)) as Climb);
+          break;
+        case 'totalNumOfClimbs':
+          result.totalNumOfClimbs = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -290,7 +236,7 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
   }
 }
 
-class _$ClimbingRoute extends ClimbingRoute {
+class _$Climb extends Climb {
   @override
   final String documentId;
   @override
@@ -312,10 +258,10 @@ class _$ClimbingRoute extends ClimbingRoute {
   @override
   final String comment;
 
-  factory _$ClimbingRoute([void Function(ClimbingRouteBuilder) updates]) =>
-      (new ClimbingRouteBuilder()..update(updates)).build();
+  factory _$Climb([void Function(ClimbBuilder) updates]) =>
+      (new ClimbBuilder()..update(updates)).build();
 
-  _$ClimbingRoute._(
+  _$Climb._(
       {this.documentId,
       this.outCome,
       this.uid,
@@ -328,36 +274,36 @@ class _$ClimbingRoute extends ClimbingRoute {
       this.comment})
       : super._() {
     if (outCome == null) {
-      throw new BuiltValueNullFieldError('ClimbingRoute', 'outCome');
+      throw new BuiltValueNullFieldError('Climb', 'outCome');
     }
     if (uid == null) {
-      throw new BuiltValueNullFieldError('ClimbingRoute', 'uid');
+      throw new BuiltValueNullFieldError('Climb', 'uid');
     }
     if (gradingStyle == null) {
-      throw new BuiltValueNullFieldError('ClimbingRoute', 'gradingStyle');
+      throw new BuiltValueNullFieldError('Climb', 'gradingStyle');
     }
     if (grade == null) {
-      throw new BuiltValueNullFieldError('ClimbingRoute', 'grade');
+      throw new BuiltValueNullFieldError('Climb', 'grade');
     }
     if (belayingStyle == null) {
-      throw new BuiltValueNullFieldError('ClimbingRoute', 'belayingStyle');
+      throw new BuiltValueNullFieldError('Climb', 'belayingStyle');
     }
     if (loggedDate == null) {
-      throw new BuiltValueNullFieldError('ClimbingRoute', 'loggedDate');
+      throw new BuiltValueNullFieldError('Climb', 'loggedDate');
     }
   }
 
   @override
-  ClimbingRoute rebuild(void Function(ClimbingRouteBuilder) updates) =>
+  Climb rebuild(void Function(ClimbBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ClimbingRouteBuilder toBuilder() => new ClimbingRouteBuilder()..replace(this);
+  ClimbBuilder toBuilder() => new ClimbBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ClimbingRoute &&
+    return other is Climb &&
         documentId == other.documentId &&
         outCome == other.outCome &&
         uid == other.uid &&
@@ -394,7 +340,7 @@ class _$ClimbingRoute extends ClimbingRoute {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ClimbingRoute')
+    return (newBuiltValueToStringHelper('Climb')
           ..add('documentId', documentId)
           ..add('outCome', outCome)
           ..add('uid', uid)
@@ -409,9 +355,8 @@ class _$ClimbingRoute extends ClimbingRoute {
   }
 }
 
-class ClimbingRouteBuilder
-    implements Builder<ClimbingRoute, ClimbingRouteBuilder> {
-  _$ClimbingRoute _$v;
+class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
+  _$Climb _$v;
 
   String _documentId;
   String get documentId => _$this._documentId;
@@ -455,9 +400,9 @@ class ClimbingRouteBuilder
   String get comment => _$this._comment;
   set comment(String comment) => _$this._comment = comment;
 
-  ClimbingRouteBuilder();
+  ClimbBuilder();
 
-  ClimbingRouteBuilder get _$this {
+  ClimbBuilder get _$this {
     if (_$v != null) {
       _documentId = _$v.documentId;
       _outCome = _$v.outCome;
@@ -469,144 +414,6 @@ class ClimbingRouteBuilder
       _tags = _$v.tags?.toBuilder();
       _loggedDate = _$v.loggedDate;
       _comment = _$v.comment;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(ClimbingRoute other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
-    _$v = other as _$ClimbingRoute;
-  }
-
-  @override
-  void update(void Function(ClimbingRouteBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$ClimbingRoute build() {
-    _$ClimbingRoute _$result;
-    try {
-      _$result = _$v ??
-          new _$ClimbingRoute._(
-              documentId: documentId,
-              outCome: outCome,
-              uid: uid,
-              gradingStyle: gradingStyle,
-              grade: grade,
-              belayingStyle: belayingStyle,
-              closure: closure,
-              tags: _tags?.build(),
-              loggedDate: loggedDate,
-              comment: comment);
-    } catch (_) {
-      String _$failedField;
-      try {
-        _$failedField = 'tags';
-        _tags?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'ClimbingRoute', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$Climb extends Climb {
-  @override
-  final OutComeEnum outCome;
-  @override
-  final String grade;
-  @override
-  final GradingStyleEnum gradingStyle;
-  @override
-  final BelayingStyleEnum belayingStyle;
-
-  factory _$Climb([void Function(ClimbBuilder) updates]) =>
-      (new ClimbBuilder()..update(updates)).build();
-
-  _$Climb._({this.outCome, this.grade, this.gradingStyle, this.belayingStyle})
-      : super._() {
-    if (grade == null) {
-      throw new BuiltValueNullFieldError('Climb', 'grade');
-    }
-    if (gradingStyle == null) {
-      throw new BuiltValueNullFieldError('Climb', 'gradingStyle');
-    }
-  }
-
-  @override
-  Climb rebuild(void Function(ClimbBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  ClimbBuilder toBuilder() => new ClimbBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is Climb &&
-        outCome == other.outCome &&
-        grade == other.grade &&
-        gradingStyle == other.gradingStyle &&
-        belayingStyle == other.belayingStyle;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, outCome.hashCode), grade.hashCode),
-            gradingStyle.hashCode),
-        belayingStyle.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('Climb')
-          ..add('outCome', outCome)
-          ..add('grade', grade)
-          ..add('gradingStyle', gradingStyle)
-          ..add('belayingStyle', belayingStyle))
-        .toString();
-  }
-}
-
-class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
-  _$Climb _$v;
-
-  OutComeEnum _outCome;
-  OutComeEnum get outCome => _$this._outCome;
-  set outCome(OutComeEnum outCome) => _$this._outCome = outCome;
-
-  String _grade;
-  String get grade => _$this._grade;
-  set grade(String grade) => _$this._grade = grade;
-
-  GradingStyleEnum _gradingStyle;
-  GradingStyleEnum get gradingStyle => _$this._gradingStyle;
-  set gradingStyle(GradingStyleEnum gradingStyle) =>
-      _$this._gradingStyle = gradingStyle;
-
-  BelayingStyleEnum _belayingStyle;
-  BelayingStyleEnum get belayingStyle => _$this._belayingStyle;
-  set belayingStyle(BelayingStyleEnum belayingStyle) =>
-      _$this._belayingStyle = belayingStyle;
-
-  ClimbBuilder();
-
-  ClimbBuilder get _$this {
-    if (_$v != null) {
-      _outCome = _$v.outCome;
-      _grade = _$v.grade;
-      _gradingStyle = _$v.gradingStyle;
-      _belayingStyle = _$v.belayingStyle;
       _$v = null;
     }
     return this;
@@ -627,12 +434,31 @@ class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
 
   @override
   _$Climb build() {
-    final _$result = _$v ??
-        new _$Climb._(
-            outCome: outCome,
-            grade: grade,
-            gradingStyle: gradingStyle,
-            belayingStyle: belayingStyle);
+    _$Climb _$result;
+    try {
+      _$result = _$v ??
+          new _$Climb._(
+              documentId: documentId,
+              outCome: outCome,
+              uid: uid,
+              gradingStyle: gradingStyle,
+              grade: grade,
+              belayingStyle: belayingStyle,
+              closure: closure,
+              tags: _tags?.build(),
+              loggedDate: loggedDate,
+              comment: comment);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'tags';
+        _tags?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Climb', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -653,6 +479,10 @@ class _$AppUser extends AppUser {
   final DateTime lastLogin;
   @override
   final Climb lastClimb;
+  @override
+  final Climb bestClimb;
+  @override
+  final int totalNumOfClimbs;
 
   factory _$AppUser([void Function(AppUserBuilder) updates]) =>
       (new AppUserBuilder()..update(updates)).build();
@@ -664,7 +494,9 @@ class _$AppUser extends AppUser {
       this.email,
       this.tags,
       this.lastLogin,
-      this.lastClimb})
+      this.lastClimb,
+      this.bestClimb,
+      this.totalNumOfClimbs})
       : super._() {
     if (uid == null) {
       throw new BuiltValueNullFieldError('AppUser', 'uid');
@@ -677,6 +509,9 @@ class _$AppUser extends AppUser {
     }
     if (lastLogin == null) {
       throw new BuiltValueNullFieldError('AppUser', 'lastLogin');
+    }
+    if (totalNumOfClimbs == null) {
+      throw new BuiltValueNullFieldError('AppUser', 'totalNumOfClimbs');
     }
   }
 
@@ -697,7 +532,9 @@ class _$AppUser extends AppUser {
         email == other.email &&
         tags == other.tags &&
         lastLogin == other.lastLogin &&
-        lastClimb == other.lastClimb;
+        lastClimb == other.lastClimb &&
+        bestClimb == other.bestClimb &&
+        totalNumOfClimbs == other.totalNumOfClimbs;
   }
 
   @override
@@ -706,12 +543,16 @@ class _$AppUser extends AppUser {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, uid.hashCode), displayName.hashCode),
-                        photoUrl.hashCode),
-                    email.hashCode),
-                tags.hashCode),
-            lastLogin.hashCode),
-        lastClimb.hashCode));
+                    $jc(
+                        $jc(
+                            $jc($jc($jc(0, uid.hashCode), displayName.hashCode),
+                                photoUrl.hashCode),
+                            email.hashCode),
+                        tags.hashCode),
+                    lastLogin.hashCode),
+                lastClimb.hashCode),
+            bestClimb.hashCode),
+        totalNumOfClimbs.hashCode));
   }
 
   @override
@@ -723,7 +564,9 @@ class _$AppUser extends AppUser {
           ..add('email', email)
           ..add('tags', tags)
           ..add('lastLogin', lastLogin)
-          ..add('lastClimb', lastClimb))
+          ..add('lastClimb', lastClimb)
+          ..add('bestClimb', bestClimb)
+          ..add('totalNumOfClimbs', totalNumOfClimbs))
         .toString();
   }
 }
@@ -759,6 +602,15 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   ClimbBuilder get lastClimb => _$this._lastClimb ??= new ClimbBuilder();
   set lastClimb(ClimbBuilder lastClimb) => _$this._lastClimb = lastClimb;
 
+  ClimbBuilder _bestClimb;
+  ClimbBuilder get bestClimb => _$this._bestClimb ??= new ClimbBuilder();
+  set bestClimb(ClimbBuilder bestClimb) => _$this._bestClimb = bestClimb;
+
+  int _totalNumOfClimbs;
+  int get totalNumOfClimbs => _$this._totalNumOfClimbs;
+  set totalNumOfClimbs(int totalNumOfClimbs) =>
+      _$this._totalNumOfClimbs = totalNumOfClimbs;
+
   AppUserBuilder();
 
   AppUserBuilder get _$this {
@@ -770,6 +622,8 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
       _tags = _$v.tags?.toBuilder();
       _lastLogin = _$v.lastLogin;
       _lastClimb = _$v.lastClimb?.toBuilder();
+      _bestClimb = _$v.bestClimb?.toBuilder();
+      _totalNumOfClimbs = _$v.totalNumOfClimbs;
       _$v = null;
     }
     return this;
@@ -800,7 +654,9 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
               email: email,
               tags: _tags?.build(),
               lastLogin: lastLogin,
-              lastClimb: _lastClimb?.build());
+              lastClimb: _lastClimb?.build(),
+              bestClimb: _bestClimb?.build(),
+              totalNumOfClimbs: totalNumOfClimbs);
     } catch (_) {
       String _$failedField;
       try {
@@ -809,6 +665,8 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
 
         _$failedField = 'lastClimb';
         _lastClimb?.build();
+        _$failedField = 'bestClimb';
+        _bestClimb?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppUser', _$failedField, e.toString());

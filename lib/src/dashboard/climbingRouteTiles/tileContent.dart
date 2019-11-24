@@ -9,7 +9,7 @@ import 'package:hundred_climbs/src/models/values.dart';
 import 'package:provider/provider.dart';
 
 class TileContent extends StatelessWidget {
-  final ClimbingRoute route;
+  final Climb route;
   final bool selected;
   TileContent({@required this.route, @required this.selected});
 

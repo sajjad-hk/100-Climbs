@@ -10,13 +10,12 @@ import 'values.dart';
 part 'serializers.g.dart';
 
 @SerializersFor(const [
-  ClimbingRoute,
+  Climb,
   AppUser,
   OutComeEnum,
   BelayingStyleEnum,
   GradingStyleEnum,
   ClosureEnum,
-  Timestamp,
-  Climb
+  Timestamp
 ])
 final Serializers serializers = _$serializers;

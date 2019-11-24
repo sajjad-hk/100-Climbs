@@ -1,5 +1,6 @@
 import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/commons/customIcon.dart';
+import 'package:hundred_climbs/src/models/values.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<FirebaseUser>(context);
+    var user = Provider.of<AppUser>(context);
     return Drawer(
       child: Container(
         color: AppColors.dark,
@@ -40,7 +41,8 @@ class CustomDrawer extends StatelessWidget {
                           height: 105,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.getGradeColor('5b'),
+                            color:
+                                AppColors.getGradeColor(user.bestClimb.grade),
                           ),
                         ),
                         Positioned(

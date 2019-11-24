@@ -16,34 +16,33 @@ class ClimbingCountChartService {
         ..addPlugin(TimestampSerializerPlugin()))
       .build();
 
-  StreamTransformer<QuerySnapshot, List<ClimbingRoute>>
+  StreamTransformer<QuerySnapshot, List<Climb>>
       _jsonToClimbingRoutesTransformer = StreamTransformer.fromHandlers(
     handleData: (data, sink) {
       return sink.add(data.documents.map(
         (document) {
           return standardSerializers
-              .deserializeWith(ClimbingRoute.serializer, document.data)
+              .deserializeWith(Climb.serializer, document.data)
               .rebuild((it) => it..documentId = document.documentID);
         },
       ).toList());
     },
   );
 
-  StreamTransformer<List<ClimbingRoute>,
-          Map<String, Map<DateTime, List<ClimbingRoute>>>>
+  StreamTransformer<List<Climb>, Map<String, Map<DateTime, List<Climb>>>>
       _climbingRoutesToChartTransformer =
       StreamTransformer.fromHandlers(handleData: (data, sink) {
     Map groupByMonth = groupBy(
       data.where((it) => it.outCome == OutComeEnum.success),
       (it) => it.grade,
     );
-    Map<String, Map<DateTime, List<ClimbingRoute>>> groupByGrade =
-        groupByMonth.map(
+    Map<String, Map<DateTime, List<Climb>>> groupByGrade = groupByMonth.map(
       (key, values) => MapEntry(
         key,
         groupBy(
           values,
-          (value) => DateTime(value.loggedDate.year, value.loggedDate.month),
+          (value) => DateTime(value.loggedDate.year, value.loggedDate.month,
+              value.loggedDate.day),
         ),
       ),
     );
@@ -52,12 +51,12 @@ class ClimbingCountChartService {
     );
   });
 
-  Stream<Map<String, Map<DateTime, List<ClimbingRoute>>>>
-      getClimbingCountChartData(String uid) {
+  Stream<Map<String, Map<DateTime, List<Climb>>>> getClimbingCountChartData(
+      String uid) {
     return _getClimbingRoutes(uid).transform(_climbingRoutesToChartTransformer);
   }
 
-  Stream<List<ClimbingRoute>> _getClimbingRoutes(String uid) {
+  Stream<List<Climb>> _getClimbingRoutes(String uid) {
     var ref = _db.collection('routes').where('uid', isEqualTo: uid);
     return ref.snapshots().transform(_jsonToClimbingRoutesTransformer);
   }

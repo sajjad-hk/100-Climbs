@@ -24,7 +24,7 @@ class HundredClimbs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<FirebaseUser>.value(
-      stream: FirebaseAuth.instance.onAuthStateChanged,
+      value: FirebaseAuth.instance.onAuthStateChanged,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: '100 Climbs',
@@ -33,9 +33,9 @@ class HundredClimbs extends StatelessWidget {
           builder: (context, firebaseUser, _) {
             if (firebaseUser != null) {
               return StreamProvider<AppUser>.value(
-                stream: authService.hundredClimbsUser(firebaseUser?.uid),
+                value: authService.hundredClimbsUser(firebaseUser?.uid),
                 child: ChangeNotifierProvider.value(
-                  notifier: DashboardState(),
+                  value: DashboardState(),
                   child: Home(),
                 ),
               );

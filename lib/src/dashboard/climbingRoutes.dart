@@ -12,8 +12,8 @@ import '../models/values.dart';
 class ClimbingRoutes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<DateTime, List<ClimbingRoute>> groupedRoutes =
-        Provider.of<Map<DateTime, List<ClimbingRoute>>>(context);
+    Map<DateTime, List<Climb>> groupedRoutes =
+        Provider.of<Map<DateTime, List<Climb>>>(context);
     return SliverPadding(
       padding: const EdgeInsets.only(bottom: kFloatingActionButtonMargin + 60),
       sliver: SliverList(
@@ -24,8 +24,7 @@ class ClimbingRoutes extends StatelessWidget {
     );
   }
 
-  List<Widget> flattenGroupedRoutes(
-      Map<DateTime, List<ClimbingRoute>> groupedRoutes) {
+  List<Widget> flattenGroupedRoutes(Map<DateTime, List<Climb>> groupedRoutes) {
     if (getDateTimeKeys(groupedRoutes).isEmpty)
       return [
         Container(
@@ -42,8 +41,7 @@ class ClimbingRoutes extends StatelessWidget {
         .toList();
   }
 
-  List<DateTime> getDateTimeKeys(
-      Map<DateTime, List<ClimbingRoute>> groupedRoutes) {
+  List<DateTime> getDateTimeKeys(Map<DateTime, List<Climb>> groupedRoutes) {
     return groupedRoutes == null ? [] : groupedRoutes.keys.toList()
       ..sort();
   }
@@ -67,7 +65,7 @@ class ClimbingRoutes extends StatelessWidget {
     );
   }
 
-  List<Widget> createRouteItems(List<ClimbingRoute> routes) {
+  List<Widget> createRouteItems(List<Climb> routes) {
     routes.sort((a, b) => a.loggedDate.compareTo(b.loggedDate));
     return routes.reversed
         .map(

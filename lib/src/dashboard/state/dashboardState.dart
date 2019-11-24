@@ -6,26 +6,26 @@ class DashboardState extends ChangeNotifier {
   int _mode;
   int _previousMode;
   bool _newRouteOpen = false;
-  ClimbingRoute _selectedClimbingRoute;
-  List<ClimbingRoute> _selectedClimbingRoutes;
+  Climb _selectedClimbingRoute;
+  List<Climb> _selectedClimbingRoutes;
 
   DashboardState()
       : _mode = DashboardMode.defaultDashboard,
-        _selectedClimbingRoutes = List<ClimbingRoute>(),
+        _selectedClimbingRoutes = List<Climb>(),
         super();
 
   int get mode => _mode;
   bool get isNewModalOpen => _newRouteOpen;
   int get previousMode => _previousMode;
-  ClimbingRoute get selectedClimbingRoute => _selectedClimbingRoute;
-  List<ClimbingRoute> get selectedClimbingRoutes => _selectedClimbingRoutes;
+  Climb get selectedClimbingRoute => _selectedClimbingRoute;
+  List<Climb> get selectedClimbingRoutes => _selectedClimbingRoutes;
 
-  pickClimbingRoute(ClimbingRoute route) {
+  pickClimbingRoute(Climb route) {
     _selectedClimbingRoute = route;
     notifyListeners();
   }
 
-  selectClimbingRoute(ClimbingRoute route) {
+  selectClimbingRoute(Climb route) {
     if (!_selectedClimbingRoutes.contains(route))
       _selectedClimbingRoutes.add(route);
     else
@@ -38,12 +38,12 @@ class DashboardState extends ChangeNotifier {
     notifyListeners();
   }
 
-  unSelectClimbingRoute(ClimbingRoute route) {
+  unSelectClimbingRoute(Climb route) {
     _selectedClimbingRoutes.remove(route);
     notifyListeners();
   }
 
-  bool isSelected(ClimbingRoute route) {
+  bool isSelected(Climb route) {
     return _selectedClimbingRoutes.contains(route);
   }
 

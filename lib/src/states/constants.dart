@@ -23,7 +23,12 @@ class Constants {
       '7b+',
       '7c',
       '7c+',
-      '8a'
+      '8a',
+      '8a+',
+      '8b',
+      '8b+',
+      '8c',
+      '8c+',
     ],
     GradingStyleEnum.polish: [
       'IV+',
