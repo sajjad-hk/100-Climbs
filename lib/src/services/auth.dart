@@ -65,6 +65,22 @@ class AuthService {
     return ref.setData(appUserJson, merge: true);
   }
 
+  Future<void> sendSignInWithEmailLink(String email) async {
+    return _auth.sendSignInWithEmailLink(
+      email: email,
+      url: '',
+      androidInstallIfNotAvailable: true,
+      androidMinimumVersion: '21',
+      androidPackageName: 'io.do4climbing.hundred_climbs',
+      handleCodeInApp: true,
+      iOSBundleID: null,
+    );
+  }
+
+  Future<AuthResult> signInWithEmailLink(String email, String link) async {
+    return _auth.signInWithEmailAndLink(email: email, link: link);
+  }
+
   void signOut(BuildContext context) {
     _auth.signOut();
   }
