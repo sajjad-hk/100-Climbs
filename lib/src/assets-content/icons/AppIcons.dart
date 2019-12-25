@@ -23,7 +23,7 @@ class AppIcons {
       case BelayingStyleEnum.toprope:
         return toprope;
       case BelayingStyleEnum.auto:
-        return lead;
+        return auto;
       case BelayingStyleEnum.lead:
         return lead;
       default:

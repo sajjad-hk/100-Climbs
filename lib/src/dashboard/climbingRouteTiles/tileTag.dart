@@ -6,23 +6,24 @@ class TileTags extends StatelessWidget {
   TileTags({this.tagText});
   @override
   Widget build(BuildContext context) {
+    int txtLength = this.tagText.length < 5 ? 5 : this.tagText.length;
     return Container(
-      padding: const EdgeInsets.only(top: 2, bottom: 2),
-      margin: const EdgeInsets.only(left: 8),
+      width: txtLength * 9.0,
+      padding:
+          const EdgeInsets.only(top: 4.0, right: 2.0, left: 2.0, bottom: 4.0),
+      margin:
+          const EdgeInsets.only(top: 2.0, right: 2.0, left: 10, bottom: 2.0),
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border.all(
           color: AppColors.whiteTwo,
         ),
       ),
-      child: Container(
-        margin: const EdgeInsets.all(2.0),
-        child: Center(
-          child: Text(
-            tagText,
-            style: TextStyle(
-              color: AppColors.warmGrey,
-            ),
+      child: Center(
+        child: Text(
+          tagText,
+          style: TextStyle(
+            color: AppColors.warmGrey,
           ),
         ),
       ),

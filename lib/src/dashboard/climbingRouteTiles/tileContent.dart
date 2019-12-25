@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/dashboard/climbingRouteTiles/tileDetails.dart';
 import 'package:hundred_climbs/src/dashboard/climbingRouteTiles/tileTag.dart';
-import 'package:hundred_climbs/src/dashboard/climbingRouteTiles/triedTag.dart';
 import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
-import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:hundred_climbs/src/models/values.dart';
 import 'package:provider/provider.dart';
 
@@ -34,24 +34,22 @@ class TileContent extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
+            border: Border(
+              left: BorderSide(
                 color: AppColors.getGradeColor(route.grade),
-                height: 100,
                 width: 6,
               ),
-              Container(
-                height: 100,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Container(
                           padding: const EdgeInsets.all(10),
@@ -64,28 +62,32 @@ class TileContent extends StatelessWidget {
                           ),
                         ),
                         Container(
+                          padding: const EdgeInsets.all(10),
                           child: TileDetails(
                             belayingStyle: route.belayingStyle,
                             closure: route.closure,
                           ),
                         ),
-                        if (route.outCome == OutComeEnum.failure) TriedTag(),
                       ],
                     ),
-                    Wrap(
-                      children: <Widget>[
-                        if (route.tags.isNotEmpty)
-                          for (String tag in route.tags)
-                            TileTags(
-                              tagText: tag,
-                            ),
-                      ],
-                    )
+                    if (route.tags.isNotEmpty)
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 3),
+                        child: Wrap(
+                          runSpacing: 5.0,
+                          children: <Widget>[
+                            for (String tag in route.tags)
+                              TileTags(
+                                tagText: tag,
+                              ),
+                          ],
+                        ),
+                      ),
                   ],
                 ),
               ),
-              Spacer(),
               Container(
+                height: 100,
                 padding: const EdgeInsets.all(10.0),
                 child: IconButton(
                   icon: Container(

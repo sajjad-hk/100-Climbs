@@ -48,7 +48,7 @@ class ClimbingRoutes extends StatelessWidget {
 
   Widget createDateItem(DateTime date) {
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.only(top: 10, right: 5, left: 5, bottom: 2),
       child: Row(
         children: <Widget>[
           CustomIcon(

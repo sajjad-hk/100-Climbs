@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
