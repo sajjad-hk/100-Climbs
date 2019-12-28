@@ -56,7 +56,7 @@ class AppDatePicker extends StatelessWidget {
       context: context,
       initialDate: dashboardState.selectedClimbingRoute.loggedDate,
       firstDate: DateTime(2015),
-      lastDate: DateTime.now().add(Duration(days: 1)),
+//      lastDate: DateTime.now().add(Duration(days: 1)),
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData.dark(),
