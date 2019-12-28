@@ -45,11 +45,20 @@ class Dashboard extends StatelessWidget {
                               flex: 2,
                               child: Container(
                                 padding: const EdgeInsets.all(10),
-                                child: StreamProvider<
-                                    Map<String,
-                                        Map<DateTime, List<Climb>>>>.value(
-                                  value: climbingCountChartService
-                                      .getClimbingCountChartData(user.uid),
+                                child: MultiProvider(
+                                  providers: [
+                                    StreamProvider<
+                                        Map<String,
+                                            Map<DateTime, List<Climb>>>>.value(
+                                      value: climbingCountChartService
+                                          .getClimbingCountChartData(user.uid),
+                                    ),
+                                    StreamProvider<
+                                            Map<DateTime, List<Climb>>>.value(
+                                        value: climbingRouteService
+                                            .getClimbingRoutesGroupByDate(
+                                                user.uid)),
+                                  ],
                                   child: StackedBarChart.withData(),
                                 ),
                               ),

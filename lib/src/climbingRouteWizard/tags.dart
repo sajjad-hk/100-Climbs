@@ -23,7 +23,7 @@ class Tags extends StatelessWidget {
           ),
         ),
         Text(
-          "${state.selectedTags.length.toString()}/5",
+          "${ws.selectedTags.length.toString()}/5",
           style: TextStyle(
             color: Colors.white,
             fontSize: 12.0,

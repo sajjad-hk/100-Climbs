@@ -2,6 +2,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/models/values.dart';
 import 'package:flutter/material.dart';
+import 'package:hundred_climbs/src/services/climbingRouteService.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -19,6 +20,10 @@ class StackedBarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, Map<DateTime, List<Climb>>> data =
         Provider.of<Map<String, Map<DateTime, List<Climb>>>>(context);
+    Map<DateTime, List<Climb>> dataByDate =
+        Provider.of<Map<DateTime, List<Climb>>>(context);
+    List<DateTime> allDates = dataByDate == null ? [] : dataByDate.keys.toList()
+      ..sort();
 
     List<String> grades = data == null ? [] : data.keys.toList()
       ..sort();
@@ -26,11 +31,11 @@ class StackedBarChart extends StatelessWidget {
     grades.reversed.forEach((key) {
       if (!chartData.containsKey(key)) chartData[key] = List();
       List<DateTime> keys = data[key].keys.toList()..sort();
-      keys.forEach((key2) {
+      allDates.forEach((date) {
         chartData[key].add(
           ClimbingCount(
-            key2,
-            data[key][key2].length,
+            date,
+            data[key][date] == null ? 0 : data[key][date].length,
             key,
             AppColors.getGradeColor(key),
           ),
@@ -46,8 +51,9 @@ class StackedBarChart extends StatelessWidget {
         domainFn: (ClimbingCount climbs, _) =>
             DateFormat.MEd().format(climbs.loggedDateTime),
         measureFn: (ClimbingCount climbs, _) => climbs.gradeCount,
-        colorFn: (ClimbingCount climbs, _) =>
-            charts.ColorUtil.fromDartColor(climbs.color),
+        colorFn: (ClimbingCount climbs, _) => climbs.gradeCount == 0
+            ? charts.ColorUtil.fromDartColor(Colors.transparent)
+            : charts.ColorUtil.fromDartColor(climbs.color),
         labelAccessorFn: (ClimbingCount climbs, _) => climbs.grade,
         data: value,
       ));
