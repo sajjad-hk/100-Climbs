@@ -1,14 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/climbingRouteWizard/belayStyle.dart';
-import 'package:hundred_climbs/src/climbingRouteWizard/climbingStyle.dart';
 import 'package:hundred_climbs/src/climbingRouteWizard/grade.dart';
 import 'package:hundred_climbs/src/climbingRouteWizard/outCome.dart';
 import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
 import 'package:hundred_climbs/src/climbingRouteWizard/tags.dart';
-import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
-import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:hundred_climbs/src/services/climbingRouteService.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/values.dart';
@@ -49,7 +47,7 @@ class NewRouteWizard extends StatelessWidget {
                           ),
                           onPressed: () {
                             _controller.jumpToPage(0);
-                            wizardState.currentPageIndex = 0;
+                            wizardState.flush();
                             dashboardState.closeNewRouteWizard();
                             FocusScope.of(context)
                                 .requestFocus(new FocusNode());
@@ -83,16 +81,6 @@ class NewRouteWizard extends StatelessWidget {
                               curve: Curves.easeIn,
                             ),
                           ),
-                          if (wizardState.selectedOutCome ==
-                              OutComeEnum.success)
-                            ClimbingStyle(
-                              autoNext: () => _controller.nextPage(
-                                duration: Duration(
-                                  milliseconds: 500,
-                                ),
-                                curve: Curves.easeIn,
-                              ),
-                            ),
                           Tags(),
                         ],
                       ),
@@ -124,7 +112,7 @@ class NewRouteWizard extends StatelessWidget {
                                       size: 35,
                                     ),
                                     Text(
-                                      'SEVE AND LOG ANOTHER',
+                                      'SAVE AND LOG ANOTHER',
                                       style: TextStyle(
                                         fontSize: 18,
                                         color: Color(0xff4d000000),
@@ -205,12 +193,7 @@ class NewRouteWizard extends StatelessWidget {
                             Flexible(
                               fit: FlexFit.tight,
                               child: Visibility(
-                                visible: (wizardState.selectedOutCome ==
-                                            OutComeEnum.success &&
-                                        wizardState.currentPageIndex != 4) ||
-                                    (wizardState.selectedOutCome ==
-                                            OutComeEnum.failure &&
-                                        wizardState.currentPageIndex != 3),
+                                visible: wizardState.currentPageIndex != 3,
                                 child: IconButton(
                                   iconSize: 50,
                                   icon: Icon(

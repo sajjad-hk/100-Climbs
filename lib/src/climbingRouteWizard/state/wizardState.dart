@@ -18,7 +18,6 @@ class WizardState with ChangeNotifier {
   GradingStyleEnum _selectedGradingStyle;
   String _selectedClimbingGrade;
   BelayingStyleEnum _selectedBelayStyle;
-  ClosureEnum _selectedClosure;
   DateTime _selectedLoggedDate;
   List<String> _selectedTags;
   int _currentPageIndex;
@@ -30,8 +29,6 @@ class WizardState with ChangeNotifier {
   String get selectedClimbingGrade => _selectedClimbingGrade;
 
   BelayingStyleEnum get selectedBelayStyle => _selectedBelayStyle;
-
-  ClosureEnum get selectedClosure => _selectedClosure;
 
   DateTime get selectedLoggedDate => _selectedLoggedDate;
 
@@ -59,20 +56,14 @@ class WizardState with ChangeNotifier {
     notifyListeners();
   }
 
-  set selectedClosure(ClosureEnum closure) {
-    _selectedClosure = closure;
-    notifyListeners();
-  }
-
   set currentPageIndex(int index) {
     _currentPageIndex = index;
     notifyListeners();
   }
 
   flush() {
-    selectedOutCome = null;
-    selectedBelayStyle = null;
-    selectedClosure = null;
+    selectedOutCome = _selectedOutCome;
+    selectedBelayStyle = _selectedBelayStyle;
     setLoggedDate();
     currentPageIndex = 0;
     _selectedTags = List<String>();

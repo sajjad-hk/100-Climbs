@@ -1,16 +1,14 @@
-import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
-import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:hundred_climbs/src/home.dart';
 import 'package:hundred_climbs/src/login.dart';
 import 'package:hundred_climbs/src/models/values.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

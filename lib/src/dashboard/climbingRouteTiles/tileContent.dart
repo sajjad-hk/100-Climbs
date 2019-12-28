@@ -72,7 +72,7 @@ class TileContent extends StatelessWidget {
                     ),
                     if (route.tags.isNotEmpty)
                       Container(
-                        margin: const EdgeInsets.only(bottom: 3),
+                        margin: const EdgeInsets.only(bottom: 8),
                         child: Wrap(
                           runSpacing: 5.0,
                           children: <Widget>[

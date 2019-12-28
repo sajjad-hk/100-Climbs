@@ -29,8 +29,7 @@ class ClimbingRoutes extends StatelessWidget {
       return [
         Container(
           height: double.maxFinite,
-          color: Colors.deepPurple,
-        )
+        ),
       ];
     return getDateTimeKeys(groupedRoutes)
         .reversed

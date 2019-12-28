@@ -145,7 +145,9 @@ class Dashboard extends StatelessWidget {
                                 Text(
                                   'DELETE',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 16),
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ],
                             ),

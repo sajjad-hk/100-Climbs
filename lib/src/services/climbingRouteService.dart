@@ -73,7 +73,6 @@ class ClimbingRouteService {
         ..gradingStyle = wizardState.selectedGradingStyle
         ..grade = wizardState.selectedClimbingGrade
         ..belayingStyle = wizardState.selectedBelayStyle
-        ..closure = wizardState.selectedClosure
         ..tags = SetBuilder<String>(wizardState.selectedTags)
         ..loggedDate = DateTime.now(),
     );

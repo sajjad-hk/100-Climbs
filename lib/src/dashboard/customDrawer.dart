@@ -1,9 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
-import 'package:hundred_climbs/src/commons/customIcon.dart';
 import 'package:hundred_climbs/src/models/values.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {

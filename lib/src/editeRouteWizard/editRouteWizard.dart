@@ -73,7 +73,6 @@ class _State extends State<EditRouteWizard> {
                 createListViewGradePicker(context, grades),
               ]),
               itemSection('Belay', [createBelayStyle(context)]),
-              itemSection('Style', [createClimbingStyle(context)]),
               itemSection('Tags', [createTagsSection(context)]),
               itemSection('Comments', [createCommentSection(context)]),
             ],
@@ -177,7 +176,6 @@ class _State extends State<EditRouteWizard> {
 
   Widget createTagsSection(BuildContext context) {
     final dashboardState = Provider.of<DashboardState>(context);
-    final user = Provider.of<AppUser>(context);
     return Column(
       children: <Widget>[
         Row(
@@ -489,62 +487,6 @@ class _State extends State<EditRouteWizard> {
             ),
           ),
         ),
-      ],
-    );
-  }
-
-  Widget createClimbingStyle(BuildContext context) {
-    final dashboardState = Provider.of<DashboardState>(context);
-    return Row(
-      children: <Widget>[
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AspectRatio(
-              aspectRatio: 2.7,
-              child: NewCustomRadio.row(
-                value: ClosureEnum.onsight,
-                groupValue: dashboardState.selectedClimbingRoute?.closure,
-                checkedBgColor: AppColors.black30,
-                unCheckedBgColor: Colors.transparent,
-                checkedContentColor: Colors.white,
-                label: 'On Sight',
-                fontSize: 16,
-                iconProvider: AppIcons.eye,
-                iconSize: 40,
-                onChanged: (val) {
-                  dashboardState.pickClimbingRoute(dashboardState
-                      .selectedClimbingRoute
-                      .rebuild((r) => r..closure = val));
-                },
-              ),
-            ),
-          ),
-        ),
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AspectRatio(
-              aspectRatio: 2.7,
-              child: NewCustomRadio.row(
-                value: ClosureEnum.flash,
-                groupValue: dashboardState.selectedClimbingRoute?.closure,
-                checkedBgColor: AppColors.black30,
-                unCheckedBgColor: Colors.transparent,
-                checkedContentColor: Colors.white,
-                label: 'Flash',
-                fontSize: 16,
-                iconProvider: AppIcons.flash,
-                iconSize: 40,
-                onChanged: (val) {
-                  dashboardState.pickClimbingRoute(dashboardState
-                      .selectedClimbingRoute
-                      .rebuild((r) => r..closure = val));
-                },
-              ),
-            ),
-          ),
-        )
       ],
     );
   }

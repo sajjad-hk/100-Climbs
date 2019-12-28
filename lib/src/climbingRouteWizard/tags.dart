@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class Tags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<WizardState>(context);
+    final ws = Provider.of<WizardState>(context);
     final ds = Provider.of<DashboardState>(context);
 
     return Column(
@@ -48,21 +48,22 @@ class Tags extends StatelessWidget {
                 constraints: BoxConstraints(maxHeight: 150),
                 child: Wrap(
                   children: [
-                    for (String tag in state.selectedTags)
+                    for (String tag in ws.selectedTags)
                       TagItem(
                         text: tag,
-                        onTab: (t) => state.removeTag(t),
+                        onTab: (t) => ws.removeTag(t),
                       )
                   ],
                 ),
               ),
               Visibility(
                 visible: MediaQuery.of(context).viewInsets.bottom == 0.0 &&
-                    state.selectedTags.length < 5,
+                    ws.selectedTags.length < 5,
                 child: FlatButton(
                   highlightColor: Colors.transparent,
                   onPressed: () => ds.openTagsEdit(),
                   child: Container(
+                    margin: const EdgeInsets.only(top: 15.0),
                     padding: const EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
