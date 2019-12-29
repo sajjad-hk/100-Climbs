@@ -86,6 +86,8 @@ flutter:
     - assets/icons/toprope_icon.png
     - assets/icons/calendar_icon.png
     - assets/icons/100_climbs.png
+    - assets/icons/empty_illustration.png
+    - assets/icons/empty_arrow.png
 
 
 

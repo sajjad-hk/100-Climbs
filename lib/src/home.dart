@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:hundred_climbs/src/dashboard/customDrawer.dart';
 import 'package:hundred_climbs/src/dashboard/dashboard.dart';
 import 'package:hundred_climbs/src/dashboard/state/dashboardState.dart';
 import 'package:hundred_climbs/src/editeRouteWizard/editRouteWizard.dart';
@@ -21,12 +24,12 @@ class _HomeState extends State<Home> {
 
     if (user != null) {
       return SafeArea(
-        child: ChangeNotifierProvider(
-          builder: (context) => WizardState(user?.lastClimb),
+        child: ChangeNotifierProvider.value(
+          value: WizardState(user?.lastClimb),
           child: IndexedStack(
             index: state.mode,
             children: <Widget>[
-              user.totalNumOfClimbs != 0 ? Dashboard() : FirstDashboard(),
+              Dashboard(),
               EditRouteWizard(),
               TagsL(),
             ],
@@ -37,13 +40,5 @@ class _HomeState extends State<Home> {
       // Todo add on user loading some how
       return Container();
     }
-  }
-}
-
-class FirstDashboard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
   }
 }

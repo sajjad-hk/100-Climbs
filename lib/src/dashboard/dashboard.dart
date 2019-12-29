@@ -1,5 +1,6 @@
 import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/climbingRouteWizard/newRouteWizard.dart';
+import 'package:hundred_climbs/src/dashboard/FirstDashboard.dart';
 import 'package:hundred_climbs/src/dashboard/climbingRoutes.dart';
 import 'package:hundred_climbs/src/dashboard/customDrawer.dart';
 import 'package:hundred_climbs/src/dashboard/stackedBarChart.dart';
@@ -23,66 +24,75 @@ class Dashboard extends StatelessWidget {
           children: <Widget>[
             Scaffold(
               backgroundColor: AppColors.silver,
-              body: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                    centerTitle: true,
-                    leading: Builder(
-                      builder: (context) => IconButton(
-                        icon: Icon(Icons.menu),
-                        onPressed: () => Scaffold.of(context).openDrawer(),
-                      ),
-                    ),
-                    backgroundColor: Colors.black,
-                    floating: true,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Container(
-                        padding: EdgeInsets.only(top: 50.0),
-                        child: Column(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                child: MultiProvider(
-                                  providers: [
-                                    StreamProvider<
-                                        Map<String,
-                                            Map<DateTime, List<Climb>>>>.value(
-                                      value: climbingCountChartService
-                                          .getClimbingCountChartData(user.uid),
+              body: user.totalNumOfClimbs != 0
+                  ? CustomScrollView(
+                      slivers: <Widget>[
+                        SliverAppBar(
+                          centerTitle: true,
+                          leading: Builder(
+                            builder: (context) => IconButton(
+                              icon: Icon(Icons.menu),
+                              onPressed: () =>
+                                  Scaffold.of(context).openDrawer(),
+                            ),
+                          ),
+                          backgroundColor: Colors.black,
+                          floating: true,
+                          pinned: true,
+                          flexibleSpace: FlexibleSpaceBar(
+                            background: Container(
+                              padding: EdgeInsets.only(top: 50.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      child: MultiProvider(
+                                        providers: [
+                                          StreamProvider<
+                                              Map<
+                                                  String,
+                                                  Map<DateTime,
+                                                      List<Climb>>>>.value(
+                                            value: climbingCountChartService
+                                                .getClimbingCountChartData(
+                                                    user.uid),
+                                          ),
+                                          StreamProvider<
+                                                  Map<DateTime,
+                                                      List<Climb>>>.value(
+                                              value: climbingRouteService
+                                                  .getClimbingRoutesGroupByDate(
+                                                      user.uid)),
+                                        ],
+                                        child: StackedBarChart.withData(),
+                                      ),
                                     ),
-                                    StreamProvider<
-                                            Map<DateTime, List<Climb>>>.value(
-                                        value: climbingRouteService
-                                            .getClimbingRoutesGroupByDate(
-                                                user.uid)),
-                                  ],
-                                  child: StackedBarChart.withData(),
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [AppColors.lightNavy, AppColors.dark],
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [AppColors.lightNavy, AppColors.dark],
                           ),
+                          expandedHeight: constraints.maxHeight / 2.2,
                         ),
-                      ),
+                        StreamProvider<Map<DateTime, List<Climb>>>.value(
+                          value: climbingRouteService
+                              .getClimbingRoutesGroupByDate(user.uid),
+                          child: ClimbingRoutes(),
+                        ),
+                      ],
+                    )
+                  : FirstDashboard(
+                      openDrawer: (context) => Scaffold.of(context).openDrawer,
                     ),
-                    expandedHeight: constraints.maxHeight / 2.2,
-                  ),
-                  StreamProvider<Map<DateTime, List<Climb>>>.value(
-                    value: climbingRouteService
-                        .getClimbingRoutesGroupByDate(user.uid),
-                    child: ClimbingRoutes(),
-                  ),
-                ],
-              ),
               floatingActionButton: FloatingActionButton(
                 heroTag: 'Hero2',
                 elevation: 3.0,
