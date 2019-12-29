@@ -1,10 +1,10 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
-import 'package:hundred_climbs/src/models/values.dart';
 import 'package:flutter/material.dart';
-import 'package:hundred_climbs/src/services/climbingRouteService.dart';
-import 'package:provider/provider.dart';
+import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
+import 'package:hundred_climbs/src/models/values.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class StackedBarChart extends StatelessWidget {
   final bool animate;
@@ -24,6 +24,11 @@ class StackedBarChart extends StatelessWidget {
         Provider.of<Map<DateTime, List<Climb>>>(context);
     List<DateTime> allDates = dataByDate == null ? [] : dataByDate.keys.toList()
       ..sort();
+
+    dataByDate?.forEach((key, value) {
+      if (value.where((i) => i.outCome == OutComeEnum.success).isEmpty)
+        allDates.remove(key);
+    });
 
     List<String> grades = data == null ? [] : data.keys.toList()
       ..sort();
@@ -70,6 +75,9 @@ class StackedBarChart extends StatelessWidget {
       behaviors: [
         charts.PanAndZoomBehavior(),
         charts.SlidingViewport(),
+        charts.InitialSelection(selectedDataConfig: [
+          new charts.SeriesDatumConfig<String>('5a+', 'Thu, 11/7')
+        ])
       ],
       domainAxis: charts.AxisSpec<String>(
         renderSpec: charts.SmallTickRendererSpec(
