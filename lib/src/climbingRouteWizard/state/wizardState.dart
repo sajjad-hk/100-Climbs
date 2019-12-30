@@ -8,7 +8,7 @@ class WizardState with ChangeNotifier {
     _selectedOutCome = lastClimb?.outCome ?? OutComeEnum.success;
     _selectedGradingStyle = lastClimb?.gradingStyle ?? GradingStyleEnum.french;
     _selectedClimbingGrade =
-        lastClimb?.grade ?? Constants.grades[lastClimb.gradingStyle][0];
+        lastClimb?.grade ?? Constants.grades[_selectedGradingStyle][0];
     _selectedBelayStyle = lastClimb?.belayingStyle ?? BelayingStyleEnum.lead;
     _selectedTags = List<String>();
     _currentPageIndex = 0;

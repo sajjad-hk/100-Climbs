@@ -22,8 +22,6 @@ class _$ClimbSerializer implements StructuredSerializer<Climb> {
       'outCome',
       serializers.serialize(object.outCome,
           specifiedType: const FullType(OutComeEnum)),
-      'uid',
-      serializers.serialize(object.uid, specifiedType: const FullType(String)),
       'gradingStyle',
       serializers.serialize(object.gradingStyle,
           specifiedType: const FullType(GradingStyleEnum)),
@@ -41,6 +39,12 @@ class _$ClimbSerializer implements StructuredSerializer<Climb> {
       result
         ..add('documentId')
         ..add(serializers.serialize(object.documentId,
+            specifiedType: const FullType(String)));
+    }
+    if (object.uid != null) {
+      result
+        ..add('uid')
+        ..add(serializers.serialize(object.uid,
             specifiedType: const FullType(String)));
     }
     if (object.closure != null) {
@@ -136,26 +140,29 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
   @override
   Iterable<Object> serialize(Serializers serializers, AppUser object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'uid',
-      serializers.serialize(object.uid, specifiedType: const FullType(String)),
-      'displayName',
-      serializers.serialize(object.displayName,
-          specifiedType: const FullType(String)),
-      'email',
-      serializers.serialize(object.email,
-          specifiedType: const FullType(String)),
-      'lastLogin',
-      serializers.serialize(object.lastLogin,
-          specifiedType: const FullType(DateTime)),
-      'totalNumOfClimbs',
-      serializers.serialize(object.totalNumOfClimbs,
-          specifiedType: const FullType(int)),
-    ];
+    final result = <Object>[];
+    if (object.uid != null) {
+      result
+        ..add('uid')
+        ..add(serializers.serialize(object.uid,
+            specifiedType: const FullType(String)));
+    }
+    if (object.displayName != null) {
+      result
+        ..add('displayName')
+        ..add(serializers.serialize(object.displayName,
+            specifiedType: const FullType(String)));
+    }
     if (object.photoUrl != null) {
       result
         ..add('photoUrl')
         ..add(serializers.serialize(object.photoUrl,
+            specifiedType: const FullType(String)));
+    }
+    if (object.email != null) {
+      result
+        ..add('email')
+        ..add(serializers.serialize(object.email,
             specifiedType: const FullType(String)));
     }
     if (object.tags != null) {
@@ -164,6 +171,12 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
         ..add(serializers.serialize(object.tags,
             specifiedType:
                 const FullType(BuiltSet, const [const FullType(String)])));
+    }
+    if (object.lastLogin != null) {
+      result
+        ..add('lastLogin')
+        ..add(serializers.serialize(object.lastLogin,
+            specifiedType: const FullType(DateTime)));
     }
     if (object.lastClimb != null) {
       result
@@ -176,6 +189,12 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
         ..add('bestClimb')
         ..add(serializers.serialize(object.bestClimb,
             specifiedType: const FullType(Climb)));
+    }
+    if (object.totalNumOfClimbs != null) {
+      result
+        ..add('totalNumOfClimbs')
+        ..add(serializers.serialize(object.totalNumOfClimbs,
+            specifiedType: const FullType(int)));
     }
     return result;
   }
@@ -275,9 +294,6 @@ class _$Climb extends Climb {
       : super._() {
     if (outCome == null) {
       throw new BuiltValueNullFieldError('Climb', 'outCome');
-    }
-    if (uid == null) {
-      throw new BuiltValueNullFieldError('Climb', 'uid');
     }
     if (gradingStyle == null) {
       throw new BuiltValueNullFieldError('Climb', 'gradingStyle');
@@ -497,23 +513,7 @@ class _$AppUser extends AppUser {
       this.lastClimb,
       this.bestClimb,
       this.totalNumOfClimbs})
-      : super._() {
-    if (uid == null) {
-      throw new BuiltValueNullFieldError('AppUser', 'uid');
-    }
-    if (displayName == null) {
-      throw new BuiltValueNullFieldError('AppUser', 'displayName');
-    }
-    if (email == null) {
-      throw new BuiltValueNullFieldError('AppUser', 'email');
-    }
-    if (lastLogin == null) {
-      throw new BuiltValueNullFieldError('AppUser', 'lastLogin');
-    }
-    if (totalNumOfClimbs == null) {
-      throw new BuiltValueNullFieldError('AppUser', 'totalNumOfClimbs');
-    }
-  }
+      : super._();
 
   @override
   AppUser rebuild(void Function(AppUserBuilder) updates) =>

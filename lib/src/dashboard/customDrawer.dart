@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
+import 'package:hundred_climbs/src/assets-content/icons/AppIcons.dart';
+import 'package:hundred_climbs/src/commons/customIcon.dart';
 import 'package:hundred_climbs/src/models/values.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({@required this.accountType});
@@ -88,36 +92,50 @@ class CustomDrawer extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Container(
+                margin: const EdgeInsets.only(top: 30),
                 padding: const EdgeInsets.only(left: 35.0, bottom: 50.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30.0),
-                      child: FlatButton(
-                        color: Colors.black,
-                        onPressed: () => authService.signOut(context),
-                        child: Container(
-                          width: 100,
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Icon(
-                                Icons.exit_to_app,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                              Text(
-                                'SIGN OUT',
-                                style: TextStyle(color: Colors.white),
-                              )
-                            ],
-                          ),
+                    FlatButton(
+                      color: Colors.black,
+                      onPressed: () => authService.signOut(context),
+                      child: Container(
+                        width: 120,
+                        height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            CustomIcon(
+                              path: AppIcons.logOut,
+                              size: 40,
+                            ),
+                            Text(
+                              'SIGN OUT',
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
                         ),
                       ),
                     ),
+                    Spacer(),
+                    FlatButton(
+                      color: Colors.transparent,
+                      onPressed: sendEmail,
+                      child: Row(
+                        children: <Widget>[
+                          CustomIcon(
+                            path: AppIcons.paperPlane,
+                            size: 40,
+                          ),
+                          Text(
+                            'CONTACT US',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -126,5 +144,14 @@ class CustomDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  sendEmail() async {
+    const email = 'mailto:100climbs.app@gmail.com';
+    if (await canLaunch(email)) {
+      await launch(email);
+    } else {
+      throw 'Could not launch $email';
+    }
   }
 }

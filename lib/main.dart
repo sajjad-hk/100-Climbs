@@ -32,7 +32,7 @@ class HundredClimbs extends StatelessWidget {
           builder: (context, firebaseUser, _) {
             if (firebaseUser != null) {
               return StreamProvider<AppUser>.value(
-                value: authService.hundredClimbsUser(firebaseUser?.uid),
+                value: authService.hundredClimbsUser(firebaseUser.uid),
                 child: ChangeNotifierProvider.value(
                   value: DashboardState(),
                   child: Home(),

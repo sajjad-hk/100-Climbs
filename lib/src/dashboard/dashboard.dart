@@ -102,8 +102,9 @@ class Dashboard extends StatelessWidget {
                   Icons.add,
                   size: 45.0,
                 ),
-                backgroundColor: AppColors.getGradeColor(
-                    user.lastClimb.grade), //LogBookColors.getGradeColor(),
+                backgroundColor: AppColors.getGradeColor(user.lastClimb != null
+                    ? user.lastClimb.grade
+                    : '4'), //LogBookColors.getGradeColor(),
               ),
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.endFloat,

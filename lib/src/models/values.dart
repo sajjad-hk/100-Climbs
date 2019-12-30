@@ -11,6 +11,7 @@ abstract class Climb implements Built<Climb, ClimbBuilder> {
 
   OutComeEnum get outCome;
 
+  @nullable
   String get uid;
 
   GradingStyleEnum get gradingStyle;
@@ -38,18 +39,22 @@ abstract class Climb implements Built<Climb, ClimbBuilder> {
 }
 
 abstract class AppUser implements Built<AppUser, AppUserBuilder> {
+  @nullable
   String get uid;
 
+  @nullable
   String get displayName;
 
   @nullable
   String get photoUrl;
 
+  @nullable
   String get email;
 
   @nullable
   BuiltSet<String> get tags;
 
+  @nullable
   DateTime get lastLogin;
 
   @nullable
@@ -58,6 +63,7 @@ abstract class AppUser implements Built<AppUser, AppUserBuilder> {
   @nullable
   Climb get bestClimb;
 
+  @nullable
   int get totalNumOfClimbs;
 
   AppUser._();

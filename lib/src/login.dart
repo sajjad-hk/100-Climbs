@@ -131,7 +131,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(5.0),
-      height: double.infinity,
+      height: 100,
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.all(

@@ -28,41 +28,18 @@ class AuthService {
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
     final FirebaseUser user =
         (await _auth.signInWithCredential(credential)).user;
-    updateUserData(user);
     return user;
   }
 
   Stream<AppUser> hundredClimbsUser(String uid) {
-    if (uid != null)
-      return _db.collection('users').document(uid).snapshots().map((data) =>
-          standardSerializers.deserializeWith(AppUser.serializer, data.data));
-  }
-
-  void updateUserData(FirebaseUser user) async {
-    DocumentReference ref = _db.collection('users').document(user.uid);
-
-    Climb lastClimb = Climb((c) => c
-      ..outCome = OutComeEnum.success
-      ..gradingStyle = GradingStyleEnum.french
-      ..grade = Constants.grades[c.gradingStyle][0]
-      ..belayingStyle = BelayingStyleEnum.lead);
-
-    // todo if user exists we should merge it with this data
-    SetBuilder<String> tags = SetBuilder(Constants.defaultTags);
-
-    AppUser appUser = AppUser((u) => u
-      ..uid = user.uid
-      ..displayName = user.displayName
-      ..photoUrl = user.photoUrl
-      ..email = user.email
-      ..lastLogin = DateTime.now()
-      ..lastClimb = lastClimb.toBuilder()
-      ..tags = tags);
-
-    dynamic appUserJson =
-        standardSerializers.serializeWith(AppUser.serializer, appUser);
-
-    return ref.setData(appUserJson, merge: true);
+    return _db
+        .collection('users')
+        .document(uid)
+        .snapshots()
+        .where((it) => it != null)
+        .map((data) {
+      return standardSerializers.deserializeWith(AppUser.serializer, data.data);
+    });
   }
 
   void signOut(BuildContext context) {
