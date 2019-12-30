@@ -25,18 +25,6 @@ class TileDetails extends StatelessWidget {
             ),
             color: AppColors.silver,
           ),
-          if (closure != null)
-            Positioned(
-              left: 28,
-              child: TileIconsWrapper(
-                icon: CustomIcon(
-                  path: AppIcons.getRouteClimbClosureIcon(closure),
-                  color: AppColors.black30,
-                  size: 32,
-                ),
-                color: AppColors.paleGrey,
-              ),
-            ),
         ],
       ),
     );
