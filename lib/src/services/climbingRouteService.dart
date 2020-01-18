@@ -1,14 +1,12 @@
 import 'dart:async';
 
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:hundred_climbs/src/climbingRouteWizard/state/wizardState.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:hundred_climbs/src/models/serializers.dart';
 import 'package:hundred_climbs/src/models/values.dart';
 import 'package:hundred_climbs/src/plugin/TimestapmsSerializer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 
 class ClimbingRouteService {
   final Firestore _db = Firestore.instance;
@@ -56,24 +54,17 @@ class ClimbingRouteService {
     return getClimbingRoutes(uid).transform(_dateGroupByTransformer);
   }
 
-  Future<void> saveNewClimbingRouteAndNewTags(
-      AppUser user, WizardState wizardState) {
-    Climb climbingRoute =
-        _getClimbingRouteFromWizardState(user.uid, wizardState);
+  Future<void> saveNewClimbingRouteAndNewTags(AppUser user, Climb climb) {
+    Climb climbingRoute = _getClimbingRouteFromWizardState(user.uid, climb);
 
-    saveNewTagsToFirebase(user, wizardState.selectedTags);
+    saveNewTagsToFirebase(user, climb.tags.toList());
     return saveClimbingRouteToFirebase(climbingRoute);
   }
 
-  Climb _getClimbingRouteFromWizardState(String uid, WizardState wizardState) {
-    return Climb(
-      (route) => route
+  Climb _getClimbingRouteFromWizardState(String uid, Climb climb) {
+    return climb.rebuild(
+      (c) => c
         ..uid = uid
-        ..outCome = wizardState.selectedOutCome
-        ..gradingStyle = wizardState.selectedGradingStyle
-        ..grade = wizardState.selectedClimbingGrade
-        ..belayingStyle = wizardState.selectedBelayStyle
-        ..tags = SetBuilder<String>(wizardState.selectedTags)
         ..loggedDate = DateTime.now(),
     );
   }

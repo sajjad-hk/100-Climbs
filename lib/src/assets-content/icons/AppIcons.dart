@@ -5,12 +5,8 @@ class AppIcons {
 
   static const String lead = 'assets/icons/lead_icon.png';
   static const String auto = 'assets/icons/auto_icon.png';
-  static const String toprope = 'assets/icons/toprope_icon.png';
+  static const String topRope = 'assets/icons/toprope_icon.png';
   static const String calendar = 'assets/icons/calendar_icon.png';
-  static const String arrowLeft = 'assets/icons/arrow_left-icon.png';
-  static const String envelope = 'assets/icons/envelope-icon.png';
-  static const String eye = 'assets/icons/onsight_icon.png';
-  static const String facebook = 'assets/icons/facebook-icon.png';
   static const String flash = 'assets/icons/flash_icon.png';
   static const String google = 'assets/icons/google-icon.png';
   static const String minus = 'assets/icons/minus-icon.png';
@@ -23,22 +19,11 @@ class AppIcons {
   static String getBelayStyleIcon(BelayingStyleEnum style) {
     switch (style) {
       case BelayingStyleEnum.toprope:
-        return toprope;
+        return topRope;
       case BelayingStyleEnum.auto:
         return auto;
       case BelayingStyleEnum.lead:
         return lead;
-      default:
-        return null;
-    }
-  }
-
-  static String getRouteClimbClosureIcon(ClosureEnum closure) {
-    switch (closure) {
-      case ClosureEnum.flash:
-        return flash;
-      case ClosureEnum.onsight:
-        return eye;
       default:
         return null;
     }

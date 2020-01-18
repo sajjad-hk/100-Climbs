@@ -74,15 +74,10 @@ flutter:
 
   assets:
     - assets/icons/google-icon.png
-    - assets/icons/facebook-icon.png
-    - assets/icons/envelope-icon.png
-    - assets/icons/sad-icon.png
     - assets/icons/smile-white-icon.png
     - assets/icons/sad-white-icon.png
     - assets/icons/minus-icon.png
     - assets/icons/plus-icon.png
-    - assets/icons/flash_icon.png
-    - assets/icons/onsight_icon.png
     - assets/icons/lead_icon.png
     - assets/icons/auto_icon.png
     - assets/icons/toprope_icon.png

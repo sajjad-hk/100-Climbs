@@ -1,13 +1,11 @@
-import 'package:built_collection/built_collection.dart';
+import 'dart:async';
+
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:hundred_climbs/src/models/enums.dart';
-import 'package:hundred_climbs/src/models/serializers.dart';
-import 'package:hundred_climbs/src/models/values.dart';
-import 'package:hundred_climbs/src/states/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hundred_climbs/src/models/serializers.dart';
+import 'package:hundred_climbs/src/models/values.dart';
 
 import '../plugin/TimestapmsSerializer.dart';
 
@@ -16,22 +14,34 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
 
-  final standardSerializers = (serializers.toBuilder()
+  Future<FirebaseUser> get getUser => _auth.currentUser();
+
+  Stream<FirebaseUser> get user => _auth.onAuthStateChanged;
+
+  static final standardSerializers = (serializers.toBuilder()
         ..addPlugin(StandardJsonPlugin())
         ..addPlugin(TimestampSerializerPlugin()))
       .build();
 
   Future<FirebaseUser> googleSignIn() async {
-    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-    final FirebaseUser user =
-        (await _auth.signInWithCredential(credential)).user;
-    return user;
+    try {
+      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth =
+          await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+
+      final FirebaseUser user =
+          (await _auth.signInWithCredential(credential)).user;
+
+      return user;
+    } catch (error) {
+      print(error);
+      return null;
+    }
   }
 
-  Stream<AppUser> hundredClimbsUser(String uid) {
+  Stream<AppUser> userInfo(String uid) {
     return _db
         .collection('users')
         .document(uid)
@@ -42,8 +52,8 @@ class AuthService {
     });
   }
 
-  void signOut(BuildContext context) {
-    _auth.signOut();
+  Future<void> signOut() {
+    return _auth.signOut();
   }
 }
 
