@@ -7,7 +7,7 @@ class Store with ChangeNotifier {
 
   void openNewClimb(Climb climb) {
     _newClimbOpen = true;
-    _selectedClimb = climb;
+    _selectedClimb = climb.rebuild((c) => c..tags.clear());
     notifyListeners();
   }
 

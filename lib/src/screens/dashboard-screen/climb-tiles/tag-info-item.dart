@@ -12,7 +12,7 @@ class TagInfoItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border.all(
-          color: AppColors.whiteTwo,
+          color: AppColors.white2,
         ),
       ),
       child: Row(mainAxisSize: MainAxisSize.min, children: [

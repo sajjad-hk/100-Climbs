@@ -15,7 +15,6 @@ void main() async {
 }
 
 class HundredClimbs extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,7 +33,8 @@ class HundredClimbs extends StatelessWidget {
           primaryColor: AppColors.dark,
         ),
         routes: {
-          '/': (context) => SafeArea(child: Login()),
+          '/': (context) => SafeArea(child: Intro()),
+          '/login-screen': (context) => SafeArea(child: Login()),
           '/home': (context) => SafeArea(child: Home()),
           '/edit-climb-screen': (context) => SafeArea(child: EditRouteWizard()),
         },

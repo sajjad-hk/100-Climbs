@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
-import 'package:flutter/material.dart';
+
 import 'screens.dart';
 
 class Login extends StatefulWidget {

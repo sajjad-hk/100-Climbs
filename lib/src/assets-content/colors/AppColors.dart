@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
+  static const Color azure = Color(0xff00abff);
+
   static const Color white = Color(0xfff6f6f6);
-  static const Color whiteTwo = Color(0xffe8e8e8);
+  static const Color white2 = Color(0xffe8e8e8);
   static const Color paleGrey = Color(0xffe7ecee);
   static const Color paleGrey2 = Color(0xfff1f4f5);
   static const Color silver = Color(0xffd8e2e5);
@@ -38,7 +40,7 @@ class AppColors {
   static const Color mangoTwo = Color(0xffffac2e);
   static const Color tangerine = Color(0xffff9200);
   static const Color pinkishOrangeTwo = Color(0xffff6c41);
-  static const Color coralTwo = Color(0xfff74444);
+  static const Color coral2 = Color(0xfff74444);
   static const Color strawberry = Color(0xffef2d3f);
   static const Color pinkishRedTwo = Color(0xffdf0e3e);
   static const Color cerise = Color(0xffe20866);
@@ -82,7 +84,7 @@ class AppColors {
       case '7a+':
         return pinkishOrangeTwo;
       case '7b':
-        return coralTwo;
+        return coral2;
       case '7b+':
         return strawberry;
       case '7c':
