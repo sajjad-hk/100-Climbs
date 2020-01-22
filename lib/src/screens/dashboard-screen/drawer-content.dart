@@ -95,8 +95,8 @@ class DrawerContent extends StatelessWidget {
                     color: Colors.black,
                     onPressed: () async {
                       await authService.signOut();
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil('/', (route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/intro-screen', (route) => false);
                     },
                     child: Container(
                       width: 120,

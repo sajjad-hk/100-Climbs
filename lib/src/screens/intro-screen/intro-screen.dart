@@ -13,11 +13,6 @@ class _IntroState extends State<Intro> {
   @override
   void initState() {
     super.initState();
-    checkIntro().then((onValue) {
-      if (onValue.toString() == 'YES')
-        Navigator.pushReplacementNamed(context, '/login-screen');
-    });
-//    clearPrefs();
   }
 
   @override

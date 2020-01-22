@@ -48,7 +48,6 @@ class DashboardContent extends StatelessWidget {
             ),
           ),
           expandedHeight: 280,
-//          expandedHeight: constraints.maxHeight / 2.2,
         ),
         StreamProvider<Map<DateTime, List<Climb>>>.value(
           value: climbingRouteService.getClimbingRoutesGroupByDate(user?.uid),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
+import 'package:hundred_climbs/src/screens/loader-screen.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,8 @@ class HundredClimbs extends StatelessWidget {
           primaryColor: AppColors.dark,
         ),
         routes: {
-          '/': (context) => SafeArea(child: Intro()),
+          '/': (context) => SafeArea(child: Loader()),
+          '/intro-screen': (context) => SafeArea(child: Intro()),
           '/login-screen': (context) => SafeArea(child: Login()),
           '/home': (context) => SafeArea(child: Home()),
           '/edit-climb-screen': (context) => SafeArea(child: EditRouteWizard()),

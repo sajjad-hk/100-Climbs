@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hundred_climbs/src/screens/dashboard-screen/dashboard-screen.dart';
+import 'package:hundred_climbs/src/screens/loader-screen.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
