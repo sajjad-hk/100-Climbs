@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
                             FirebaseUser user =
                                 await authService.googleSignIn();
                             if (user != null) {
-                              Navigator.pushReplacementNamed(context, '/home');
+                              Navigator.pushReplacementNamed(context, '/');
                             }
                           },
                         ),

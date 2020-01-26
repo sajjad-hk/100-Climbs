@@ -43,7 +43,7 @@ class _LoaderState extends State<Loader> {
         child: FlareActor(
           'assets/loading.flr',
           alignment: Alignment.center,
-          animation: 'loading',
+          animation: 'Loading animation',
         ),
       ),
     );

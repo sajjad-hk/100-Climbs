@@ -82,8 +82,13 @@ class _State extends State<TagsEditor> {
         .map((it) => TagModel(it, store.climb.tags.contains(it)))
         .toList();
 
+    List<TagModel> filteredTags = [];
+    if (_tagTextController.text.isNotEmpty &&
+        !widget.userTagsHistory.contains(_tagTextController.text))
+      filteredTags
+          .addAll([TagModel(_tagTextController.text, false), ...tagModels]);
     setState(() {
-      tags = tagModels;
+      tags = filteredTags;
     });
   }
 

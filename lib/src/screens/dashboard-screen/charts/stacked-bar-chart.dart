@@ -70,55 +70,57 @@ class StackedBarChart extends StatelessWidget {
       ));
     });
 
-    return charts.BarChart(
-      chartSeriesData,
-      animate: animate,
-      defaultInteractions: true,
-      defaultRenderer: charts.BarRendererConfig(
-        groupingType: charts.BarGroupingType.stacked,
-        strokeWidthPx: 2.0,
-      ),
-      behaviors: [
-        charts.PanAndZoomBehavior(),
-        charts.SlidingViewport(),
-      ],
-      domainAxis: charts.OrdinalAxisSpec(
-        renderSpec: charts.SmallTickRendererSpec(
-          // Tick and Label styling here.
-          minimumPaddingBetweenLabelsPx: 20,
-          labelStyle: charts.TextStyleSpec(
-            fontSize: 9, // size in Pts.
-            color: charts.ColorUtil.fromDartColor(AppColors.greyIsh),
+    if (allDates.isNotEmpty)
+      return charts.BarChart(
+        chartSeriesData,
+        animate: animate,
+        defaultInteractions: true,
+        defaultRenderer: charts.BarRendererConfig(
+          groupingType: charts.BarGroupingType.stacked,
+          strokeWidthPx: 2.0,
+        ),
+        behaviors: [
+          charts.PanBehavior(),
+          charts.SlidingViewport(),
+        ],
+        domainAxis: charts.OrdinalAxisSpec(
+          renderSpec: charts.SmallTickRendererSpec(
+            // Tick and Label styling here.
+            minimumPaddingBetweenLabelsPx: 20,
+            labelStyle: charts.TextStyleSpec(
+              fontSize: 9, // size in Pts.
+              color: charts.ColorUtil.fromDartColor(AppColors.greyIsh),
+            ),
+            labelAnchor: charts.TickLabelAnchor.centered,
+            labelRotation: 45,
+            labelJustification: charts.TickLabelJustification.outside,
+            // Change the line colors to match text color.
+            lineStyle: charts.LineStyleSpec(
+              color: charts.ColorUtil.fromDartColor(Colors.transparent),
+            ),
           ),
-          labelAnchor: charts.TickLabelAnchor.centered,
-          labelRotation: 45,
-          labelJustification: charts.TickLabelJustification.outside,
-          // Change the line colors to match text color.
-          lineStyle: charts.LineStyleSpec(
-            color: charts.ColorUtil.fromDartColor(Colors.transparent),
+          viewport: charts.OrdinalViewport(start, numberOfBarViewPort),
+        ),
+        primaryMeasureAxis: charts.NumericAxisSpec(
+          renderSpec: charts.GridlineRendererSpec(
+            labelAnchor: charts.TickLabelAnchor.after,
+            // Tick and Label styling here.
+            labelStyle: charts.TextStyleSpec(
+              fontSize: 14, // size in Pts.
+              color: charts.ColorUtil.fromDartColor(AppColors.white),
+            ),
+            // Change the line colors to match text color.
+            lineStyle: charts.LineStyleSpec(
+              color: charts.ColorUtil.fromDartColor(AppColors.iceBlue28),
+            ),
           ),
         ),
-        viewport: charts.OrdinalViewport(start, numberOfBarViewPort),
-      ),
-      primaryMeasureAxis: charts.NumericAxisSpec(
-        renderSpec: charts.GridlineRendererSpec(
-          labelAnchor: charts.TickLabelAnchor.after,
-          // Tick and Label styling here.
-          labelStyle: charts.TextStyleSpec(
-            fontSize: 14, // size in Pts.
-            color: charts.ColorUtil.fromDartColor(AppColors.white),
-          ),
-          // Change the line colors to match text color.
-          lineStyle: charts.LineStyleSpec(
-            color: charts.ColorUtil.fromDartColor(AppColors.iceBlue28),
-          ),
-        ),
-      ),
-    );
+      );
+    else
+      return Container();
   }
 }
 
-/// Sample ordinal data type.
 class ClimbingCount {
   final DateTime loggedDateTime;
   final int gradeCount;
