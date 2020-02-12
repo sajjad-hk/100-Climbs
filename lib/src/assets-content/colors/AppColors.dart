@@ -47,7 +47,8 @@ class AppColors {
   static const Color strongPinkTwo = Color(0xfff71888);
   static const Color purplePinkTwo = Color(0xffe524aa);
   static const Color barney = Color(0xffc522a9);
-  static const Color barneyThree = Color(0xffa71ab2);
+  static const Color barney3 = Color(0xffa71ab2);
+  static const Color barney4 = Color(0xffae26a3);
   static const Color purple = Color(0xff7c1eb2);
   static const Color violetBlue = Color(0xff7108cd);
 
@@ -98,7 +99,7 @@ class AppColors {
       case '8b':
         return barney;
       case '8b+':
-        return barneyThree;
+        return barney3;
       case '8c':
         return purple;
       case '8c+':

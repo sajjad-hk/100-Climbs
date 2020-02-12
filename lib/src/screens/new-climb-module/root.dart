@@ -1,5 +1,5 @@
 import 'package:hundred_climbs/src/models/values.dart';
-import 'package:hundred_climbs/src/services/climbingRouteService.dart';
+import 'package:hundred_climbs/src/services/climbService.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
@@ -105,14 +105,14 @@ class NewClimb extends StatelessWidget {
 
   void saveAndClose(BuildContext context, AppUser user) {
     final store = Provider.of<Store>(context);
-    climbingRouteService.saveNewClimbingRouteAndNewTags(user, store.climb);
+    climbService.addClimb(store.climb);
     _controller.jumpToPage(0);
     store.closeNewClimb();
   }
 
   void saveAndLogAnother(BuildContext context, AppUser user) {
     final store = Provider.of<Store>(context);
-    climbingRouteService.saveNewClimbingRouteAndNewTags(user, store.climb);
+    climbService.addClimb(store.climb);
     _controller.jumpToPage(0);
   }
 

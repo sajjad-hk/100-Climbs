@@ -38,7 +38,6 @@ export 'edit-climb-module/horizontal-grade-picker.dart';
 export 'edit-climb-module/tags-tile.dart';
 export 'package:hundred_climbs/src/assets-content/colors/AppColors.dart';
 export 'package:hundred_climbs/src/assets-content/icons/AppIcons.dart';
-export 'package:hundred_climbs/src/screens/login.dart';
 export 'package:hundred_climbs/src/screens/home.dart';
 export 'package:hundred_climbs/src/screens/intro-screen/intro-page.dart';
 export 'package:hundred_climbs/src/screens/intro-screen/intro-screen.dart';

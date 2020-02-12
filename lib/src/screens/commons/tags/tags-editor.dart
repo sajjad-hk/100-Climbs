@@ -34,7 +34,7 @@ class _State extends State<TagsEditor> {
             'Edidting tags',
           ),
         ),
-        backgroundColor: AppColors.getGradeColor(climb.grade),
+        backgroundColor: AppColors.getGradeColor(climb?.grade),
         body: ListView(
           children: [
             Container(

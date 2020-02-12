@@ -1,4 +1,6 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:hundred_climbs/src/models/values.dart';
 
 class Store with ChangeNotifier {
@@ -6,12 +8,21 @@ class Store with ChangeNotifier {
   bool get isNewClimbOpen => _newClimbOpen;
 
   void openNewClimb(Climb climb) {
+    if (climb == null) climb = defaultClimb;
     _newClimbOpen = true;
     _selectedClimb = climb.rebuild((c) => c
       ..tags.clear()
       ..comment = '');
     notifyListeners();
   }
+
+  Climb get defaultClimb => Climb((it) => it
+    ..grade = '4'
+    ..outCome = OutComeEnum.success
+    ..gradingStyle = GradingStyleEnum.french
+    ..belayingStyle = BelayingStyleEnum.lead
+    ..tags = SetBuilder([])
+    ..loggedDate = DateTime.now());
 
   void closeNewClimb() {
     _newClimbOpen = false;

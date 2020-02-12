@@ -47,12 +47,6 @@ class _$ClimbSerializer implements StructuredSerializer<Climb> {
         ..add(serializers.serialize(object.uid,
             specifiedType: const FullType(String)));
     }
-    if (object.closure != null) {
-      result
-        ..add('closure')
-        ..add(serializers.serialize(object.closure,
-            specifiedType: const FullType(ClosureEnum)));
-    }
     if (object.tags != null) {
       result
         ..add('tags')
@@ -105,10 +99,6 @@ class _$ClimbSerializer implements StructuredSerializer<Climb> {
           result.belayingStyle = serializers.deserialize(value,
                   specifiedType: const FullType(BelayingStyleEnum))
               as BelayingStyleEnum;
-          break;
-        case 'closure':
-          result.closure = serializers.deserialize(value,
-              specifiedType: const FullType(ClosureEnum)) as ClosureEnum;
           break;
         case 'tags':
           result.tags.replace(serializers.deserialize(value,
@@ -269,8 +259,6 @@ class _$Climb extends Climb {
   @override
   final BelayingStyleEnum belayingStyle;
   @override
-  final ClosureEnum closure;
-  @override
   final BuiltSet<String> tags;
   @override
   final DateTime loggedDate;
@@ -287,7 +275,6 @@ class _$Climb extends Climb {
       this.gradingStyle,
       this.grade,
       this.belayingStyle,
-      this.closure,
       this.tags,
       this.loggedDate,
       this.comment})
@@ -326,7 +313,6 @@ class _$Climb extends Climb {
         gradingStyle == other.gradingStyle &&
         grade == other.grade &&
         belayingStyle == other.belayingStyle &&
-        closure == other.closure &&
         tags == other.tags &&
         loggedDate == other.loggedDate &&
         comment == other.comment;
@@ -341,14 +327,12 @@ class _$Climb extends Climb {
                     $jc(
                         $jc(
                             $jc(
-                                $jc(
-                                    $jc($jc(0, documentId.hashCode),
-                                        outCome.hashCode),
-                                    uid.hashCode),
-                                gradingStyle.hashCode),
-                            grade.hashCode),
-                        belayingStyle.hashCode),
-                    closure.hashCode),
+                                $jc($jc(0, documentId.hashCode),
+                                    outCome.hashCode),
+                                uid.hashCode),
+                            gradingStyle.hashCode),
+                        grade.hashCode),
+                    belayingStyle.hashCode),
                 tags.hashCode),
             loggedDate.hashCode),
         comment.hashCode));
@@ -363,7 +347,6 @@ class _$Climb extends Climb {
           ..add('gradingStyle', gradingStyle)
           ..add('grade', grade)
           ..add('belayingStyle', belayingStyle)
-          ..add('closure', closure)
           ..add('tags', tags)
           ..add('loggedDate', loggedDate)
           ..add('comment', comment))
@@ -400,10 +383,6 @@ class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
   set belayingStyle(BelayingStyleEnum belayingStyle) =>
       _$this._belayingStyle = belayingStyle;
 
-  ClosureEnum _closure;
-  ClosureEnum get closure => _$this._closure;
-  set closure(ClosureEnum closure) => _$this._closure = closure;
-
   SetBuilder<String> _tags;
   SetBuilder<String> get tags => _$this._tags ??= new SetBuilder<String>();
   set tags(SetBuilder<String> tags) => _$this._tags = tags;
@@ -426,7 +405,6 @@ class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
       _gradingStyle = _$v.gradingStyle;
       _grade = _$v.grade;
       _belayingStyle = _$v.belayingStyle;
-      _closure = _$v.closure;
       _tags = _$v.tags?.toBuilder();
       _loggedDate = _$v.loggedDate;
       _comment = _$v.comment;
@@ -460,7 +438,6 @@ class ClimbBuilder implements Builder<Climb, ClimbBuilder> {
               gradingStyle: gradingStyle,
               grade: grade,
               belayingStyle: belayingStyle,
-              closure: closure,
               tags: _tags?.build(),
               loggedDate: loggedDate,
               comment: comment);

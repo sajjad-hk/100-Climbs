@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hundred_climbs/src/services/climbingRouteService.dart';
+import 'package:hundred_climbs/src/services/climbService.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +41,7 @@ class BottomActionBar extends StatelessWidget {
                 flex: 3,
                 child: FlatButton(
                   onPressed: () {
-                    climbingRouteService.removeClimbingRoutes(
+                    climbService.deleteClimbs(
                         store.climbs.map((i) => i.documentId).toList());
                     store.clearClimbs();
                   },

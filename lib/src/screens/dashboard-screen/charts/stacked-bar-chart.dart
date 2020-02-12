@@ -1,9 +1,8 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:hundred_climbs/src/screens/screens.dart';
 
 class StackedBarChart extends StatelessWidget {
   final bool animate;
@@ -20,43 +19,29 @@ class StackedBarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, Map<DateTime, List<Climb>>> data =
         Provider.of<Map<String, Map<DateTime, List<Climb>>>>(context);
-    Map<DateTime, List<Climb>> dataByDate =
-        Provider.of<Map<DateTime, List<Climb>>>(context);
-    List<DateTime> allDates = dataByDate == null ? [] : dataByDate.keys.toList()
-      ..sort();
 
-    dataByDate?.forEach((key, value) {
-      if (value.where((i) => i.outCome == OutComeEnum.success).isEmpty)
-        allDates.remove(key);
-    });
+    List<DateTime> sessions = Provider.of<List<DateTime>>(context);
 
-    List<String> grades = data == null ? [] : data.keys.toList()
-      ..sort();
-    Map<String, List<ClimbingCount>> chartData = Map();
-    grades.reversed.forEach((key) {
-      if (!chartData.containsKey(key)) chartData[key] = List();
-      allDates.forEach((date) {
-        chartData[key].add(
-          ClimbingCount(
-            date,
-            data[key][date] == null ? 0 : data[key][date].length,
-            key,
-            AppColors.getGradeColor(key),
-          ),
-        );
-      });
+    Map<String, List<ClimbingCount>> chartData = data?.map((grade, value) {
+      List<ClimbingCount> climbingCounts = List();
+      sessions?.forEach((date) => climbingCounts.add(ClimbingCount(
+          date,
+          value[date] == null ? 0 : value[date].length,
+          grade,
+          AppColors.getGradeColor(grade))));
+      return MapEntry(grade, climbingCounts);
     });
 
     List chartSeriesData = List<charts.Series<dynamic, String>>();
 
     String start = '';
 
-    if (allDates != null && allDates.length > 6) {
+    if (sessions != null && sessions.length > 6) {
       start = DateFormat.MMMd()
-          .format(allDates[allDates.length - numberOfBarViewPort]);
+          .format(sessions[sessions.length - numberOfBarViewPort]);
     }
 
-    chartData.forEach((key, value) {
+    chartData?.forEach((key, value) {
       chartSeriesData.add(charts.Series<ClimbingCount, String>(
         id: key,
         domainFn: (ClimbingCount climbs, _) =>
@@ -70,7 +55,7 @@ class StackedBarChart extends StatelessWidget {
       ));
     });
 
-    if (allDates.isNotEmpty)
+    if ((sessions ?? []).isNotEmpty)
       return charts.BarChart(
         chartSeriesData,
         animate: animate,

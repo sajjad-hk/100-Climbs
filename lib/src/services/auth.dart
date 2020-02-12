@@ -43,10 +43,10 @@ class AuthService {
 
   Stream<AppUser> userInfo(String uid) {
     return _db
-        .collection('users')
+        .collection('profiles')
         .document(uid)
         .snapshots()
-        .where((it) => it != null)
+        .where((it) => it != null && it.data != null)
         .map((data) {
       return standardSerializers.deserializeWith(AppUser.serializer, data.data);
     });

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
-import 'package:hundred_climbs/src/services/climbingRouteService.dart';
+import 'package:hundred_climbs/src/services/climbService.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
 
@@ -94,8 +94,7 @@ class _State extends State<EditRouteWizard> {
               ),
               FlatButton(
                 onPressed: () {
-                  climbingRouteService
-                      .removeClimbingRoute(store.climb.documentId);
+                  climbService.deleteClimb(store.climb.documentId);
                   Navigator.pop(context);
                 },
                 child: Row(
@@ -123,7 +122,7 @@ class _State extends State<EditRouteWizard> {
                   size: 35,
                 ),
                 onPressed: () {
-                  climbingRouteService.updateClimbingRoute(store.climb);
+                  climbService.updateClimb(store.climb);
                   Navigator.pop(context);
                 },
               )

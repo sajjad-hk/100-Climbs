@@ -6,9 +6,8 @@ import 'package:hundred_climbs/src/screens/screens.dart';
 
 class TileDetails extends StatelessWidget {
   final BelayingStyleEnum belayingStyle;
-  final ClosureEnum closure;
 
-  TileDetails({this.closure, this.belayingStyle});
+  TileDetails({this.belayingStyle});
 
   @override
   Widget build(BuildContext context) {

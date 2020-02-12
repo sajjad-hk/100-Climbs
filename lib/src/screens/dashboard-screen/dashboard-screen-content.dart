@@ -1,7 +1,7 @@
 import 'package:hundred_climbs/src/models/values.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
-import 'package:hundred_climbs/src/services/climbingCountChartService.dart';
-import 'package:hundred_climbs/src/services/climbingRouteService.dart';
+import 'package:hundred_climbs/src/services/chartService.dart';
+import 'package:hundred_climbs/src/services/climbService.dart';
 import 'package:provider/provider.dart';
 
 class DashboardContent extends StatelessWidget {
@@ -25,12 +25,11 @@ class DashboardContent extends StatelessWidget {
                         providers: [
                           StreamProvider<
                               Map<String, Map<DateTime, List<Climb>>>>.value(
-                            value: climbingCountChartService
+                            value: chartService
                                 .getClimbingCountChartData(user?.uid),
                           ),
-                          StreamProvider<Map<DateTime, List<Climb>>>.value(
-                              value: climbingRouteService
-                                  .getClimbingRoutesGroupByDate(user?.uid)),
+                          StreamProvider<List<DateTime>>.value(
+                              value: climbService.climbingSessions(user?.uid)),
                         ],
                         child: StackedBarChart.withData(),
                       ),
@@ -50,7 +49,7 @@ class DashboardContent extends StatelessWidget {
           expandedHeight: 280,
         ),
         StreamProvider<Map<DateTime, List<Climb>>>.value(
-          value: climbingRouteService.getClimbingRoutesGroupByDate(user?.uid),
+          value: climbService.climbsGroupByDate(user?.uid),
           child: ClimbingRoutes(),
         ),
       ],

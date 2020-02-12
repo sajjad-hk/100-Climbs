@@ -1,28 +1,7 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
-import 'package:hundred_climbs/src/services/auth.dart';
 
-class Loader extends StatefulWidget {
-  @override
-  _LoaderState createState() => _LoaderState();
-}
-
-class _LoaderState extends State<Loader> {
-  @override
-  void initState() {
-    super.initState();
-    authService.getUser.then(
-      (user) {
-        if (user != null) {
-          Future.delayed(Duration(seconds: 2))
-              .then((__) => Navigator.pushReplacementNamed(context, '/home'));
-        } else {
-          Navigator.pushReplacementNamed(context, '/intro-screen');
-        }
-      },
-    );
-  }
-
+class Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

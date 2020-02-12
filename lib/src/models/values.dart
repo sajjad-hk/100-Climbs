@@ -21,9 +21,6 @@ abstract class Climb implements Built<Climb, ClimbBuilder> {
   BelayingStyleEnum get belayingStyle;
 
   @nullable
-  ClosureEnum get closure;
-
-  @nullable
   BuiltSet<String> get tags;
 
   DateTime get loggedDate;

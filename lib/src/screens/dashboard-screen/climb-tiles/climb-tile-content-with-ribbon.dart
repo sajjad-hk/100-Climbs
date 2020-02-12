@@ -47,9 +47,7 @@ class ClimbTileContentWithRibbon extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.only(right: 10),
                           child: TileDetails(
-                            belayingStyle: currentClimb.belayingStyle,
-                            closure: currentClimb.closure,
-                          ),
+                              belayingStyle: currentClimb.belayingStyle),
                         ),
                       ],
                     ),

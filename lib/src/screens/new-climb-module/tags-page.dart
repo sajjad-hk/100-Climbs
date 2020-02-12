@@ -1,5 +1,6 @@
 import 'package:hundred_climbs/src/models/values.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
+import 'package:hundred_climbs/src/services/tagService.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +64,10 @@ class Tags extends StatelessWidget {
                         TagItem(
                           text: tag,
                           onTab: (tag) => store.updateClimb(
-                              store.climb.rebuild((c) => c..tags.remove(tag))),
+                            store.climb.rebuild(
+                              (c) => c..tags.remove(tag),
+                            ),
+                          ),
                         )
                   ],
                 ),
@@ -74,8 +78,21 @@ class Tags extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TagsEditor(
-                        userTagsHistory: user?.tags?.toList() ?? [],
+                      builder: (context) => FutureBuilder(
+                        future: tagService.tags(),
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            List<String> ts = [
+                              ...snapshot.data[0].toList()[0],
+                              if (snapshot.data[1].toList().isNotEmpty)
+                                ...snapshot.data[1].toList()[0]
+                            ];
+                            return TagsEditor(
+                              userTagsHistory: ts.toList() ?? [],
+                            );
+                          } else
+                            return Container();
+                        },
                       ),
                     ),
                   ),
