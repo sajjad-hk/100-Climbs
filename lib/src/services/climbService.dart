@@ -85,6 +85,16 @@ class ClimbService {
         .orderBy('grade', descending: true)
         .limit(1)
         .getDocuments();
+    var defaultClimb = Completer();
+    defaultClimb.complete({
+      'outCome': 'success',
+      'grade': '4',
+      'gradingStyle': 'french',
+      'belayingStyle': 'lead',
+      'tags': [],
+      'loggedDate': DateTime.now()
+    });
+    if (d.documents.isEmpty) return defaultClimb.future;
     // todo when user removes all climbs no best climb
     return d.documents.first.data;
   }

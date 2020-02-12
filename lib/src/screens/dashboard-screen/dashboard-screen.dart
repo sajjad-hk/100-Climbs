@@ -20,7 +20,7 @@ class Dashboard extends StatelessWidget {
             floatingActionButton: NewClimbFloatingActionButton(),
             drawer: Drawer(
               child: DrawerContent(),
-            ), // todo change static account type
+            ),
             bottomNavigationBar: BottomActionBar(),
           );
         },
