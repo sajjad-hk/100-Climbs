@@ -32,7 +32,7 @@ class DashboardContent extends StatelessWidget {
                           StreamProvider<List<DateTime>>.value(
                               value: climbService.climbingSessions(user?.uid)),
                         ],
-                        child: StackedBarChart.withData(),
+                        child: StackedBarChart(),
                       ),
                     ),
                   ),
