@@ -1,4 +1,5 @@
 import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/services/chartService.dart';
 import 'package:hundred_climbs/src/services/climbService.dart';
@@ -46,7 +47,8 @@ class DashboardContent extends StatelessWidget {
               ),
             ),
           ),
-          expandedHeight: 280,
+          expandedHeight: screens['DASHBOARD']['CHART_HEIGHT']
+              [LayoutUtils(context).screenSize],
         ),
         StreamProvider<Map<DateTime, List<Climb>>>.value(
           value: climbService.climbsGroupByDate(user?.uid),

@@ -54,7 +54,8 @@ Map screens = {
     'ICON_SIZE': {'SMALL': 15.0, 'MEDIUM': 20.0, 'LARGE': 25.0},
     'FAILURE_DASHLINE_SKIP': {'SMALL': 3.1, 'MEDIUM': 3.3, 'LARGE': 3.3},
     'TAG_HEIGHT': {'SMALL': 25.0, 'MEDIUM': 30.0, 'LARGE': 35.0},
-    'BORDER_RADIUS': {'SMALL': 14.0, 'MEDIUM': 14.0, 'LARGE': 20.0}
+    'BORDER_RADIUS': {'SMALL': 14.0, 'MEDIUM': 14.0, 'LARGE': 20.0},
+    'CHART_HEIGHT': {'SMALL': 280.0, 'MEDIUM': 300.0, 'LARGE': 330.0},
   },
   'TAG_ICON': {'SMALL': 20.0, 'MEDIUM': 22.0, 'LARGE': 30.0},
   'INTRO': {
