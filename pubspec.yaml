@@ -11,7 +11,7 @@ description: Climbing sport application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+2
+version: 1.0.0+9
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -86,7 +86,6 @@ flutter:
     - assets/icons/calendar_icon.png
     - assets/icons/100_climbs.png
     - assets/icons/empty_illustration.png
-    - assets/icons/empty_arrow.png
     - assets/icons/paper_plane.png
     - assets/icons/log_out.png
     - assets/icons/onboarding_1.png
