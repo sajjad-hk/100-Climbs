@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:hundred_climbs/src/assets-content/constants.dart';
 import 'package:hundred_climbs/src/models/enums.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
@@ -88,11 +89,14 @@ class _GradePickerState extends State<GradePicker> {
                 alignment: Alignment.topCenter,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.all(20),
+                    margin: EdgeInsets.all(screens['PAGE_GRADE']['KNOB_SIZE']
+                                [LayoutUtils(context).screenSize] /
+                            2 -
+                        5),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Color(0xff4d000000),
+                        color: AppColors.black30,
                         width: 8.0,
                       ),
                     ),

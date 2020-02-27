@@ -15,6 +15,7 @@ class AppIcons {
   static const String smile = 'assets/icons/smile-white-icon.png';
   static const String paperPlane = 'assets/icons/paper_plane.png';
   static const String logOut = 'assets/icons/log_out.png';
+  static const String emptyIllustration = 'assets/icons/empty_illustration.png';
 
   static String getBelayStyleIcon(BelayingStyleEnum style) {
     switch (style) {

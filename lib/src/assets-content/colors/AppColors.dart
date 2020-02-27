@@ -12,14 +12,17 @@ class AppColors {
   static const Color white2 = Color(0xffe8e8e8);
   static const Color paleGrey = Color(0xffe7ecee);
   static const Color paleGrey2 = Color(0xfff1f4f5);
+  static const Color paleGrey3 = Color(0xffedf4f6);
   static const Color silver = Color(0xffd8e2e5);
   static const Color coolGrey = Color(0xff95989a);
+  static const Color coolGrey2 = Color(0xffa7acad);
   static const Color warmGrey = Color(0xff8b8b8b);
   static const Color dark = Color(0xff0e1823);
   static const Color lightNavy = Color(0xff165571);
   static const Color black50 = Color(0x80000000);
   static const Color black30 = Color(0x4d000000);
   static const Color black7 = Color(0x12000000);
+  static const Color black70 = Color(0xb3000000);
 
   static const Color iceBlue28 = Color(0x47f1f9ff);
   static const Color greyIsh = Color(0xffb1b1b1);

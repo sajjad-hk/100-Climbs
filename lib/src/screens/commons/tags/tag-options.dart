@@ -1,3 +1,4 @@
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -24,16 +25,7 @@ class TagsHistory extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.all(1),
               padding: const EdgeInsets.all(8.0),
-              decoration: new BoxDecoration(
-                color: Colors.black26,
-                boxShadow: [
-                  new BoxShadow(
-                    color: Colors.black26,
-                    offset: new Offset(2.0, 2.0),
-                    blurRadius: 20.0,
-                  )
-                ],
-              ),
+              color: Colors.black26,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -43,7 +35,8 @@ class TagsHistory extends StatelessWidget {
                       tags[index].value,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: screens['NEW_CLIMB']['PAGE_ACTION_FONT']
+                            [LayoutUtils(context).screenSize],
                       ),
                     ),
                   ),

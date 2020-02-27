@@ -1,5 +1,6 @@
 import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:hundred_climbs/src/models/values.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
@@ -18,14 +19,16 @@ class BelayStyleTile extends StatelessWidget {
               aspectRatio: 1,
               child: NewCustomRadio.col(
                 value: BelayingStyleEnum.lead,
-                groupValue: climb.belayingStyle,
+                groupValue: climb?.belayingStyle,
                 checkedBgColor: AppColors.black30,
                 unCheckedBgColor: Colors.transparent,
                 checkedContentColor: Colors.white,
                 iconProvider: AppIcons.lead,
                 label: 'Lead',
-                fontSize: 16,
-                iconSize: 40,
+                fontSize: screens['NEW_CLIMB']['PAGE_ACTION_FONT']
+                    [LayoutUtils(context).screenSize],
+                iconSize: screens['NEW_CLIMB']['PAGE_ACTION_BUTTON']
+                    [LayoutUtils(context).screenSize],
                 onChanged: (val) =>
                     store.updateClimb(updateBelayStyle(climb, val)),
               ),
@@ -39,14 +42,16 @@ class BelayStyleTile extends StatelessWidget {
               aspectRatio: 1,
               child: NewCustomRadio.col(
                 value: BelayingStyleEnum.auto,
-                groupValue: climb.belayingStyle,
+                groupValue: climb?.belayingStyle,
                 checkedBgColor: AppColors.black30,
                 unCheckedBgColor: Colors.transparent,
                 checkedContentColor: Colors.white,
                 iconProvider: AppIcons.auto,
-                iconSize: 40,
+                iconSize: screens['NEW_CLIMB']['PAGE_ACTION_BUTTON']
+                    [LayoutUtils(context).screenSize],
                 label: 'Auto',
-                fontSize: 16,
+                fontSize: screens['NEW_CLIMB']['PAGE_ACTION_FONT']
+                    [LayoutUtils(context).screenSize],
                 onChanged: (val) =>
                     store.updateClimb(updateBelayStyle(climb, val)),
               ),
@@ -60,14 +65,16 @@ class BelayStyleTile extends StatelessWidget {
               aspectRatio: 1,
               child: NewCustomRadio.col(
                 value: BelayingStyleEnum.toprope,
-                groupValue: climb.belayingStyle,
+                groupValue: climb?.belayingStyle,
                 checkedBgColor: AppColors.black30,
                 unCheckedBgColor: Colors.transparent,
                 checkedContentColor: Colors.white,
                 iconProvider: AppIcons.topRope,
-                iconSize: 40,
+                iconSize: screens['NEW_CLIMB']['PAGE_ACTION_BUTTON']
+                    [LayoutUtils(context).screenSize],
                 label: 'Toprope',
-                fontSize: 16,
+                fontSize: screens['NEW_CLIMB']['PAGE_ACTION_FONT']
+                    [LayoutUtils(context).screenSize],
                 onChanged: (val) =>
                     store.updateClimb(updateBelayStyle(climb, val)),
               ),

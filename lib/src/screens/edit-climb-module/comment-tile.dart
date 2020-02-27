@@ -1,3 +1,4 @@
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,7 @@ class CommentTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<Store>(context);
-    _controller.text = store.climb.comment;
+    _controller.text = store.climb?.comment;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.black30,
@@ -27,6 +28,8 @@ class CommentTile extends StatelessWidget {
         ),
         style: TextStyle(
           color: Colors.white,
+          fontSize: screens['NEW_CLIMB']['BUTTON_FONT']
+              [LayoutUtils(context).screenSize],
         ),
         onSubmitted: (value) {
           store.updateClimb(

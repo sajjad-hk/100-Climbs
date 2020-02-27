@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,72 +13,44 @@ class Intro extends StatefulWidget {
 class _IntroState extends State<Intro> {
   int currentPageValue = 0;
   final PageController _controller = PageController();
-  TapGestureRecognizer _emailTapRecognizer;
-  TapGestureRecognizer _privacyLinkTapRecognizer;
 
   @override
   void initState() {
     super.initState();
-    _emailTapRecognizer = TapGestureRecognizer()..onTap = () => sendEmail();
-    _privacyLinkTapRecognizer = TapGestureRecognizer()
-      ..onTap = () => _launchURL();
-  }
-
-  void sendEmail() async {
-    const email = 'mailto:100climbs.app@gmail.com';
-    if (await canLaunch(email)) {
-      await launch(email);
-    } else {
-      throw 'Could not launch $email';
-    }
-  }
-
-  void _launchURL() async {
-    const url = 'https://flutter.dev';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              AppColors.lightNavy,
+              AppColors.dark,
+            ],
+          ),
+        ),
         child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: <Widget>[
-            PageView(
-              controller: _controller,
-              onPageChanged: (int i) {
-                setState(() {
-                  currentPageValue = i;
-                });
-              },
-              children: <Widget>[
-                IntroPage(
-                  ind: 1,
-                ),
-                IntroPage(
-                  ind: 2,
-                ),
-                IntroPage(
-                  ind: 3,
-                ),
-                IntroPage(
-                  ind: 4,
-                )
-              ],
-            ),
             Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                Flexible(
+                  child: Container(
+                    child: AspectRatio(
+                      aspectRatio: screens['INTRO']['ASPECTR']
+                          [LayoutUtils(context).screenSize],
+                    ),
+                  ),
+                ),
                 Stack(
                   alignment: AlignmentDirectional.topStart,
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.only(bottom: 20),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -92,17 +65,61 @@ class _IntroState extends State<Intro> {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  margin:
-                      const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                  child: introText(currentPageValue),
+                SizedBox(
+                  height: 100,
+                )
+              ],
+            ),
+            PageView(
+              controller: _controller,
+              onPageChanged: (int i) {
+                setState(() {
+                  currentPageValue = i;
+                });
+              },
+              children: <Widget>[
+                IntroPage(
+                  ind: 1,
+                  emailTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => sendEmail(),
+                  privacyLinkTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => _launchURL(),
+                ),
+                IntroPage(
+                  ind: 2,
+                  emailTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => sendEmail(),
+                  privacyLinkTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => _launchURL(),
+                ),
+                IntroPage(
+                  ind: 3,
+                  emailTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => sendEmail(),
+                  privacyLinkTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => _launchURL(),
+                ),
+                IntroPage(
+                  ind: 4,
+                  emailTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => sendEmail(),
+                  privacyLinkTapRecognizer: TapGestureRecognizer()
+                    ..onTap = () => _launchURL(),
+                )
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(
+                  height: 100, // text space holder
                 ),
                 Container(
-                  margin: const EdgeInsets.only(bottom: 30),
+                  margin: screens['INTRO']['MARGIN']
+                      [LayoutUtils(context).screenSize],
                   child: FlatButton.icon(
-                    padding: const EdgeInsets.only(
-                        left: 30, bottom: 15, right: 30, top: 15),
+                    padding: screens['INTRO']['BUTTON']
+                        [LayoutUtils(context).screenSize],
                     color: AppColors.dark,
                     icon: Image(
                       height: 30,
@@ -129,6 +146,24 @@ class _IntroState extends State<Intro> {
     );
   }
 
+  void sendEmail() async {
+    const email = 'mailto:100climbs.app@gmail.com';
+    if (await canLaunch(email)) {
+      await launch(email);
+    } else {
+      throw 'Could not launch $email';
+    }
+  }
+
+  void _launchURL() async {
+    const url = 'https://climbs-dev.firebaseapp.com/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   Widget circleBar(bool isActive, int pgNo) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
@@ -153,97 +188,6 @@ class _IntroState extends State<Intro> {
         return AppColors.barney4;
       default:
         return Colors.white;
-    }
-  }
-
-  RichText introText(int i) {
-    switch (i) {
-      case 0:
-        return RichText(
-          textAlign: TextAlign.center,
-          strutStyle: StrutStyle(
-            height: 1.5,
-          ),
-          text: TextSpan(
-            style: TextStyle(
-              color: Colors.white,
-            ),
-            children: [
-              TextSpan(
-                  text:
-                      'Record and keep track of the routes you\'ve climbed (or tried). Build a history of your training sessions and track your progress'),
-            ],
-          ),
-        );
-      case 1:
-        return RichText(
-          textAlign: TextAlign.center,
-          strutStyle: StrutStyle(
-            height: 1.5,
-          ),
-          text: TextSpan(
-            style: TextStyle(
-              color: Colors.white,
-            ),
-            children: [
-              TextSpan(
-                  text:
-                      'We are starting small but while you\'re building your climbs history we are working hard to add new features. Expect some updates soon!'),
-            ],
-          ),
-        );
-
-      case 2:
-        return RichText(
-          textAlign: TextAlign.center,
-          strutStyle: StrutStyle(
-            height: 1.5,
-          ),
-          text: TextSpan(
-            style: TextStyle(
-              color: Colors.white,
-            ),
-            children: [
-              TextSpan(
-                  text:
-                      'We would love to know what you think. Our small Warsaw team is waiting for your feedback on '),
-              TextSpan(
-                  text: '100climbs.app@gmail.com!',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    decorationStyle: TextDecorationStyle.wavy,
-                  ),
-                  recognizer: _emailTapRecognizer),
-            ],
-          ),
-        );
-      case 3:
-        return RichText(
-          textAlign: TextAlign.center,
-          strutStyle: StrutStyle(
-            height: 1.5,
-          ),
-          text: TextSpan(
-            style: TextStyle(
-              color: Colors.white,
-            ),
-            children: [
-              TextSpan(
-                  text:
-                      'We value your privacy. We don\'t share your data with third parties. Read more in our'),
-              TextSpan(
-                  text: '\nPrivacy Policy.',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                  ),
-                  recognizer: _privacyLinkTapRecognizer),
-            ],
-          ),
-        );
-      default:
-        return RichText(
-          text: TextSpan(text: ''),
-        );
     }
   }
 }

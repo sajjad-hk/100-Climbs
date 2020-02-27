@@ -61,7 +61,7 @@ class HorizontalGradePicker extends StatelessWidget {
   }
 
   bool isTheGrade(Climb climb, int index) {
-    return grades[index] == climb.grade;
+    return grades[index] == climb?.grade;
   }
 
   Climb updateGrade(Climb climb, String value) {

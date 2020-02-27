@@ -1,4 +1,5 @@
 import 'package:flutter/rendering.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 
 class Grade extends StatelessWidget {
@@ -7,13 +8,25 @@ class Grade extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        WizardPageTitle(
-          title: 'Grade',
+        Flexible(
+          flex: 1,
+          fit: FlexFit.loose,
+          child: WizardPageTitle(
+            title: 'Grade',
+          ),
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 30),
-          child: GradePicker(),
+        Flexible(
+          flex: 4,
+          child: Container(
+            margin: screens['PAGE_GRADE']['CIRCLE_MARGIN']
+                [LayoutUtils(context).screenSize],
+            child: GradePicker(),
+          ),
         ),
+        Flexible(
+          flex: 1,
+          child: Container(),
+        )
       ],
     );
   }

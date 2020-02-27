@@ -1,4 +1,5 @@
 import 'package:flutter/rendering.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 
 class GradePickerControllers extends StatelessWidget {
@@ -14,19 +15,25 @@ class GradePickerControllers extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        InkWell(
-          onTap: onMinus,
-          child: Container(
-            width: 60,
-            height: 60,
-            child: CustomIcon(
-              path: AppIcons.minus,
-              color: Colors.black38,
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(35),
+            onTap: onMinus,
+            child: Container(
+              width: screens['NEW_CLIMB']['GRADE_ICON']
+                  [LayoutUtils(context).screenSize],
+              height: screens['NEW_CLIMB']['GRADE_ICON']
+                  [LayoutUtils(context).screenSize],
+              child: CustomIcon(
+                path: AppIcons.minus,
+                color: Colors.black38,
+              ),
             ),
           ),
         ),
         Container(
-          margin: const EdgeInsets.all(5),
+          margin: const EdgeInsets.all(2),
           width: 80,
           child: Text(
             grade,
@@ -45,14 +52,20 @@ class GradePickerControllers extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        InkWell(
-          onTap: onPlus,
-          child: Container(
-            width: 60,
-            height: 60,
-            child: CustomIcon(
-              path: AppIcons.plus,
-              color: Colors.black38,
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(35),
+            onTap: onPlus,
+            child: Container(
+              width: screens['NEW_CLIMB']['GRADE_ICON']
+                  [LayoutUtils(context).screenSize],
+              height: screens['NEW_CLIMB']['GRADE_ICON']
+                  [LayoutUtils(context).screenSize],
+              child: CustomIcon(
+                path: AppIcons.plus,
+                color: Colors.black38,
+              ),
             ),
           ),
         ),

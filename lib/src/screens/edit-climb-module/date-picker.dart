@@ -1,3 +1,4 @@
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:intl/intl.dart';
@@ -7,11 +8,11 @@ class DatePickerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<Store>(context);
-    DateTime date = store.climb.loggedDate ?? DateTime.now();
-
+    DateTime date = store.climb?.loggedDate ?? DateTime.now();
     return InkWell(
       child: Container(
-        height: 50,
+        height: screens['EDIT_CLIMB']['BUTTON_HEIGHT']
+            [LayoutUtils(context).screenSize],
         decoration: BoxDecoration(
           color: AppColors.black30,
           borderRadius: BorderRadius.all(
@@ -27,7 +28,8 @@ class DatePickerButton extends StatelessWidget {
               child: CustomIcon(
                 color: Colors.white,
                 path: AppIcons.calendar,
-                size: 25,
+                size: screens['EDIT_CLIMB']['ICON_SIZE']
+                    [LayoutUtils(context).screenSize],
               ),
             ),
             Padding(

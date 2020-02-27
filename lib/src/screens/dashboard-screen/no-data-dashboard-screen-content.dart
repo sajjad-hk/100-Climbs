@@ -7,89 +7,102 @@ class NoDataDashboardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.silver,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              IconButton(
-                onPressed: openDrawer(context),
-                icon: Icon(
-                  Icons.menu,
-                  color: AppColors.black30,
+    AppBar appBar = AppBar(
+      backgroundColor: AppColors.silver,
+      elevation: 0,
+      leading: IconButton(
+        onPressed: openDrawer(context),
+        icon: Icon(
+          Icons.menu,
+          color: AppColors.black30,
+        ),
+      ),
+    );
+    return Scaffold(
+      appBar: appBar,
+      body: Container(
+        color: AppColors.silver,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              child: RichText(
+                textAlign: TextAlign.center,
+                strutStyle: StrutStyle(
+                  height: 1.5,
                 ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'No data',
-                style: TextStyle(
-                  color: AppColors.black30,
-                  fontSize: 26,
+                text: TextSpan(
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                  children: [
+                    TextSpan(
+                      semanticsLabel: 'No data',
+                      text: 'No data \n',
+                      style: TextStyle(
+                        color: AppColors.black30,
+                        fontSize: 26,
+                      ),
+                    ),
+                    TextSpan(
+                      semanticsLabel: 'Go do some climbing!',
+                      text: 'Go do some climbing!',
+                      style: TextStyle(
+                        color: AppColors.black30,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Go do some climbing!',
-                style: TextStyle(
-                  color: AppColors.black30,
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-          AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-                decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/icons/empty_illustration.png'),
-              ),
-            )),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Click here to',
-                style: TextStyle(
-                  color: AppColors.black30,
-                  fontSize: 16,
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'record your first climb',
-                style: TextStyle(
-                  color: AppColors.black30,
-                  fontSize: 16,
-                ),
-              )
-            ],
-          ),
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/icons/empty_arrow.png'),
-                  fit: BoxFit.fitHeight),
             ),
-          ),
-        ],
+            AspectRatio(
+              aspectRatio: 1.2, // todo fix it wrong number
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(AppIcons.emptyIllustration),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              child: RichText(
+                textAlign: TextAlign.center,
+                strutStyle: StrutStyle(
+                  height: 1.5,
+                ),
+                text: TextSpan(
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                  children: [
+                    TextSpan(
+                      semanticsLabel: 'Click + to record',
+                      text: 'Click \'+\' to record\n',
+                      style: TextStyle(
+                        color: AppColors.black30,
+                        fontSize: 16,
+                      ),
+                    ),
+                    TextSpan(
+                      semanticsLabel: 'your first climb',
+                      text: 'your first climb',
+                      style: TextStyle(
+                        color: AppColors.black30,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: appBar.preferredSize.height,
+            )
+          ],
+        ),
       ),
     );
   }

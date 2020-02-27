@@ -4,9 +4,10 @@ import 'package:hundred_climbs/src/screens/screens.dart';
 class TileSection extends StatelessWidget {
   final Widget content;
   final String title;
-  final bool margine;
+  final bool withMargin;
 
-  const TileSection({Key key, @required this.content, this.title, this.margine})
+  const TileSection(
+      {Key key, @required this.content, this.title, this.withMargin})
       : super(key: key);
 
   @override
@@ -25,7 +26,7 @@ class TileSection extends StatelessWidget {
         skipLength: 3.0,
       ),
       child: Container(
-        margin: margine
+        margin: withMargin
             ? const EdgeInsets.only(top: 20, right: 15, bottom: 20, left: 15)
             : const EdgeInsets.all(0),
         child: Column(
@@ -34,7 +35,7 @@ class TileSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              margin: margine
+              margin: withMargin
                   ? const EdgeInsets.only(bottom: 15)
                   : const EdgeInsets.only(
                       top: 20, right: 15, bottom: 15, left: 15),
@@ -48,7 +49,7 @@ class TileSection extends StatelessWidget {
               ),
             ),
             Container(
-              margin: margine
+              margin: withMargin
                   ? const EdgeInsets.all(0)
                   : const EdgeInsets.only(bottom: 15),
               child: content,

@@ -15,14 +15,17 @@ class TagInfoItem extends StatelessWidget {
           color: AppColors.white2,
         ),
       ),
-      child: Row(mainAxisSize: MainAxisSize.min, children: [
-        Text(
-          tagText,
-          style: TextStyle(
-            color: AppColors.warmGrey,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            tagText,
+            style: TextStyle(
+              color: AppColors.warmGrey,
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

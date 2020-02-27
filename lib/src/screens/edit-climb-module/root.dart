@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/services/auth.dart';
 import 'package:hundred_climbs/src/services/climbService.dart';
@@ -44,32 +45,32 @@ class _State extends State<EditRouteWizard> {
               children: <Widget>[
                 TileSection(
                   title: 'Date',
-                  margine: true,
+                  withMargin: true,
                   content: DatePickerTile(),
                 ),
                 TileSection(
                   title: 'Succeded?',
-                  margine: true,
+                  withMargin: true,
                   content: OutComeTile(),
                 ),
                 TileSection(
                   title: 'Grade',
-                  margine: false,
+                  withMargin: false,
                   content: HorizontalGradePicker(),
                 ),
                 TileSection(
                   title: 'Belay',
-                  margine: true,
+                  withMargin: true,
                   content: BelayStyleTile(),
                 ),
                 TileSection(
                   title: 'Tags',
-                  margine: true,
+                  withMargin: true,
                   content: TagsTile(),
                 ),
                 TileSection(
                   title: 'Comments',
-                  margine: true,
+                  withMargin: true,
                   content: CommentTile(),
                 ),
               ],
@@ -86,7 +87,8 @@ class _State extends State<EditRouteWizard> {
                 icon: Icon(
                   Icons.arrow_back,
                   color: Colors.white,
-                  size: 35,
+                  size: screens['EDIT_CLIMB']['ICON_SIZE']
+                      [LayoutUtils(context).screenSize],
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -104,12 +106,16 @@ class _State extends State<EditRouteWizard> {
                       child: Icon(
                         Icons.delete,
                         color: Colors.white,
-                        size: 20,
+                        size: screens['EDIT_CLIMB']['ACTION_ICON']
+                            [LayoutUtils(context).screenSize],
                       ),
                     ),
                     Text(
                       'DELETE',
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: screens['NEW_CLIMB']['PAGE_ACTION_FONT']
+                              [LayoutUtils(context).screenSize]),
                     ),
                   ],
                 ),
@@ -119,7 +125,8 @@ class _State extends State<EditRouteWizard> {
                 icon: Icon(
                   Icons.check,
                   color: Colors.white,
-                  size: 35,
+                  size: screens['EDIT_CLIMB']['ICON_SIZE']
+                      [LayoutUtils(context).screenSize],
                 ),
                 onPressed: () {
                   climbService.updateClimb(store.climb);

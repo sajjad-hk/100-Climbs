@@ -132,11 +132,15 @@ class NewCustomRadio<T> extends StatelessWidget {
           Radius.circular(4),
         ),
       ),
-      child: InkWell(
-        child: style == 'col' ? _buildInCol() : _buildInRow(),
-        onTap: () {
-          onChanged(value);
-        },
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(4.0),
+          child: style == 'col' ? _buildInCol() : _buildInRow(),
+          onTap: () {
+            onChanged(value);
+          },
+        ),
       ),
     );
   }

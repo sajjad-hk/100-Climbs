@@ -1,3 +1,4 @@
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 
 class ClimbTileWrapper extends StatelessWidget {
@@ -10,7 +11,7 @@ class ClimbTileWrapper extends StatelessWidget {
     Widget content = ClimbTileContent(viewClimb);
 
     if (viewClimb.isFailure && !viewClimb.isSelected)
-      content = failureWrapper(content);
+      content = failureWrapper(content, context);
     if (viewClimb.isSelected) content = selectedWrapper(content);
 
     return Container(
@@ -19,13 +20,14 @@ class ClimbTileWrapper extends StatelessWidget {
     );
   }
 
-  Widget failureWrapper(Widget content) {
+  Widget failureWrapper(Widget content, BuildContext context) {
     return CustomPaint(
       painter: DashedBorderPainter(
-        strokeWidth: 2.0,
+        strokeWidth: 3.0,
         color: AppColors.coolGrey,
         dashLength: 4.5,
-        skipLength: 3.0,
+        skipLength: screens['DASHBOARD']['FAILURE_DASHLINE_SKIP']
+            [LayoutUtils(context).screenSize],
       ),
       child: content,
     );

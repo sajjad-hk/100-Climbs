@@ -1,9 +1,10 @@
 import 'package:hundred_climbs/src/models/enums.dart';
 import 'package:hundred_climbs/src/screens/dashboard-screen/climb-tiles/climb-tile-wrapper.dart';
-import 'package:hundred_climbs/src/store/store.dart';
-import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
+import 'package:hundred_climbs/src/store/store.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/values.dart';
 
@@ -16,14 +17,18 @@ class ClimbingRoutes extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: kFloatingActionButtonMargin + 60),
       sliver: SliverList(
         delegate: SliverChildListDelegate(
-          flattenGroupedRoutes(groupedRoutes, context),
+          flattenGroupedRoutes(
+              groupedRoutes,
+              context,
+              screens['DASHBOARD']['FONT_SIZE']
+                  [LayoutUtils(context).screenSize]),
         ),
       ),
     );
   }
 
   List<Widget> flattenGroupedRoutes(
-      Map<DateTime, List<Climb>> groupedRoutes, context) {
+      Map<DateTime, List<Climb>> groupedRoutes, context, fontSize) {
     if (getDateTimeKeys(groupedRoutes).isEmpty)
       return [
         Container(
@@ -33,7 +38,10 @@ class ClimbingRoutes extends StatelessWidget {
     return getDateTimeKeys(groupedRoutes)
         .reversed
         .map((it) {
-          return [createDate(it), ...createClimbs(groupedRoutes[it], context)];
+          return [
+            createDate(it, fontSize),
+            ...createClimbs(groupedRoutes[it], context)
+          ];
         })
         .expand((i) => i)
         .toList();
@@ -44,7 +52,7 @@ class ClimbingRoutes extends StatelessWidget {
       ..sort();
   }
 
-  Widget createDate(DateTime date) {
+  Widget createDate(DateTime date, double fontSize) {
     return Container(
       padding: const EdgeInsets.only(top: 10, right: 5, left: 5, bottom: 2),
       child: Row(
@@ -56,7 +64,7 @@ class ClimbingRoutes extends StatelessWidget {
           ),
           Text(
             DateFormat.yMMMMEEEEd().format(date),
-            style: TextStyle(color: AppColors.warmGrey),
+            style: TextStyle(color: AppColors.warmGrey, fontSize: fontSize),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
 import 'package:hundred_climbs/src/store/store.dart';
 import 'package:provider/provider.dart';
@@ -40,20 +41,24 @@ class ClimbTileContentWithRibbon extends StatelessWidget {
                             currentClimb.grade,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 28,
+                              fontSize: screens['DASHBOARD']['FONT_SIZE_2']
+                                  [LayoutUtils(context).screenSize],
                             ),
                           ),
                         ),
                         Container(
                           padding: const EdgeInsets.only(right: 10),
                           child: TileDetails(
-                              belayingStyle: currentClimb.belayingStyle),
+                            belayingStyle: currentClimb.belayingStyle,
+                            outCome: currentClimb.outCome,
+                          ),
                         ),
                       ],
                     ),
                     if (currentClimb.tags.isNotEmpty)
                       Container(
-                        margin: const EdgeInsets.only(left: 4, bottom: 4),
+                        margin:
+                            const EdgeInsets.only(left: 10, top: 4, bottom: 4),
                         child: Wrap(
                           spacing: 5,
                           runSpacing: 5.0,
@@ -72,7 +77,8 @@ class ClimbTileContentWithRibbon extends StatelessWidget {
               Column(
                 children: <Widget>[
                   Container(
-                    height: 80,
+                    height: screens['DASHBOARD']['TILE_HEIGHT']
+                        [LayoutUtils(context).screenSize],
                     padding: const EdgeInsets.all(10.0),
                     child: IconButton(
                       icon: Container(
@@ -84,7 +90,8 @@ class ClimbTileContentWithRibbon extends StatelessWidget {
                         ),
                         child: Icon(
                           Icons.done,
-                          size: 32,
+                          size: screens['DASHBOARD']['ICON_SIZE']
+                              [LayoutUtils(context).screenSize],
                           color: AppColors.getClimbingRouteOutcomeColor(
                               currentClimb.outCome),
                         ),
