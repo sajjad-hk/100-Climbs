@@ -60,8 +60,6 @@ Map screens = {
   'TAG_ICON': {'SMALL': 20.0, 'MEDIUM': 22.0, 'LARGE': 30.0},
   'INTRO': {
     'FONT_SIZE': {'SMALL': 12.0, 'MEDIUM': 14.0, 'LARGE': 16.0},
-    'HEIGHT': {'SMALL': 20.0, 'MEDIUM': 10.0, 'LARGE': 0.0},
-    'HEIGHT_2': {'SMALL': 20.0, 'MEDIUM': 30.0, 'LARGE': 40.0},
     'BUTTON': {
       'SMALL': const EdgeInsets.only(
           top: 10.0, bottom: 10.0, left: 12.0, right: 12.0),
@@ -71,10 +69,6 @@ Map screens = {
           top: 15.0, bottom: 15.0, left: 25.0, right: 25.0),
     },
     'ASPECTR': {'SMALL': 1.0, 'MEDIUM': 0.9, 'LARGE': 0.8},
-    'MARGIN': {
-      'SMALL': const EdgeInsets.only(bottom: 10),
-      'MEDIUM': const EdgeInsets.only(bottom: 20),
-      'LARGE': const EdgeInsets.only(bottom: 30)
-    },
+    'MARGIN': {'SMALL': 20.0, 'MEDIUM': 30.0, 'LARGE': 40.0},
   }
 };
