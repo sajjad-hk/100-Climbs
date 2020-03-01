@@ -30,11 +30,11 @@ Map screens = {
   'PAGE_GRADE': {
     'CIRCLE_MARGIN': {
       'SMALL': const EdgeInsets.all(45),
-      'MEDIUM': const EdgeInsets.all(35),
-      'LARGE': const EdgeInsets.all(25),
+      'MEDIUM': const EdgeInsets.all(25),
+      'LARGE': const EdgeInsets.all(20),
     },
-    'KNOB_SIZE': {'SMALL': 30.0, 'MEDIUM': 40.0, 'LARGE': 50.0},
-    'INNER_KNOB_SIZE': {'SMALL': 18.0, 'MEDIUM': 25.0, 'LARGE': 32.0},
+    'KNOB_SIZE': {'SMALL': 35.0, 'MEDIUM': 40.0, 'LARGE': 45.0},
+    'INNER_KNOB_SIZE': {'SMALL': 18.0, 'MEDIUM': 23.0, 'LARGE': 30.0},
   },
   'PAGE_BELAY_STYLE': {
     'BUTTON_HEIGHT': {'SMALL': 70.0, 'MEDIUM': 80.0, 'LARGE': 95.0},
