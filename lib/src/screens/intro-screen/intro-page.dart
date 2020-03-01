@@ -35,19 +35,11 @@ class IntroPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: screens['INTRO']['HEIGHT_2']
-                [LayoutUtils(context).screenSize],
-            child: Container(), // page indicator space holder
-          ),
           Container(
             padding: const EdgeInsets.all(5),
-            margin: const EdgeInsets.only(left: 20, right: 20),
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
             child: introText(ind - 1, context),
           ),
-          SizedBox(
-            height: screens['INTRO']['HEIGHT'][LayoutUtils(context).screenSize],
-          )
         ],
       ),
     );

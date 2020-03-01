@@ -34,7 +34,7 @@ class _IntroState extends State<Intro> {
           ),
         ),
         child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
+          alignment: AlignmentDirectional.center,
           children: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -65,9 +65,6 @@ class _IntroState extends State<Intro> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 100,
-                )
               ],
             ),
             PageView(
@@ -108,38 +105,30 @@ class _IntroState extends State<Intro> {
                 )
               ],
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: 100, // text space holder
+            Positioned(
+              bottom: screens['INTRO']['MARGIN']
+                  [LayoutUtils(context).screenSize],
+              child: FlatButton.icon(
+                padding: screens['INTRO']['BUTTON']
+                    [LayoutUtils(context).screenSize],
+                color: AppColors.dark,
+                icon: Image(
+                  height: 30,
+                  width: 30,
+                  image: AssetImage(AppIcons.google),
                 ),
-                Container(
-                  margin: screens['INTRO']['MARGIN']
-                      [LayoutUtils(context).screenSize],
-                  child: FlatButton.icon(
-                    padding: screens['INTRO']['BUTTON']
-                        [LayoutUtils(context).screenSize],
-                    color: AppColors.dark,
-                    icon: Image(
-                      height: 30,
-                      width: 30,
-                      image: AssetImage(AppIcons.google),
-                    ),
-                    label: Text(
-                      'Sign in with Google',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () async {
-                      FirebaseUser user = await authService.googleSignIn();
-                      if (user != null) {
-                        Navigator.pushReplacementNamed(context, '/');
-                      }
-                    },
-                  ),
-                )
-              ],
-            ),
+                label: Text(
+                  'Sign in with Google',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () async {
+                  FirebaseUser user = await authService.googleSignIn();
+                  if (user != null) {
+                    Navigator.pushReplacementNamed(context, '/');
+                  }
+                },
+              ),
+            )
           ],
         ),
       ),
