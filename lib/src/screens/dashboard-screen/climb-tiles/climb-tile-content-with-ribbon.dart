@@ -96,7 +96,7 @@ class ClimbTileContentWithRibbon extends StatelessWidget {
                               currentClimb.outCome),
                         ),
                       ),
-                      onPressed: () => store.selectClimb(currentClimb),
+                      onPressed: () => store.selectMultiClimb(currentClimb),
                     ),
                   ),
                 ],

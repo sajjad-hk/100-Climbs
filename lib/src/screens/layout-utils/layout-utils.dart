@@ -51,7 +51,7 @@ Map screens = {
     'FONT_SIZE': {'SMALL': 10.0, 'MEDIUM': 12.0, 'LARGE': 14.0},
     'FONT_SIZE_2': {'SMALL': 24.0, 'MEDIUM': 28.0, 'LARGE': 30.0},
     'TILE_HEIGHT': {'SMALL': 70.0, 'MEDIUM': 80.0, 'LARGE': 90.0},
-    'ICON_SIZE': {'SMALL': 15.0, 'MEDIUM': 20.0, 'LARGE': 25.0},
+    'ICON_SIZE': {'SMALL': 20.0, 'MEDIUM': 25.0, 'LARGE': 30.0},
     'FAILURE_DASHLINE_SKIP': {'SMALL': 3.1, 'MEDIUM': 3.3, 'LARGE': 3.3},
     'TAG_HEIGHT': {'SMALL': 25.0, 'MEDIUM': 30.0, 'LARGE': 35.0},
     'BORDER_RADIUS': {'SMALL': 14.0, 'MEDIUM': 14.0, 'LARGE': 20.0},

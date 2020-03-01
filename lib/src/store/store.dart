@@ -43,7 +43,10 @@ class Store with ChangeNotifier {
   }
 
   void selectMultiClimb(Climb climb) {
-    if (!_selectedClimbs.contains(climb)) _selectedClimbs.add(climb);
+    if (!_selectedClimbs.contains(climb))
+      _selectedClimbs.add(climb);
+    else
+      unSelectClimb(climb);
     notifyListeners();
   }
 
