@@ -13,30 +13,25 @@ class Tags extends StatelessWidget {
       children: <Widget>[
         Flexible(
           flex: 1,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              WizardPageTitle(
-                title: "Tags",
-              ),
-              Container(
-                margin: const EdgeInsets.all(4.0),
-                child: Text(
-                  "${climb.tags == null ? 0 : climb.tags.length.toString()}/5",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: Offset(1.0, 2.0),
-                        blurRadius: 3.0,
-                        color: Colors.black12,
-                      ),
-                    ],
-                  ),
+          child: WizardPageTitle(
+            title: "Tags",
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(4.0),
+          child: Text(
+            "${climb.tags == null ? 0 : climb.tags.length.toString()}/5",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 12.0,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(1.0, 2.0),
+                  blurRadius: 3.0,
+                  color: Colors.black12,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Flexible(
@@ -44,6 +39,20 @@ class Tags extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Visibility(
+                visible: climb.tags == null || climb.tags.isEmpty,
+                child: Container(
+                  margin: const EdgeInsets.all(50),
+                  child: Text(
+                    'Use tags to add extra info about the route for example color, type of holds,slope, length',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.black30,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ),
               Visibility(
                 visible: isTagLimitReached,
                 child: Container(

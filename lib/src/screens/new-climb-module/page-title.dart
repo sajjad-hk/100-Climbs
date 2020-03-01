@@ -8,9 +8,8 @@ class WizardPageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-//      padding: const EdgeInsets.only(top: 20, bottom: 10),
-//      margin: const EdgeInsets.only(top: 70),
-      child: Center(
+      child: Align(
+        alignment: Alignment.bottomCenter,
         child: Text(
           title,
           style: TextStyle(
