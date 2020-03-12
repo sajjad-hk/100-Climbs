@@ -16,12 +16,10 @@ class DashboardContent extends StatelessWidget {
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
             background: Container(
-              padding: EdgeInsets.only(top: 50.0),
               child: Column(
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.all(10),
                       child: MultiProvider(
                         providers: [
                           StreamProvider<
@@ -37,13 +35,6 @@ class DashboardContent extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [AppColors.lightNavy, AppColors.dark],
-                ),
               ),
             ),
           ),

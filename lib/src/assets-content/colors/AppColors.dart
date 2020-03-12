@@ -112,6 +112,63 @@ class AppColors {
     }
   }
 
+  static String getGradeCSSColor(String grade) {
+    switch (grade) {
+      case '4':
+        return '#4f3bd5';
+      case '5a':
+        return '#3b5de8';
+      case '5a+':
+        return '#009fee';
+      case '5b':
+        return '#0ec2f0';
+      case '5b+':
+        return '#15cdcb';
+      case '5c':
+        return '#0abfa4';
+      case '5c+':
+        return '#1cb371';
+      case '6a':
+        return '#42c054';
+      case '6a+':
+        return '#6bc440';
+      case '6b':
+        return '#a7ca12';
+      case '6b+':
+        return '#e0d00a';
+      case '6c':
+        return '#ffcc00';
+      case '6c+':
+        return '#ffac2e';
+      case '7a':
+        return '#ff9200';
+      case '7a+':
+        return '#ff6c41';
+      case '7b':
+        return '#f74444';
+      case '7b+':
+        return '#ef2d3f';
+      case '7c':
+        return '#df0e3e';
+      case '7c+':
+        return '#e20866';
+      case '8a':
+        return '#f71888';
+      case '8a+':
+        return '#e524aa';
+      case '8b':
+        return '#c522a9';
+      case '8b+':
+        return '#a71ab2';
+      case '8c':
+        return '#7c1eb2';
+      case '8c+':
+        return '#7108cd';
+      default:
+        return 'white';
+    }
+  }
+
   static Color getClimbingRouteOutcomeColor(OutComeEnum outCome) {
     switch (outCome) {
       case OutComeEnum.failure:

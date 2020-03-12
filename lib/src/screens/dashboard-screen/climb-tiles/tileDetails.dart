@@ -18,6 +18,8 @@ class TileDetails extends StatelessWidget {
       height: screens['DASHBOARD']['TAG_HEIGHT']
           [LayoutUtils(context).screenSize],
       child: Stack(
+        overflow: Overflow.visible,
+        alignment: Alignment.centerLeft,
         children: <Widget>[
           TileIconsWrapper(
             icon: CustomIcon(

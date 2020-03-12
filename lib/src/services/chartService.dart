@@ -11,7 +11,7 @@ class ChartService {
     handleData: (data, sink) {
       Map<String, List<Climb>> m = Map.fromIterable(
           groupBy(data, (it) => it.grade).entries.toList()
-            ..sort((a, b) => b.key.compareTo(a.key)),
+            ..sort((a, b) => a.key.compareTo(b.key)),
           key: (i) => i.key.toString(),
           value: (i) => i.value);
       return sink.add(
@@ -31,7 +31,7 @@ class ChartService {
   Stream<Map<String, Map<DateTime, List<Climb>>>> getClimbingCountChartData(
       String uid) {
     return climbService
-        .readSuccessClimbs(uid)
+        .readClimbs(uid)
         .transform(_climbsToChartDataTransformer);
   }
 }
