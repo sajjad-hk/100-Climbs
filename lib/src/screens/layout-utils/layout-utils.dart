@@ -29,7 +29,7 @@ Map screens = {
   },
   'PAGE_GRADE': {
     'CIRCLE_MARGIN': {
-      'SMALL': const EdgeInsets.all(45),
+      'SMALL': const EdgeInsets.all(30),
       'MEDIUM': const EdgeInsets.all(25),
       'LARGE': const EdgeInsets.all(20),
     },
@@ -56,6 +56,10 @@ Map screens = {
     'TAG_HEIGHT': {'SMALL': 25.0, 'MEDIUM': 30.0, 'LARGE': 35.0},
     'BORDER_RADIUS': {'SMALL': 14.0, 'MEDIUM': 14.0, 'LARGE': 20.0},
     'CHART_HEIGHT': {'SMALL': 280.0, 'MEDIUM': 300.0, 'LARGE': 330.0},
+  },
+  'DRAWER': {
+    'PROFILE_PIC_SIZE': {'SMALL': 45.0, 'MEDIUM': 50.0, 'LARGE': 60.0},
+    'BUTTON_HEIGHT': {'SMALL': 45.0, 'MEDIUM': 50.0, 'LARGE': 60.0}
   },
   'TAG_ICON': {'SMALL': 20.0, 'MEDIUM': 22.0, 'LARGE': 30.0},
   'INTRO': {

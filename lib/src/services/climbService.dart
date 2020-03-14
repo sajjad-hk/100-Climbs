@@ -104,7 +104,7 @@ class ClimbService {
   }
 
   Stream<List<DateTime>> climbingSessions(String uid) {
-    return readSuccessClimbs(uid).transform(_sessionDateTransformer);
+    return readClimbs(uid).transform(_sessionDateTransformer);
   }
 
   Future<void> deleteClimb(String climbId) async {

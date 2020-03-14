@@ -31,6 +31,10 @@ class ChartStyle {
   static final String yAxis = '''
       [{
            type: 'value',
+           minInterval: 1,
+           axisTick: {
+              show: false,
+          },
            axisLine: {
                show: false,
                lineStyle: {
@@ -75,15 +79,24 @@ class ChartStyle {
 
   static String getSeriesTemp(
       String grade, List<int> successes, List<int> failures) {
-    return '''
+    String result = '';
+    if (successes.isNotEmpty) {
+      result += '''
       {
           name: '$grade',
           type: 'bar',
           stack: 'SUCCES',
           barWidth: 12,
-          itemStyle: {color: '${AppColors.getGradeCSSColor(grade)}'},
+          itemStyle: {
+              color: '${AppColors.getGradeCSSColor(grade)}', 
+              borderWidth: 0,
+          },
           data: ${successes.toString()},
       },
+      ''';
+    }
+    if (failures.isNotEmpty) {
+      result += '''
       {
           name: '$grade',
           type: 'bar',
@@ -91,12 +104,13 @@ class ChartStyle {
           barWidth: 12,
           itemStyle: {
               color: '${AppColors.getGradeCSSColor(grade)}', 
+              borderWidth: 0,
               opacity: 0.4, 
-              borderType: 'solid', 
-              borderColor: '#8b8b8b'
           },
           data: ${failures.toString()},
       }
     ''';
+    }
+    return result;
   }
 }
