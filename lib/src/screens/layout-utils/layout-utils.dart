@@ -48,7 +48,7 @@ Map screens = {
     'BUTTON_HEIGHT_2': {'SMALL': 40.0, 'MEDIUM': 55.0, 'LARGE': 60.0},
   },
   'DASHBOARD': {
-    'FONT_SIZE': {'SMALL': 10.0, 'MEDIUM': 12.0, 'LARGE': 14.0},
+    'FONT_SIZE': {'SMALL': 12.0, 'MEDIUM': 13.0, 'LARGE': 14.0},
     'FONT_SIZE_2': {'SMALL': 24.0, 'MEDIUM': 28.0, 'LARGE': 30.0},
     'TILE_HEIGHT': {'SMALL': 70.0, 'MEDIUM': 80.0, 'LARGE': 90.0},
     'ICON_SIZE': {'SMALL': 20.0, 'MEDIUM': 25.0, 'LARGE': 30.0},
