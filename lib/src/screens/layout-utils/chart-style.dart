@@ -80,7 +80,7 @@ class ChartStyle {
   static String getSeriesTemp(
       String grade, List<int> successes, List<int> failures) {
     String result = '';
-    if (successes.isNotEmpty) {
+    if (isEmptyGrades(successes)) {
       result += '''
       {
           name: '$grade',
@@ -95,7 +95,7 @@ class ChartStyle {
       },
       ''';
     }
-    if (failures.isNotEmpty) {
+    if (isEmptyGrades(failures)) {
       result += '''
       {
           name: '$grade',
@@ -108,9 +108,13 @@ class ChartStyle {
               opacity: 0.4, 
           },
           data: ${failures.toString()},
-      }
+      },
     ''';
     }
     return result;
+  }
+
+  static bool isEmptyGrades(List<int> grades) {
+    return grades.reduce((a, b) => a + b) != 0;
   }
 }
