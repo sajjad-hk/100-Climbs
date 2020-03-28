@@ -21,116 +21,110 @@ class _IntroState extends State<Intro> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppColors.lightNavy,
-              AppColors.dark,
-            ],
-          ),
-        ),
-        child: Stack(
-          alignment: AlignmentDirectional.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Flexible(
-                  child: Container(
-                    child: AspectRatio(
-                      aspectRatio: screens['INTRO']['ASPECTR']
-                          [LayoutUtils(context).screenSize],
-                    ),
-                  ),
-                ),
-                Stack(
-                  alignment: AlignmentDirectional.topStart,
-                  children: <Widget>[
-                    Container(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          for (int i = 0; i < 4; i++)
-                            if (i == currentPageValue) ...[
-                              circleBar(true, i)
-                            ] else
-                              circleBar(false, 0),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            PageView(
-              controller: _controller,
-              onPageChanged: (int i) {
-                setState(() {
-                  currentPageValue = i;
-                });
-              },
-              children: <Widget>[
-                IntroPage(
-                  ind: 1,
-                  emailTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => sendEmail(),
-                  privacyLinkTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchURL(),
-                ),
-                IntroPage(
-                  ind: 2,
-                  emailTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => sendEmail(),
-                  privacyLinkTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchURL(),
-                ),
-                IntroPage(
-                  ind: 3,
-                  emailTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => sendEmail(),
-                  privacyLinkTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchURL(),
-                ),
-                IntroPage(
-                  ind: 4,
-                  emailTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => sendEmail(),
-                  privacyLinkTapRecognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchURL(),
-                )
-              ],
-            ),
-            Positioned(
-              bottom: screens['INTRO']['MARGIN']
-                  [LayoutUtils(context).screenSize],
-              child: FlatButton.icon(
-                padding: screens['INTRO']['BUTTON']
-                    [LayoutUtils(context).screenSize],
-                color: AppColors.dark,
-                icon: Image(
-                  height: 30,
-                  width: 30,
-                  image: AssetImage(AppIcons.google),
-                ),
-                label: Text(
-                  'Sign in with Google',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  FirebaseUser user = await authService.googleSignIn();
-                  if (user != null) {
-                    Navigator.pushReplacementNamed(context, '/');
-                  }
-                },
-              ),
-            )
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.lightNavy,
+            AppColors.dark,
           ],
         ),
+      ),
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          PageView(
+            controller: _controller,
+            onPageChanged: (int i) {
+              setState(() {
+                currentPageValue = i;
+              });
+            },
+            children: <Widget>[
+              IntroPage(
+                ind: 1,
+                emailTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => sendEmail(),
+                privacyLinkTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => _launchURL(),
+              ),
+              IntroPage(
+                ind: 2,
+                emailTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => sendEmail(),
+                privacyLinkTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => _launchURL(),
+              ),
+              IntroPage(
+                ind: 3,
+                emailTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => sendEmail(),
+                privacyLinkTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => _launchURL(),
+              ),
+              IntroPage(
+                ind: 4,
+                emailTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => sendEmail(),
+                privacyLinkTapRecognizer: TapGestureRecognizer()
+                  ..onTap = () => _launchURL(),
+              )
+            ],
+          ),
+          Positioned(
+            bottom: screens['INTRO']['MARGIN'][LayoutUtils(context).screenSize],
+            child: Semantics(
+              label: 'Sign in with Google account',
+              button: true,
+              child: Column(
+                children: <Widget>[
+                  Stack(
+                    alignment: AlignmentDirectional.topStart,
+                    children: <Widget>[
+                      Container(
+                        margin: screens['INTRO']['P_I']
+                            [LayoutUtils(context).screenSize],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            for (int i = 0; i < 4; i++)
+                              if (i == currentPageValue) ...[
+                                circleBar(true, i)
+                              ] else
+                                circleBar(false, 0),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  FlatButton.icon(
+                    padding: screens['INTRO']['BUTTON']
+                        [LayoutUtils(context).screenSize],
+                    color: AppColors.dark,
+                    icon: Image(
+                      height: 30,
+                      width: 30,
+                      image: AssetImage(AppIcons.google),
+                    ),
+                    label: Text(
+                      'Sign in with Google',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      FirebaseUser user = await authService.googleSignIn();
+                      if (user != null) {
+                        Navigator.pushReplacementNamed(context, '/');
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

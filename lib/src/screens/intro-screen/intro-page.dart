@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:hundred_climbs/src/screens/layout-utils/layout-utils.dart';
 import 'package:hundred_climbs/src/screens/screens.dart';
@@ -16,11 +17,12 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Flexible(
+            flex: 3,
+            fit: FlexFit.tight,
             child: Container(
               child: AspectRatio(
                 aspectRatio: screens['INTRO']['ASPECTR']
@@ -35,17 +37,32 @@ class IntroPage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(5),
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
-            child: introText(ind - 1, context),
+          Flexible(
+            flex: 1,
+            fit: FlexFit.tight,
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: introText(ind - 1, context),
+            ),
           ),
+          Flexible(
+            flex: 1,
+            child: Container(),
+          )
         ],
       ),
     );
   }
 
   RichText introText(int i, context) {
+    List<String> text = [
+      '100 climbs is a simple climb logging app. It lets you record the routes you climbed and build a history of your sessions to track your progress.',
+      'We are starting small but while you\'re building your climbs history we are working hard to add new features. Expect some updates soon!',
+      'We would love to know what you think. Our small Warsaw-based team is waiting for your feedback on ',
+      'We treat privacy seriously. We don\'t sell or share your data with third parties. Read more in our'
+    ];
     switch (i) {
       case 0:
         return RichText(
@@ -60,8 +77,9 @@ class IntroPage extends StatelessWidget {
                     [LayoutUtils(context).screenSize]),
             children: [
               TextSpan(
-                  text:
-                      '100 climbs is a simple climb logging app. It lets you record the routes you climbed and build a history of your sessions to track your progress.'),
+                semanticsLabel: text[i],
+                text: text[i],
+              ),
             ],
           ),
         );
@@ -79,12 +97,12 @@ class IntroPage extends StatelessWidget {
             ),
             children: [
               TextSpan(
-                  text:
-                      'We are starting small but while you\'re building your climbs history we are working hard to add new features. Expect some updates soon!'),
+                semanticsLabel: text[i],
+                text: text[i],
+              ),
             ],
           ),
         );
-
       case 2:
         return RichText(
           textAlign: TextAlign.center,
@@ -99,9 +117,11 @@ class IntroPage extends StatelessWidget {
             ),
             children: [
               TextSpan(
-                  text:
-                      'We would love to know what you think. Our small Warsaw-based team is waiting for your feedback on '),
+                semanticsLabel: text[i],
+                text: text[i],
+              ),
               TextSpan(
+                  semanticsLabel: 'emails',
                   text: '100climbs.app@gmail.com',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
@@ -124,10 +144,12 @@ class IntroPage extends StatelessWidget {
             ),
             children: [
               TextSpan(
-                  text:
-                      'We treat privacy seriously. We don\'t sell or share your data with third parties. Read more in our\n'),
+                semanticsLabel: text[i],
+                text: text[i],
+              ),
               TextSpan(
-                  text: 'Privacy Policy.',
+                  semanticsLabel: 'Link to Privacy Policy',
+                  text: '\nPrivacy Policy.',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                   ),

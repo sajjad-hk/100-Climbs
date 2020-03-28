@@ -72,6 +72,11 @@ Map screens = {
       'LARGE': const EdgeInsets.only(
           top: 15.0, bottom: 15.0, left: 25.0, right: 25.0),
     },
+    'P_I': {
+      'SMALL': const EdgeInsets.only(bottom: 20.0),
+      'MEDIUM': const EdgeInsets.only(bottom: 30.0),
+      'LARGE': const EdgeInsets.only(bottom: 30.0)
+    },
     'ASPECTR': {'SMALL': 1.0, 'MEDIUM': 0.9, 'LARGE': 0.8},
     'MARGIN': {'SMALL': 20.0, 'MEDIUM': 30.0, 'LARGE': 40.0},
   }
