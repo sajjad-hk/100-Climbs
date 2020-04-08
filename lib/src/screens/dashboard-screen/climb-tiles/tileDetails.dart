@@ -55,7 +55,7 @@ class TileDetails extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Text(
-                        'FAILURE',
+                        'TRIED',
                         style: TextStyle(
                           fontSize: 10,
                           color: AppColors.coolGrey2,

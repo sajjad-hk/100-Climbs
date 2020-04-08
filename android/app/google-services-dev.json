@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "604560914287",
+    "firebase_url": "https://climbs-dev.firebaseio.com",
+    "project_id": "climbs-dev",
+    "storage_bucket": "climbs-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604560914287:android:ec8c7e645f021bc62e5a9a",
+        "android_client_info": {
+          "package_name": "app.code4climb.hundredclimbs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604560914287-n6cbh28o9et20j18emp7alvso72ej89o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.code4climb.hundredclimbs",
+            "certificate_hash": "e2f8e0c1b5125c0eaf76462dee041973d5a02961"
+          }
+        },
+        {
+          "client_id": "604560914287-vsj1tfugbggi6ul0ob9mlklmm9tgn3mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM9yISJfaRUG3ZcegW-PESAdfethIrpZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604560914287-vsj1tfugbggi6ul0ob9mlklmm9tgn3mh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

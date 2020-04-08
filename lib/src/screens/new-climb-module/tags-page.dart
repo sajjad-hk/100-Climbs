@@ -42,7 +42,7 @@ class Tags extends StatelessWidget {
               Visibility(
                 visible: climb.tags == null || climb.tags.isEmpty,
                 child: Container(
-                  margin: const EdgeInsets.all(50),
+                  margin: const EdgeInsets.only(left: 50, right: 50),
                   child: Text(
                     'Use tags to add extra info about the route for example color, type of holds,slope, length',
                     textAlign: TextAlign.center,

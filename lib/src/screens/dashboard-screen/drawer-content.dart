@@ -36,7 +36,7 @@ class DrawerContent extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(bottom: 30),
               child: Image(
-                image: AssetImage('assets/icons/100_climbs.png'),
+                image: AssetImage(AppIcons.logoBeta),
               ),
             ),
             Container(
