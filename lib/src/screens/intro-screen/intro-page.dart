@@ -23,14 +23,17 @@ class IntroPage extends StatelessWidget {
           Flexible(
             flex: 3,
             fit: FlexFit.tight,
-            child: Container(
-              child: AspectRatio(
-                aspectRatio: screens['INTRO']['ASPECTR']
-                    [LayoutUtils(context).screenSize],
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/icons/onboarding_$ind.png'),
+            child: Semantics(
+              label: 'image',
+              child: Container(
+                child: AspectRatio(
+                  aspectRatio: screens['INTRO']['ASPECTR']
+                      [LayoutUtils(context).screenSize],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/icons/onboarding_$ind.png'),
+                      ),
                     ),
                   ),
                 ),

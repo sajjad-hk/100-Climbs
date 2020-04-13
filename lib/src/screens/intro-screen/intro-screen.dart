@@ -76,6 +76,7 @@ class _IntroState extends State<Intro> {
           Positioned(
             bottom: screens['INTRO']['MARGIN'][LayoutUtils(context).screenSize],
             child: Semantics(
+              readOnly: true,
               label: 'Sign in with Google account',
               button: true,
               child: Column(
@@ -100,25 +101,29 @@ class _IntroState extends State<Intro> {
                       ),
                     ],
                   ),
-                  FlatButton.icon(
-                    padding: screens['INTRO']['BUTTON']
-                        [LayoutUtils(context).screenSize],
-                    color: AppColors.dark,
-                    icon: Image(
-                      height: 30,
-                      width: 30,
-                      image: AssetImage(AppIcons.google),
+                  Semantics(
+                    label: 'Sign in with Google',
+                    button: true,
+                    child: FlatButton.icon(
+                      padding: screens['INTRO']['BUTTON']
+                          [LayoutUtils(context).screenSize],
+                      color: AppColors.dark,
+                      icon: Image(
+                        height: 30,
+                        width: 30,
+                        image: AssetImage(AppIcons.google),
+                      ),
+                      label: Text(
+                        'Sign in with Google',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        FirebaseUser user = await authService.googleSignIn();
+                        if (user != null) {
+                          Navigator.pushReplacementNamed(context, '/');
+                        }
+                      },
                     ),
-                    label: Text(
-                      'Sign in with Google',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () async {
-                      FirebaseUser user = await authService.googleSignIn();
-                      if (user != null) {
-                        Navigator.pushReplacementNamed(context, '/');
-                      }
-                    },
                   ),
                 ],
               ),
