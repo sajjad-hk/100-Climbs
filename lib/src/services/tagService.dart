@@ -25,8 +25,9 @@ class TagService {
       ...((await this.tags())[1].toList())[0],
     ];
 
-    var dss = _db.collection('personal-tags').document('tags').get();
-    Future t2 = dss.then((it) => it.data);
+    var personalTagsRef = _db.collection('personal-tags').document(uid);
+
+    Future t2 = personalTagsRef.get().then((it) => it.data);
 
     toCheck.forEach((it) {
       if (tags.contains(it)) {
@@ -36,7 +37,7 @@ class TagService {
 
     List<String> toSave = [...(await t2)['tags'], ...toCheck];
 
-    return _db.collection('personal-tags').document(uid).setData({
+    return personalTagsRef.setData({
       'tags': [
         ...toSave,
       ]
